@@ -22,7 +22,7 @@ class FloodApp {
     this.selectedProvince = 'all';
     this.selectedDepth = 35; // Default for community report
     this.tileLayers = {};
-    this.currentTile = 'dark';
+    this.currentTile = 'streets';
   }
 
   async init() {
@@ -93,8 +93,8 @@ class FloodApp {
       });
     }
 
-    // Set default layer to dark
-    this.tileLayers.dark.addTo(this.map);
+    // Set default layer to Mapbox Streets (Clean Light Mode Standard)
+    this.tileLayers.streets.addTo(this.map);
     this.markersLayer = L.layerGroup().addTo(this.map);
   }
 
@@ -124,7 +124,7 @@ class FloodApp {
     const select = document.getElementById('province-select');
     if (!select) return;
 
-    select.innerHTML = '<option value="all">🇻🇳 Toàn quốc (63 Tỉnh/Thành)</option>';
+    select.innerHTML = '<option value="all">Toàn quốc (63 Tỉnh/Thành)</option>';
     this.provinces.forEach(p => {
       const opt = document.createElement('option');
       opt.value = p.code;
@@ -187,17 +187,14 @@ class FloodApp {
   }
 
   createFloodMarker(point) {
-    let color = '#f59e0b';
-    let label = '1';
+    let color = '#d97706';
     let pulseAnim = '';
 
     if (point.severity === 'LEVEL_3') {
-      color = '#ef4444';
-      label = '!';
-      pulseAnim = 'style="animation: marker-ripple 1.5s infinite;"';
+      color = '#dc2626';
+      pulseAnim = 'style="animation: marker-ripple 1.6s infinite;"';
     } else if (point.severity === 'LEVEL_2') {
-      color = '#f97316';
-      label = '2';
+      color = '#ea580c';
       pulseAnim = 'style="animation: marker-ripple 2.2s infinite;"';
     }
 
@@ -213,39 +210,41 @@ class FloodApp {
     const icon = L.divIcon({
       html: iconHtml,
       className: 'custom-flood-icon',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
+      iconSize: [34, 34],
+      iconAnchor: [17, 17]
     });
 
     const marker = L.marker([point.latitude, point.longitude], { icon });
 
-    // Water status translation
-    let statusText = 'Đang dâng ⬆';
-    let statusBg = 'rgba(239, 68, 68, 0.2)';
-    let statusColor = '#f87171';
+    // Status mapping with Light Mode palette
+    let statusText = 'Đang dâng';
+    let statusBg = 'var(--level3-bg)';
+    let statusColor = 'var(--level3-color)';
     if (point.status === 'RECEDING') {
-      statusText = 'Đang rút ⬇';
-      statusBg = 'rgba(16, 185, 129, 0.2)';
-      statusColor = '#34d399';
+      statusText = 'Đang rút';
+      statusBg = 'var(--safe-bg)';
+      statusColor = 'var(--safe-color)';
     } else if (point.status === 'STABLE') {
-      statusText = 'Đứng nước ⏸';
-      statusBg = 'rgba(245, 158, 11, 0.2)';
-      statusColor = '#fbbf24';
+      statusText = 'Đứng nước';
+      statusBg = 'var(--level1-bg)';
+      statusColor = 'var(--level1-color)';
     }
 
     const popupHtml = `
       <div class="flood-popup-card">
-        <div class="popup-title">🌊 ${point.name}</div>
+        <div class="popup-title">
+          <span>${point.name}</span>
+        </div>
         <div class="popup-depth-meter">
           <span class="depth-value" style="color: ${color}">${point.current_depth_cm}</span>
           <span class="depth-unit">cm (Độ sâu ngập)</span>
         </div>
         <div class="popup-badge" style="background: ${statusBg}; color: ${statusColor}">
-          ${statusText}
+          ● ${statusText}
         </div>
         <div class="popup-detail-row">
           <span>Khuyến cáo:</span>
-          <strong>${point.current_depth_cm >= 50 ? 'Cấm xe qua lại' : point.current_depth_cm >= 30 ? 'Xe gầm thấp chú ý' : 'Đi chậm an toàn'}</strong>
+          <strong>${point.current_depth_cm >= 50 ? 'Cấm xe qua lại' : point.current_depth_cm >= 30 ? 'Xe gầm thấp chú ý' : 'Lưu thông cẩn thận'}</strong>
         </div>
         <div class="popup-detail-row">
           <span>Cập nhật:</span>
@@ -261,8 +260,12 @@ class FloodApp {
   createStationMarker(station) {
     const iconHtml = `
       <div class="flood-pin-marker">
-        <div class="flood-pin-core" style="background-color: #00d2ff; border-radius: 8px;">
-          📊
+        <div class="flood-pin-core" style="background-color: var(--primary); border-radius: 8px;">
+          <svg class="icon-svg sm" viewBox="0 0 24 24" style="color:#fff; stroke-width:2.5;">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
         </div>
       </div>
     `;
@@ -270,21 +273,23 @@ class FloodApp {
     const icon = L.divIcon({
       html: iconHtml,
       className: 'custom-station-icon',
-      iconSize: [28, 28],
-      iconAnchor: [14, 14]
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
     });
 
     const marker = L.marker([station.latitude, station.longitude], { icon });
 
     const popupHtml = `
       <div class="flood-popup-card">
-        <div class="popup-title">📈 ${station.name}</div>
-        <div class="popup-depth-meter">
-          <span class="depth-value" style="color: #00d2ff">${station.current_water_level || '--'}</span>
-          <span class="depth-unit">cm (Mực nước trạm)</span>
+        <div class="popup-title">
+          <span>${station.name}</span>
         </div>
-        <div class="popup-badge" style="background: rgba(0, 210, 255, 0.15); color: #00d2ff">
-          Trạm quan trắc tự động
+        <div class="popup-depth-meter">
+          <span class="depth-value" style="color: var(--primary)">${station.current_water_level || '--'}</span>
+          <span class="depth-unit">cm (Mực nước quan trắc)</span>
+        </div>
+        <div class="popup-badge" style="background: var(--primary-subtle); color: var(--primary)">
+          ● Trạm quan trắc tự động
         </div>
         <div class="popup-detail-row">
           <span>Mã trạm:</span>
@@ -292,7 +297,7 @@ class FloodApp {
         </div>
         <div class="popup-detail-row">
           <span>Trạng thái trạm:</span>
-          <span style="color: #34d399">● Hoạt động tốt</span>
+          <span style="color: var(--safe-color); font-weight:600;">● Đang hoạt động</span>
         </div>
       </div>
     `;
@@ -354,25 +359,25 @@ class FloodApp {
       gpsBtn.addEventListener('click', () => this.handleGPSLocation());
     }
 
-    // 5. Layer Tile Switcher (Dark -> Satellite -> Streets)
+    // 5. Layer Tile Switcher (Streets -> Satellite -> Dark)
     const layerBtn = document.getElementById('btn-toggle-layer');
     if (layerBtn) {
       layerBtn.addEventListener('click', () => {
-        if (this.currentTile === 'dark') {
-          this.map.removeLayer(this.tileLayers.dark);
+        if (this.currentTile === 'streets') {
+          this.map.removeLayer(this.tileLayers.streets);
           this.map.addLayer(this.tileLayers.satellite);
           this.currentTile = 'satellite';
-          this.showToast('🛰️ Đã chuyển sang Bản đồ Vệ tinh HD (Mapbox)');
+          this.showToast('Đã chuyển sang Bản đồ Vệ tinh HD');
         } else if (this.currentTile === 'satellite') {
           this.map.removeLayer(this.tileLayers.satellite);
-          this.map.addLayer(this.tileLayers.streets);
-          this.currentTile = 'streets';
-          this.showToast('🗺️ Đã chuyển sang Bản đồ Đường phố (Mapbox)');
-        } else {
-          this.map.removeLayer(this.tileLayers.streets);
           this.map.addLayer(this.tileLayers.dark);
           this.currentTile = 'dark';
-          this.showToast('🌙 Đã chuyển sang Bản đồ Tối GIS (Mapbox)');
+          this.showToast('Đã chuyển sang Bản đồ Tối GIS');
+        } else {
+          this.map.removeLayer(this.tileLayers.dark);
+          this.map.addLayer(this.tileLayers.streets);
+          this.currentTile = 'streets';
+          this.showToast('Đã chuyển sang Bản đồ Đường phố');
         }
       });
     }
@@ -425,7 +430,7 @@ class FloodApp {
         const center = this.map.getCenter();
         const text = `CẦN CỨU HỘ KHẨN CẤP! Vị trí của tôi: https://www.google.com/maps?q=${center.lat.toFixed(5)},${center.lng.toFixed(5)}`;
         navigator.clipboard.writeText(text).then(() => {
-          this.showToast(' Đã sao chép tọa độ cứu hộ vào bộ nhớ tạm!');
+          this.showToast('Đã sao chép tọa độ cứu hộ vào bộ nhớ tạm.');
         });
       });
     }
@@ -445,7 +450,7 @@ class FloodApp {
       return;
     }
 
-    this.showToast(' Đang xác định vị trí của bạn...');
+    this.showToast('Đang xác định vị trí của bạn...');
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const lat = pos.coords.latitude;
@@ -456,17 +461,17 @@ class FloodApp {
         }
 
         const userIcon = L.divIcon({
-          html: `<div style="width:20px;height:20px;border-radius:50%;background:#00d2ff;border:3px solid #fff;box-shadow:0 0 16px #00d2ff;"></div>`,
+          html: `<div style="width:18px;height:18px;border-radius:50%;background:var(--primary);border:3px solid #ffffff;box-shadow:0 2px 8px rgba(37,99,235,0.5);"></div>`,
           className: 'user-loc-icon',
-          iconSize: [20, 20],
-          iconAnchor: [10, 10]
+          iconSize: [18, 18],
+          iconAnchor: [9, 9]
         });
 
         this.userLocationMarker = L.marker([lat, lng], { icon: userIcon }).addTo(this.map);
-        this.userLocationMarker.bindPopup('<b>📍 Vị trí của bạn</b><br>Đang quét các điểm ngập gần đây...').openPopup();
+        this.userLocationMarker.bindPopup('<b>Vị trí hiện tại của bạn</b><br>Đang theo dõi tình hình ngập xung quanh...').openPopup();
 
         this.map.flyTo([lat, lng], 14, { duration: 1.5 });
-        this.showToast('Đã định vị vị trí hiện tại của bạn');
+        this.showToast('Đã định vị vị trí hiện tại');
       },
       (err) => {
         this.showToast('Không thể lấy vị trí: ' + err.message);
@@ -497,7 +502,7 @@ class FloodApp {
     const lng = parseFloat(lngInput.value) || 105.8048;
 
     if (!address) {
-      this.showToast('⚠️ Vui lòng nhập tên đường / khu vực bị ngập');
+      this.showToast('Vui lòng nhập tên đường hoặc khu vực bị ngập.');
       return;
     }
 
@@ -537,7 +542,7 @@ class FloodApp {
     if (addressInput) addressInput.value = '';
     if (noteInput) noteInput.value = '';
 
-    this.showToast(' Báo ngập thành công! Cảm ơn bạn đã cảnh báo.');
+    this.showToast('Báo ngập thành công. Cảm ơn đóng góp của bạn!');
     this.map.flyTo([lat, lng], 15);
   }
 

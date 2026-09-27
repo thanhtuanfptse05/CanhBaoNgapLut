@@ -66,7 +66,7 @@
       "file_type": "code",
       "norm_label": "floodapp",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L8"
+      "source_location": "L13"
     },
     {
       "id": "src_interface_ui_js_supabase_service_supabasefloodservice",
@@ -211,7 +211,7 @@
       "file_type": "code",
       "norm_label": ".constructor()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L9"
+      "source_location": "L14"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_createfloodmarker",
@@ -223,7 +223,7 @@
       "file_type": "code",
       "norm_label": ".createfloodmarker()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L165"
+      "source_location": "L189"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_createstationmarker",
@@ -235,7 +235,7 @@
       "file_type": "code",
       "norm_label": ".createstationmarker()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L237"
+      "source_location": "L261"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_fillreportcoordswithcenter",
@@ -247,7 +247,7 @@
       "file_type": "code",
       "norm_label": ".fillreportcoordswithcenter()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L454"
+      "source_location": "L478"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_handlegpslocation",
@@ -259,7 +259,7 @@
       "file_type": "code",
       "norm_label": ".handlegpslocation()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L418"
+      "source_location": "L442"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_handlereportsubmit",
@@ -271,7 +271,7 @@
       "file_type": "code",
       "norm_label": ".handlereportsubmit()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L464"
+      "source_location": "L488"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_init",
@@ -283,7 +283,7 @@
       "file_type": "code",
       "norm_label": ".init()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L23"
+      "source_location": "L28"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_initmap",
@@ -295,7 +295,7 @@
       "file_type": "code",
       "norm_label": ".initmap()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L29"
+      "source_location": "L34"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_loadinitialdata",
@@ -307,7 +307,7 @@
       "file_type": "code",
       "norm_label": ".loadinitialdata()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L77"
+      "source_location": "L101"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_populateprovinceselect",
@@ -319,7 +319,7 @@
       "file_type": "code",
       "norm_label": ".populateprovinceselect()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L99"
+      "source_location": "L123"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_renderemergencybanner",
@@ -331,7 +331,7 @@
       "file_type": "code",
       "norm_label": ".renderemergencybanner()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L112"
+      "source_location": "L136"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_rendermarkers",
@@ -343,7 +343,7 @@
       "file_type": "code",
       "norm_label": ".rendermarkers()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L140"
+      "source_location": "L164"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_setupeventlisteners",
@@ -355,7 +355,7 @@
       "file_type": "code",
       "norm_label": ".setupeventlisteners()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L280"
+      "source_location": "L304"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_showtoast",
@@ -367,7 +367,7 @@
       "file_type": "code",
       "norm_label": ".showtoast()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L520"
+      "source_location": "L544"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_updateheaderstats",
@@ -379,7 +379,19 @@
       "file_type": "code",
       "norm_label": ".updateheaderstats()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L126"
+      "source_location": "L150"
+    },
+    {
+      "id": "src_interface_ui_js_app_getmapboxtoken",
+      "label": "getMapboxToken()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "FloodApp",
+      "file_type": "code",
+      "norm_label": "getmapboxtoken()",
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L7"
     },
     {
       "id": "src_interface_ui_js_supabase_service_supabasefloodservice_constructor",
@@ -1522,6 +1534,17 @@
       "norm_label": "**yeu cau ban \u0111au**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L6760"
+    },
+    {
+      "id": "src_interface_ui_js_config_example",
+      "label": "config.example.js",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "config.example.js",
+      "file_type": "code",
+      "norm_label": "config.example.js",
+      "source_file": "src/interface/ui/js/config.example.js",
+      "source_location": "L1"
     },
     {
       "id": "spec_driven_agent_driven_development_2_2_1_t\u1eeb_code_writer_\u0111\u1ebfn_outcome_engineer",
@@ -5491,6 +5514,18 @@
       "source_location": "L1"
     },
     {
+      "id": "spec_driven_agent_driven_development_2",
+      "label": "spec-driven-&-agent-driven-development (2).md",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "spec-driven-&-agent-driven-development (2).md",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L1"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_14_1_giai_\u0111o\u1ea1n_1_foundation",
       "label": "**14.1  Giai \u0110o\u1ea1n 1: Foundation**",
       "_origin": "ast",
@@ -5587,6 +5622,18 @@
       "source_location": "L15434"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_1",
+      "label": "**Ch\u01b0\u01a1ng 1**",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**chuong 1**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L204"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_16",
       "label": "**Ch\u01b0\u01a1ng 16**",
       "_origin": "ast",
@@ -5597,6 +5644,30 @@
       "norm_label": "**chuong 16**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L15714"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_cu\u1ed1n_s\u00e1ch_n\u00e0y_d\u00e0nh_cho_ai",
+      "label": "**Cu\u1ed1n s\u00e1ch n\u00e0y d\u00e0nh cho ai?**",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**cuon sach nay danh cho ai?**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L49"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_c\u00e1ch_\u0111\u1ecdc_hi\u1ec7u_qu\u1ea3",
+      "label": "**C\u00e1ch \u0111\u1ecdc hi\u1ec7u qu\u1ea3**",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**cach \u0111oc hieu qua**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L57"
     },
     {
       "id": "spec_driven_agent_driven_development_2_giai_\u0111o\u1ea1n_1",
@@ -5695,6 +5766,18 @@
       "source_location": "L15599"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_l\u1eddi_m\u1edf_\u0111\u1ea7u",
+      "label": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**loi mo \u0111au**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L43"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_mark_roadmap_15_tu\u1ea7n_\u00e1p_d\u1ee5ng_cho_\u0111\u1ed3_\u00e1n_se_mark",
       "label": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
       "_origin": "ast",
@@ -5719,6 +5802,18 @@
       "source_location": "L15587"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_m\u1ee5c_l\u1ee5c",
+      "label": "**M\u1ee4C L\u1ee4C**",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**muc luc**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L75"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_security_audit",
       "label": "**Security Audit**",
       "_origin": "ast",
@@ -5729,6 +5824,18 @@
       "norm_label": "**security audit**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L15513"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_si_ec_driven",
+      "label": "Si EC DRIVEN",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "si ec driven",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L11"
     },
     {
       "id": "spec_driven_agent_driven_development_2_sprint_1_tu\u1ea7n_5_u_6_auth_user_management_u",
@@ -5837,6 +5944,18 @@
       "norm_label": "\ud83c\udfac **thu 6 \u2014 demo & retro (60\u201390 phut)**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L15657"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_tinh_th\u1ea7n_c\u1ee7a_cu\u1ed1n_s\u00e1ch",
+      "label": "**Tinh th\u1ea7n c\u1ee7a cu\u1ed1n s\u00e1ch**",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**tinh than cua cuon sach**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L67"
     },
     {
       "id": "spec_driven_agent_driven_development_2_tu\u1ea7n_13_documentation_deployment",
@@ -15685,7 +15804,7 @@
       "node_kind": "heading",
       "norm_label": "[1.0.0] - 2026-09-27",
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L7"
+      "source_location": "L8"
     },
     {
       "id": "sdd_specs_feat_public_map_changelog_1_1_0_2026_09_27",
@@ -16884,100 +17003,202 @@
       "source_location": "L1"
     },
     {
-      "id": "spec_driven_agent_driven_development_2",
-      "label": "spec-driven-&-agent-driven-development (2).md",
+      "id": "package",
+      "label": "package.json",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "spec-driven-&-agent-driven-development (2).md",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "package.json",
+      "source_file": "package.json",
       "source_location": "L1"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_1",
-      "label": "**Ch\u01b0\u01a1ng 1**",
+      "id": "package_author",
+      "label": "author",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**chuong 1**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L204"
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "author",
+      "source_file": "package.json",
+      "source_location": "L20"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_cu\u1ed1n_s\u00e1ch_n\u00e0y_d\u00e0nh_cho_ai",
-      "label": "**Cu\u1ed1n s\u00e1ch n\u00e0y d\u00e0nh cho ai?**",
+      "id": "package_description",
+      "label": "description",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**cuon sach nay danh cho ai?**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L49"
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "description",
+      "source_file": "package.json",
+      "source_location": "L4"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_c\u00e1ch_\u0111\u1ecdc_hi\u1ec7u_qu\u1ea3",
-      "label": "**C\u00e1ch \u0111\u1ecdc hi\u1ec7u qu\u1ea3**",
+      "id": "package_keywords",
+      "label": "keywords",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**cach \u0111oc hieu qua**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L57"
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "keywords",
+      "source_file": "package.json",
+      "source_location": "L12"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_l\u1eddi_m\u1edf_\u0111\u1ea7u",
-      "label": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "id": "package_license",
+      "label": "license",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**loi mo \u0111au**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L43"
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "license",
+      "source_file": "package.json",
+      "source_location": "L21"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_m\u1ee5c_l\u1ee5c",
-      "label": "**M\u1ee4C L\u1ee4C**",
+      "id": "package_main",
+      "label": "main",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**muc luc**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L75"
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "main",
+      "source_file": "package.json",
+      "source_location": "L6"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_si_ec_driven",
-      "label": "Si EC DRIVEN",
+      "id": "package_name",
+      "label": "name",
       "_origin": "ast",
       "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "si ec driven",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "package.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "package_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "version",
+      "source_file": "package.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "server",
+      "label": "server.js",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "server.js",
+      "file_type": "code",
+      "norm_label": "server.js",
+      "source_file": "server.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_dirname",
+      "label": "__dirname",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "server.js",
+      "file_type": "code",
+      "norm_label": "__dirname",
+      "source_file": "server.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "server_filename",
+      "label": "__filename",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "server.js",
+      "file_type": "code",
+      "norm_label": "__filename",
+      "source_file": "server.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "server_mime_types",
+      "label": "MIME_TYPES",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "server.js",
+      "file_type": "code",
+      "norm_label": "mime_types",
+      "source_file": "server.js",
       "source_location": "L11"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_tinh_th\u1ea7n_c\u1ee7a_cu\u1ed1n_s\u00e1ch",
-      "label": "**Tinh th\u1ea7n c\u1ee7a cu\u1ed1n s\u00e1ch**",
+      "id": "server_server",
+      "label": "server",
       "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**tinh than cua cuon sach**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L67"
+      "community": 99,
+      "community_name": "server.js",
+      "file_type": "code",
+      "norm_label": "server",
+      "source_file": "server.js",
+      "source_location": "L26"
     },
     {
       "id": "ref_node_assert",
@@ -17050,6 +17271,61 @@
       "norm_label": "sys",
       "source_file": "",
       "type": "external"
+    },
+    {
+      "id": "ref_node_child_process",
+      "label": "ref_node_child_process",
+      "community": 99,
+      "community_name": "server.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_child_process",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_fs",
+      "label": "ref_node_fs",
+      "community": 99,
+      "community_name": "server.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_fs",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_http",
+      "label": "ref_node_http",
+      "community": 99,
+      "community_name": "server.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_http",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_path",
+      "label": "ref_node_path",
+      "community": 99,
+      "community_name": "server.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_path",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_url",
+      "label": "ref_node_url",
+      "community": 99,
+      "community_name": "server.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_url",
+      "source_file": "",
+      "type": "external"
     }
   ],
   "links": [
@@ -17074,7 +17350,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L539",
+      "source_location": "L563",
       "weight": 1.0
     },
     {
@@ -17086,7 +17362,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L420",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -17098,7 +17374,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L476",
+      "source_location": "L500",
       "weight": 1.0
     },
     {
@@ -17110,7 +17386,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L508",
+      "source_location": "L532",
       "weight": 1.0
     },
     {
@@ -17122,7 +17398,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L509",
+      "source_location": "L533",
       "weight": 1.0
     },
     {
@@ -17134,7 +17410,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L24",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -17146,7 +17422,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L25",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -17158,7 +17434,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L26",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp_initmap",
+      "target": "src_interface_ui_js_app_getmapboxtoken",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -17170,7 +17458,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L90",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -17182,7 +17470,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L91",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -17194,7 +17482,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L92",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -17206,7 +17494,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L93",
+      "source_location": "L117",
       "weight": 1.0
     },
     {
@@ -17218,7 +17506,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L152",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -17230,7 +17518,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L159",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -17242,7 +17530,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L305",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -17254,7 +17542,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L320",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -17266,7 +17554,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L330",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -17278,7 +17566,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L341",
+      "source_location": "L365",
       "weight": 1.0
     },
     {
@@ -17290,7 +17578,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L374",
+      "source_location": "L398",
       "weight": 1.0
     },
     {
@@ -17302,7 +17590,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L394",
+      "source_location": "L418",
       "weight": 1.0
     },
     {
@@ -17362,7 +17650,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L8",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -17458,6 +17746,66 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "tests/unit/flood_domain.test.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "ref_node_http",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "ref_node_fs",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "ref_node_path",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "ref_node_child_process",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "ref_node_url",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server.js",
       "source_location": "L5",
       "weight": 1.0
     },
@@ -19647,6 +19995,138 @@
       "weight": 1.0
     },
     {
+      "source": "package",
+      "target": "package_keywords",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_name",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_author",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_license",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_version",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_description",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_type",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_scripts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_test",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_dev",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_start",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "plan",
       "target": "plan_current_task_progress_plan_act_check",
       "relation": "contains",
@@ -20743,7 +21223,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -20942,6 +21422,50 @@
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/template.md",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "server_mime_types",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "server_server",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server.js",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "server_filename",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "server_dirname",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server.js",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -31725,6 +32249,17 @@
       "weight": 1.0
     },
     {
+      "source": "src_interface_ui_js_app",
+      "target": "src_interface_ui_js_app_getmapboxtoken",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
       "source": "src_interface_ui_js_supabase_service",
       "target": "src_interface_ui_js_supabase_service_fallback_data",
       "relation": "contains",
@@ -31891,156 +32426,13 @@
     },
     {
       "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_renderemergencybanner",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L112",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_updateheaderstats",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L126",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_rendermarkers",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L140",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_createfloodmarker",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L165",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_init",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L23",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_createstationmarker",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L237",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_setupeventlisteners",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L280",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_initmap",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L29",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_handlegpslocation",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L418",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_fillreportcoordswithcenter",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L454",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_handlereportsubmit",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L464",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_showtoast",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L520",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
       "target": "src_interface_ui_js_app_floodapp_loadinitialdata",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L77",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_constructor",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L9",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -32051,7 +32443,150 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L99",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_renderemergencybanner",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_constructor",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_updateheaderstats",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_rendermarkers",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_createfloodmarker",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_createstationmarker",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L261",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_init",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_setupeventlisteners",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L304",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_initmap",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_handlegpslocation",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L442",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_fillreportcoordswithcenter",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L478",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_handlereportsubmit",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L488",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_showtoast",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L544",
       "weight": 1.0
     },
     {
@@ -32215,5 +32750,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1e0edf23596d4ba1e97d88a53814e83d7d07e829"
+  "built_at_commit": "d1ea20bb25e39277c424b2e0edf96f9a00cfaea6"
 }

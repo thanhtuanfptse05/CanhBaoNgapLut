@@ -1,4 +1,8 @@
-# Changelog: feat-public-map
+## [2.0.0] - 2026-09-27
+- Chuyển đổi toàn diện sang giao diện Clean Light Mode (Apple / Google Maps / Linear Standard).
+- Tích hợp Stitch Design System (`DESIGN.md` -> Stitch Project `3691368550768245622`).
+- Chuẩn hóa 100% vector SVG icons (Lucide / Heroicons), loại bỏ hoàn toàn emoji nghiệp dư.
+- Tối ưu bảng màu sáng, độ tương phản cao và hiệu ứng bóng mềm đa tầng.
 
 ## [1.1.0] - 2026-09-27
 - Tích hợp Mapbox API Token chính thức (`dark-v11` và `satellite-streets-v12`).

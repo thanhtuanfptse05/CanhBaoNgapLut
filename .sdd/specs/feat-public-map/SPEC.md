@@ -17,15 +17,16 @@ Cung cấp một cổng thông tin trực quan hóa ngập lụt toàn quốc nh
 
 ---
 
-## 2. Tiêu Chí Thiết Kế Giao Diện (UI/UX Excellence)
-- **Phong cách thiết kế**: Hiện đại, chuẩn quốc tế (Clean GIS Dashboard), kết hợp Glassmorphism (hiệu ứng kính mờ), phông chữ không chân hiện đại (Inter / Plus Jakarta Sans).
-- **Hạ tầng bản đồ**: Tích hợp Mapbox Tiles độ nét cao (Mapbox Dark v11 và Vệ tinh Satellite Streets v12) kèm fallback CartoDB/OpenStreetMap.
+## 2. Tiêu Chí Thiết Kế Giao Diện (UI/UX Excellence — Light Mode Standard)
+- **Phong cách thiết kế**: Clean Light Mode (tiêu chuẩn Apple Maps / Google Maps / Linear), kết hợp Glassmorphism nền sáng (`rgba(255, 255, 255, 0.94)`, border `#E2E8F0`, shadow mềm mại đa tầng).
+- **Hạ tầng biểu tượng**: 100% biểu tượng vector SVG sắc nét (Lucide/Heroicons), loại bỏ hoàn toàn emoji nghiệp dư trên nút bấm và thanh công cụ.
+- **Hạ tầng bản đồ**: Tích hợp Mapbox Streets v12 (nền sáng tương phản cao), hỗ trợ chuyển đổi sang Vệ tinh HD (Satellite Streets v12) và Bản đồ Tối GIS (Dark v11).
 - **Trải nghiệm tức thì (Zero-friction)**: Tải trang < 1.5s, không popup quảng cáo hay yêu cầu tạo tài khoản.
 - **Thang đo màu sắc trực quan theo độ sâu ngập**:
-  - 🟢 **Mức 0 (< 10cm - Xanh ngọc)**: Đường thông thoáng, an toàn.
-  - 🟡 **Mức 1 (10 - 30cm - Vàng hổ phách)**: Nước ngập mắt cá chân, xe máy đi chậm, xe gầm thấp chú ý.
-  - 🟠 **Mức 2 (30 - 50cm - Cam rực rỡ)**: Nước ngập nửa bánh xe/đầu gối, nguy cơ chết máy cao.
-  - 🔴 **Mức 3 (> 50cm - Đỏ cảnh báo chớp nháy)**: Ngập sâu nguy hiểm, cấm di chuyển.
+  - 🟢 **Mức 0 (< 10cm - Emerald 600)**: Đường thông thoáng, an toàn.
+  - 🟡 **Mức 1 (10 - 30cm - Amber 600)**: Nước ngập mắt cá chân, xe máy đi chậm, xe gầm thấp chú ý.
+  - 🟠 **Mức 2 (30 - 50cm - Orange 600)**: Nước ngập nửa bánh xe/đầu gối, nguy cơ chết máy cao.
+  - 🔴 **Mức 3 (> 50cm - Crimson Red 600)**: Ngập sâu nguy hiểm, cấm di chuyển (hiệu ứng sóng nước phát sáng).
 - **Tương tác di động (Mobile-First)**: Thanh điều khiển dạng Floating Bottom Sheet vuốt lên/xuống mượt mà trên điện thoại.
 
 ---
