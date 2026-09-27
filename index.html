@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FloodGuard Việt Nam — Bản Đồ Cảnh Báo Ngập Lụt & Trạm Đo Toàn Quốc</title>
+  <meta name="description" content="Hệ thống cảnh báo ngập lụt toàn quốc thời gian thực, trực quan hóa mực nước tại 63 tỉnh thành, tra cứu trạm đo và đường dây cứu hộ SOS 114 khẩn cấp. 100% Miễn phí, không cần đăng nhập.">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet GIS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Application Stylesheet -->
+  <link rel="stylesheet" href="src/interface/ui/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Top Header Navigation & Live Bar -->
+    <header class="app-header">
+      <div class="header-bar">
+        <!-- Logo & Live Indicator -->
+        <div class="brand-section">
+          <div class="brand-logo-glow">🌊</div>
+          <div class="brand-info">
+            <h1>FloodGuard Việt Nam</h1>
+            <div class="brand-tagline">
+              <span class="pulse-dot"></span> Dữ liệu thời gian thực
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Summary Stats (Desktop) -->
+        <div class="stats-badge-group">
+          <div class="stat-pill">
+            <span>Điểm ngập:</span>
+            <strong id="stat-active-points">--</strong>
+          </div>
+          <div class="stat-pill danger">
+            <span>Sâu nhất:</span>
+            <strong id="stat-deepest-point">--</strong>
+          </div>
+        </div>
+
+        <!-- Header Action Buttons -->
+        <div class="header-actions">
+          <button id="btn-open-report" class="btn-pill btn-primary" title="Báo điểm ngập mới cho cộng đồng">
+            <span>📍 Báo ngập</span>
+          </button>
+          <button id="btn-open-sos" class="btn-pill btn-sos" title="Gọi cứu nạn khẩn cấp 114/115">
+            <span>🚨 Cứu hộ SOS</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Emergency Broadcast Alert Banner -->
+      <div id="emergency-banner" class="emergency-banner collapsed">
+        <div class="emergency-content">
+          <span class="emergency-icon">⚠️</span>
+          <span id="emergency-text" class="emergency-text">Đang tải thông báo khẩn cấp...</span>
+        </div>
+        <button id="btn-close-banner" class="emergency-close" title="Đóng thông báo">&times;</button>
+      </div>
+    </header>
+
+    <!-- Map Viewport -->
+    <main id="map-viewport"></main>
+
+    <!-- Floating Filter & Search Panel -->
+    <aside class="floating-controls">
+      <div class="control-panel">
+        <!-- Search Street / Place -->
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" id="search-input" placeholder="Tìm tên đường, ngã tư, khu vực..." autocomplete="off">
+        </div>
+
+        <!-- Province Selector -->
+        <select id="province-select" class="province-select">
+          <option value="all">🇻🇳 Đang tải 63 tỉnh thành...</option>
+        </select>
+
+        <!-- Filter Chips -->
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">Tất cả</button>
+          <button class="chip" data-filter="level3">🔴 Ngập sâu (>50cm)</button>
+          <button class="chip" data-filter="level2">🟠 Mức 2 (30-50cm)</button>
+          <button class="chip" data-filter="level1">🟡 Mức 1 (<30cm)</button>
+          <button class="chip" data-filter="stations">📊 Trạm đo</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Map Tool Floating Buttons (GPS, Layers) -->
+    <div class="map-tool-buttons">
+      <button id="btn-gps" class="tool-btn" title="Vị trí của tôi (Định vị GPS)">
+        🎯
+      </button>
+      <button id="btn-toggle-layer" class="tool-btn" title="Chuyển chế độ bản đồ Tối / Sáng">
+        🗺️
+      </button>
+    </div>
+
+    <!-- Map Legend -->
+    <div class="map-legend">
+      <div class="legend-item">
+        <div class="legend-badge" style="background-color: var(--level1-color);"></div>
+        <span>10-30cm (Mắt cá)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-badge" style="background-color: var(--level2-color);"></div>
+        <span>30-50cm (Đầu gối)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-badge" style="background-color: var(--level3-color);"></div>
+        <span>&gt;50cm (Nguy hiểm)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-badge" style="background-color: #00d2ff;"></div>
+        <span>Trạm đo tự động</span>
+      </div>
+    </div>
+
+    <!-- Modal: SOS Khẩn Cấp & Cứu Hộ -->
+    <div id="modal-sos" class="modal-backdrop">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>🚨 Danh Bạ Cứu Hộ Khẩn Cấp</h3>
+          <button id="btn-close-sos" class="emergency-close" style="color:#fff;">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.85rem; color:var(--text-muted);">
+            Bấm nút để gọi trực tiếp lực lượng cứu nạn, hoặc sao chép tọa độ vị trí hiện tại để gửi tin nhắn cầu cứu qua Zalo/SMS.
+          </p>
+
+          <div class="sos-list">
+            <div class="sos-card">
+              <div class="sos-info">
+                <h4>114 — Cứu Nạn & Cứu Hộ</h4>
+                <p>Cứu người mắc kẹt, ngập lụt, sạt lở, cháy nổ</p>
+              </div>
+              <a href="tel:114" class="btn-call">📞 Gọi 114</a>
+            </div>
+
+            <div class="sos-card">
+              <div class="sos-info">
+                <h4>115 — Cấp Cứu Y Tế</h4>
+                <p>Cấp cứu người bị thương, sơ cứu khẩn cấp</p>
+              </div>
+              <a href="tel:115" class="btn-call">📞 Gọi 115</a>
+            </div>
+
+            <div class="sos-card">
+              <div class="sos-info">
+                <h4>112 — Tìm Kiếm Cứu Nạn Toàn Quốc</h4>
+                <p>Yêu cầu trợ giúp thiên tai, bão lũ lớn</p>
+              </div>
+              <a href="tel:112" class="btn-call">📞 Gọi 112</a>
+            </div>
+          </div>
+
+          <button id="btn-copy-sos-coords" class="btn-pill btn-ghost" style="width:100%; justify-content:center; padding:12px;">
+            📋 Sao chép tọa độ cứu hộ & vị trí Maps
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Báo Ngập Cộng Đồng 1 Chạm (Crowdsource) -->
+    <div id="modal-report" class="modal-backdrop">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>📍 Báo Điểm Ngập Mới (Cộng Đồng)</h3>
+          <button id="btn-close-report" class="emergency-close" style="color:#fff;">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.8rem; color:var(--text-muted);">
+            Không cần tài khoản. Thông tin của bạn giúp hàng nghìn người đi đường tránh vùng ngập nguy hiểm.
+          </p>
+
+          <!-- Step 1: Address & Location -->
+          <div class="form-group">
+            <label>Địa điểm / Tuyến đường bị ngập (*):</label>
+            <input type="text" id="report-address" class="form-input" placeholder="Ví dụ: Đoạn ngã tư Thái Hà - Chùa Bộc">
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <div class="form-group" style="flex:1;">
+              <label>Vĩ độ (Lat):</label>
+              <input type="text" id="report-lat" class="form-input" readonly>
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label>Kinh độ (Lng):</label>
+              <input type="text" id="report-lng" class="form-input" readonly>
+            </div>
+          </div>
+
+          <!-- Step 2: Visual Water Depth Selection -->
+          <div class="form-group">
+            <label>Mức nước ngập thực tế (Chọn 1 trong 4 mức):</label>
+            <div class="report-level-grid">
+              <div class="level-card" data-depth="15">
+                <strong style="color:var(--level1-color);">🟡 Mắt cá chân</strong>
+                <span>~15cm • Xe máy đi chậm</span>
+              </div>
+              <div class="level-card selected" data-depth="35">
+                <strong style="color:var(--level2-color);">🟠 Đến đầu gối</strong>
+                <span>~35cm • Xe máy chết máy</span>
+              </div>
+              <div class="level-card" data-depth="60">
+                <strong style="color:var(--level3-color);">🔴 Ngang yên xe</strong>
+                <span>~60cm • Ô tô không qua được</span>
+              </div>
+              <div class="level-card" data-depth="100">
+                <strong style="color:#f43f5e;">⚠️ Lút nóc xe</strong>
+                <span>&gt;100cm • Cấm di chuyển</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Note -->
+          <div class="form-group">
+            <label>Ghi chú tình trạng (Tùy chọn):</label>
+            <textarea id="report-note" class="form-textarea" rows="2" placeholder="Ví dụ: Nước đang lên rất nhanh, cống nghẹt, xe chết máy hàng loạt..."></textarea>
+          </div>
+
+          <button id="btn-submit-report" class="btn-pill btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:0.95rem;">
+            🚀 Gửi cảnh báo ngay
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Leaflet GIS JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Application Logic Modules -->
+  <script src="src/interface/ui/js/supabase-service.js"></script>
+  <script src="src/interface/ui/js/app.js"></script>
+</body>
+</html>
