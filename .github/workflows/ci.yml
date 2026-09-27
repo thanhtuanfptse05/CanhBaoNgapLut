@@ -1,0 +1,18 @@
+name: CI & Spec Verification
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Constitution & Specs
+        run: |
+          echo "Verifying SDD specs and constitution compliance..."
+          test -f .sdd/constitution.md || exit 1
+          test -f .sdd/shared_context.md || exit 1

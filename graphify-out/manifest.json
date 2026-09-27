@@ -1,0 +1,74 @@
+{
+  ".specify/init-options.json": {
+    "mtime": 1790489477.497065,
+    "seen": 1790489836.7813709,
+    "ast_hash": "5be30bfde9f67b62b17d324e2a093d34",
+    "semantic_hash": "5be30bfde9f67b62b17d324e2a093d34"
+  },
+  ".specify/integration.json": {
+    "mtime": 1790489476.958192,
+    "seen": 1790489836.7813888,
+    "ast_hash": "d04100042e7fa7f7519252234b43e584",
+    "semantic_hash": "d04100042e7fa7f7519252234b43e584"
+  },
+  ".specify/integrations/agy.manifest.json": {
+    "mtime": 1790489476.9540231,
+    "seen": 1790489836.7813976,
+    "ast_hash": "c86c511d13b7f3702dba0b7fc0e39683",
+    "semantic_hash": "c86c511d13b7f3702dba0b7fc0e39683"
+  },
+  ".specify/integrations/speckit.manifest.json": {
+    "mtime": 1790489477.427632,
+    "seen": 1790489836.7814033,
+    "ast_hash": "5e41758b28c72dbeaf16fe2f2e6b09bd",
+    "semantic_hash": "5e41758b28c72dbeaf16fe2f2e6b09bd"
+  },
+  ".specify/memory/.constitution-template.json": {
+    "mtime": 1790489477.502813,
+    "seen": 1790489836.7814088,
+    "ast_hash": "7e3332a78cec1722b4351c6bf52dfc51",
+    "semantic_hash": "7e3332a78cec1722b4351c6bf52dfc51"
+  },
+  ".specify/scripts/powershell/check-prerequisites.ps1": {
+    "mtime": 1790489477.1076977,
+    "seen": 1790489836.7814138,
+    "ast_hash": "ab9d4c9d5772d28c6b2150b1f53ac638",
+    "semantic_hash": "ab9d4c9d5772d28c6b2150b1f53ac638"
+  },
+  ".specify/scripts/powershell/common.ps1": {
+    "mtime": 1790489477.1565027,
+    "seen": 1790489836.7814202,
+    "ast_hash": "6d1dc2322173d3cd13a3633d61324293",
+    "semantic_hash": "6d1dc2322173d3cd13a3633d61324293"
+  },
+  ".specify/scripts/powershell/create-new-feature.ps1": {
+    "mtime": 1790489477.208306,
+    "seen": 1790489836.7814245,
+    "ast_hash": "fad051375e6dcd47030cc49188472fe1",
+    "semantic_hash": "fad051375e6dcd47030cc49188472fe1"
+  },
+  ".specify/scripts/powershell/resolve-template.ps1": {
+    "mtime": 1790489477.2595508,
+    "seen": 1790489836.7814295,
+    "ast_hash": "645ad018c6297df6e23949ac3e915749",
+    "semantic_hash": "645ad018c6297df6e23949ac3e915749"
+  },
+  ".specify/scripts/powershell/setup-plan.ps1": {
+    "mtime": 1790489477.2672465,
+    "seen": 1790489836.781434,
+    "ast_hash": "02abf0794256a7423782adc760f0e0ca",
+    "semantic_hash": "02abf0794256a7423782adc760f0e0ca"
+  },
+  ".specify/scripts/powershell/setup-tasks.ps1": {
+    "mtime": 1790489477.2748835,
+    "seen": 1790489836.7814384,
+    "ast_hash": "9aa2f52ce7abece8476845b1f21a0ced",
+    "semantic_hash": "9aa2f52ce7abece8476845b1f21a0ced"
+  },
+  ".specify/workflows/workflow-registry.json": {
+    "mtime": 1790489477.4928222,
+    "seen": 1790489836.7814438,
+    "ast_hash": "1609bf6fde500db2c2fc01cd9499ce31",
+    "semantic_hash": "1609bf6fde500db2c2fc01cd9499ce31"
+  }
+}
