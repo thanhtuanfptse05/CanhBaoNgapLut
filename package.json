@@ -4,6 +4,7 @@
   "description": "Hệ thống Web Cảnh Báo Ngập Lụt & Trạm Quan Trắc Toàn Quốc (Clean Architecture + SDD)",
   "type": "module",
   "scripts": {
+    "build": "echo \"Static site ready\"",
     "dev": "node scripts/dev-server.js",
     "start": "node scripts/dev-server.js",
     "test": "node --test tests/unit/*.test.js"
