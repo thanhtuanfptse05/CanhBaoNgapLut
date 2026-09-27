@@ -33,6 +33,7 @@ class FloodApp {
   async init() {
     this.initMap();
     this.setupEventListeners();
+    this.setupRoutePlannerListeners();
     await this.loadInitialData();
     this.initRainRadar();
     this.updateWeather(21.0285, 105.8048, 'Hà Nội');
@@ -939,6 +940,381 @@ class FloodApp {
       toast.classList.remove('show');
     }, 3500);
   }
+
+  // ============================================================
+  // ROUTE PLANNER — Tìm Đường Tránh Ngập (feat-flood-route-planner)
+  // ============================================================
+
+  /** Haversine distance in meters */
+  _haversineMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2
+      + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180)
+      * Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  /** Min distance from point to a polyline segment */
+  _pointToSegmentDist(pLat, pLon, aLat, aLon, bLat, bLon) {
+    const dx = bLon - aLon, dy = bLat - aLat;
+    const lenSq = dx * dx + dy * dy;
+    if (lenSq === 0) return this._haversineMeters(pLat, pLon, aLat, aLon);
+    const t = Math.max(0, Math.min(1, ((pLon - aLon) * dx + (pLat - aLat) * dy) / lenSq));
+    return this._haversineMeters(pLat, pLon, aLat + t * dy, aLon + t * dx);
+  }
+
+  /** Find flood points within bufferMeters of a route polyline */
+  analyzeFloodOnRoute(coords, floodPoints, bufferMeters = 150) {
+    if (!coords || coords.length < 2 || !floodPoints) return [];
+    return floodPoints.filter(fp => {
+      for (let i = 0; i < coords.length - 1; i++) {
+        const [aLng, aLat] = coords[i];
+        const [bLng, bLat] = coords[i + 1];
+        if (this._pointToSegmentDist(fp.latitude, fp.longitude, aLat, aLng, bLat, bLng) <= bufferMeters) return true;
+      }
+      return false;
+    });
+  }
+
+  /** Score a route by safety based on flood points on it */
+  scoreRoute(floodPointsOnRoute) {
+    const count = floodPointsOnRoute.length;
+    const totalDepth = floodPointsOnRoute.reduce((s, p) => s + (p.current_depth_cm || 0), 0);
+    const level3Count = floodPointsOnRoute.filter(p => p.severity === 'LEVEL_3').length;
+    const score = Math.max(0, 100 - count * 20 - Math.floor(totalDepth / 10) - level3Count * 15);
+    const label = score >= 80 ? 'AN TOÀN' : score >= 50 ? 'THẬN TRỌNG' : 'NGUY HIỂM';
+    return { score, label };
+  }
+
+  /** Rank analyzed routes: best safety first, then shortest distance */
+  rankRoutes(routes) {
+    return [...routes].sort((a, b) => {
+      if (b.safetyScore !== a.safetyScore) return b.safetyScore - a.safetyScore;
+      return a.distance_m - b.distance_m;
+    });
+  }
+
+  setupRoutePlannerListeners() {
+    // Route panel state
+    this.routeOrigin = null;    // { lat, lng, name }
+    this.routeDest = null;      // { lat, lng, name }
+    this.routeProfile = 'driving';
+    this.routePolylines = [];
+    this.routeFloodMarkers = [];
+    this.routeDebounceOrigin = null;
+    this.routeDebounceDestTimer = null;
+
+    const panelRoute = document.getElementById('panel-route');
+    const btnOpen    = document.getElementById('btn-route-planner');
+    const btnClose   = document.getElementById('btn-close-route');
+    const btnSwap    = document.getElementById('btn-swap-route');
+    const btnGpsRoute= document.getElementById('btn-route-use-gps');
+    const btnFind    = document.getElementById('btn-find-route');
+    const btnClear   = document.getElementById('btn-clear-route');
+    const originInput= document.getElementById('route-origin-input');
+    const destInput  = document.getElementById('route-dest-input');
+    const originSug  = document.getElementById('route-origin-suggestions');
+    const destSug    = document.getElementById('route-dest-suggestions');
+
+    if (!panelRoute || !btnOpen) return;
+
+    // Open / close panel
+    btnOpen.addEventListener('click', () => {
+      const isOpen = panelRoute.style.display !== 'none';
+      panelRoute.style.display = isOpen ? 'none' : 'flex';
+      btnOpen.classList.toggle('active', !isOpen);
+    });
+    if (btnClose) btnClose.addEventListener('click', () => {
+      panelRoute.style.display = 'none';
+      btnOpen.classList.remove('active');
+    });
+
+    // Transport mode buttons
+    document.querySelectorAll('.transport-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.transport-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.routeProfile = btn.dataset.profile;
+      });
+    });
+
+    // Swap origin ↔ dest
+    if (btnSwap) btnSwap.addEventListener('click', () => {
+      const tmpCoords = this.routeOrigin;
+      this.routeOrigin = this.routeDest;
+      this.routeDest = tmpCoords;
+      if (originInput) originInput.value = this.routeOrigin ? this.routeOrigin.name : '';
+      if (destInput)   destInput.value   = this.routeDest   ? this.routeDest.name   : '';
+    });
+
+    // GPS for origin
+    if (btnGpsRoute) btnGpsRoute.addEventListener('click', () => {
+      if (!navigator.geolocation) return;
+      this.showToast('Đang xác định vị trí GPS...');
+      navigator.geolocation.getCurrentPosition((pos) => {
+        this.routeOrigin = { lat: pos.coords.latitude, lng: pos.coords.longitude, name: 'Vị trí của tôi' };
+        if (originInput) originInput.value = 'Vị trí của tôi';
+        this.showToast('Đã dùng vị trí GPS làm điểm xuất phát');
+      }, () => this.showToast('Không lấy được GPS'));
+    });
+
+    // Autocomplete for origin field
+    this._setupRouteInputAutocomplete(originInput, originSug, (item) => {
+      this.routeOrigin = { lat: item.latitude, lng: item.longitude, name: item.name };
+    });
+
+    // Autocomplete for dest field
+    this._setupRouteInputAutocomplete(destInput, destSug, (item) => {
+      this.routeDest = { lat: item.latitude, lng: item.longitude, name: item.name };
+    });
+
+    // Find route button
+    if (btnFind) btnFind.addEventListener('click', () => this.handleFindRoute());
+
+    // Clear route button
+    if (btnClear) btnClear.addEventListener('click', () => this.clearRoute());
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#panel-route')) {
+        if (originSug) originSug.style.display = 'none';
+        if (destSug)   destSug.style.display   = 'none';
+      }
+    });
+  }
+
+  _setupRouteInputAutocomplete(input, dropdown, onSelect) {
+    if (!input || !dropdown) return;
+    let timer = null;
+    input.addEventListener('input', () => {
+      const q = input.value.trim();
+      if (timer) clearTimeout(timer);
+      if (q.length < 2) { dropdown.style.display = 'none'; return; }
+      timer = setTimeout(async () => {
+        const center = this.map ? this.map.getCenter() : null;
+        const results = await window.FloodService.searchAddress(q, center ? { lat: center.lat, lng: center.lng } : null);
+        this._renderRouteDropdown(dropdown, results, (item) => {
+          input.value = item.name;
+          dropdown.style.display = 'none';
+          onSelect(item);
+        });
+      }, 260);
+    });
+  }
+
+  _renderRouteDropdown(dropdown, results, onSelect) {
+    dropdown.innerHTML = '';
+    if (!results || results.length === 0) {
+      dropdown.style.display = 'none';
+      return;
+    }
+    results.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'suggestion-item';
+      el.innerHTML = `
+        <div class="suggestion-icon">
+          <svg class="icon-svg sm" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="suggestion-content">
+          <span class="suggestion-name">${item.name}</span>
+          <span class="suggestion-address">${item.fullName}</span>
+        </div>
+      `;
+      el.addEventListener('click', () => onSelect(item));
+      dropdown.appendChild(el);
+    });
+    dropdown.style.display = 'flex';
+    dropdown.style.flexDirection = 'column';
+  }
+
+  async handleFindRoute() {
+    if (!this.routeOrigin || !this.routeDest) {
+      this.showToast('⚠️ Vui lòng chọn cả điểm xuất phát và điểm đến.');
+      return;
+    }
+
+    this.clearRoute();
+    this.showToast('🗺️ Đang tìm tuyến đường và phân tích ngập lụt...');
+    const btnFind = document.getElementById('btn-find-route');
+    if (btnFind) { btnFind.textContent = 'Đang tính...'; btnFind.disabled = true; }
+
+    try {
+      const routes = await window.FloodService.getRoutes(this.routeOrigin, this.routeDest, this.routeProfile);
+
+      if (!routes || routes.length === 0) {
+        this.showToast('❌ Không tìm được tuyến đường. Hãy kiểm tra lại địa điểm.');
+        return;
+      }
+
+      // Analyze flood on each route
+      const analyzed = routes.map((r, idx) => {
+        const floodOnRoute = this.analyzeFloodOnRoute(r.coordinates, this.floodPoints);
+        const { score, label } = this.scoreRoute(floodOnRoute);
+        return { ...r, floodOnRoute, safetyScore: score, safetyLabel: label, isBest: false };
+      });
+
+      // Rank and mark best
+      const ranked = this.rankRoutes(analyzed);
+      ranked[0].isBest = true;
+
+      // Draw routes on map
+      this._drawRoutes(ranked);
+
+      // Show summary cards
+      this._renderRouteSummary(ranked);
+
+      // Fit map to show all routes
+      const allCoords = ranked.flatMap(r => r.coordinates.map(([lng, lat]) => [lat, lng]));
+      if (allCoords.length > 0) {
+        this.map.fitBounds(L.latLngBounds(allCoords), { padding: [40, 40] });
+      }
+
+      const floodTotal = ranked[0].floodOnRoute.length;
+      this.showToast(floodTotal === 0
+        ? `✅ Tuyến đề xuất: THÔNG THOÁNG, không có điểm ngập.`
+        : `⚠️ Tuyến tốt nhất có ${floodTotal} điểm ngập. Hãy cẩn thận!`
+      );
+    } catch (err) {
+      console.error('[RoutePlanner] Error:', err);
+      this.showToast('❌ Lỗi khi tính toán tuyến đường. Vui lòng thử lại.');
+    } finally {
+      if (btnFind) { btnFind.textContent = 'Tìm đường tránh ngập'; btnFind.disabled = false; }
+    }
+  }
+
+  _drawRoutes(rankedRoutes) {
+    const ROUTE_COLORS = ['#16a34a', '#2563eb', '#7c3aed'];
+    const ROUTE_WEIGHTS = [5, 4, 3];
+    const ROUTE_OPACITY = [1, 0.75, 0.6];
+
+    rankedRoutes.forEach((route, idx) => {
+      const latLngs = route.coordinates.map(([lng, lat]) => [lat, lng]);
+      const polyline = L.polyline(latLngs, {
+        color: ROUTE_COLORS[idx] || '#94a3b8',
+        weight: ROUTE_WEIGHTS[idx] || 3,
+        opacity: ROUTE_OPACITY[idx] || 0.6,
+        lineJoin: 'round',
+        lineCap: 'round'
+      });
+      polyline.addTo(this.map);
+      this.routePolylines.push(polyline);
+
+      // Draw flood warning markers on this route
+      route.floodOnRoute.forEach(fp => {
+        const warningIcon = L.divIcon({
+          html: `<div class="route-flood-marker">⚠️</div>`,
+          className: '',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        });
+        const marker = L.marker([fp.latitude, fp.longitude], { icon: warningIcon });
+        marker.bindPopup(`
+          <div style="font-size:0.83rem; min-width:160px;">
+            <strong style="color:#dc2626;">⚠️ Điểm Ngập Trên Tuyến</strong><br>
+            <b>${fp.name || 'Khu vực ngập'}</b><br>
+            Độ sâu: <b>${fp.current_depth_cm}cm</b><br>
+            Cấp độ: <b>${fp.severity === 'LEVEL_3' ? '🔴 Nguy hiểm' : fp.severity === 'LEVEL_2' ? '🟠 Cảnh báo' : '🟡 Theo dõi'}</b>
+          </div>
+        `);
+        marker.addTo(this.map);
+        this.routeFloodMarkers.push(marker);
+      });
+    });
+
+    // Add origin/dest markers
+    const originIcon = L.divIcon({
+      html: `<div style="width:14px;height:14px;background:#22c55e;border:2px solid #16a34a;border-radius:50%;box-shadow:0 2px 6px rgba(34,197,94,0.5);"></div>`,
+      className: '', iconSize: [14, 14], iconAnchor: [7, 7]
+    });
+    const destIcon = L.divIcon({
+      html: `<div style="width:14px;height:14px;background:#ef4444;border:2px solid #dc2626;border-radius:50%;box-shadow:0 2px 6px rgba(239,68,68,0.5);"></div>`,
+      className: '', iconSize: [14, 14], iconAnchor: [7, 7]
+    });
+
+    const originMarker = L.marker([this.routeOrigin.lat, this.routeOrigin.lng], { icon: originIcon });
+    originMarker.bindPopup(`<b>📍 Điểm đi:</b> ${this.routeOrigin.name}`);
+    originMarker.addTo(this.map);
+    this.routeFloodMarkers.push(originMarker);
+
+    const destMarker = L.marker([this.routeDest.lat, this.routeDest.lng], { icon: destIcon });
+    destMarker.bindPopup(`<b>🏁 Điểm đến:</b> ${this.routeDest.name}`);
+    destMarker.addTo(this.map);
+    this.routeFloodMarkers.push(destMarker);
+  }
+
+  _renderRouteSummary(rankedRoutes) {
+    const resultsEl = document.getElementById('route-results');
+    const containerEl = document.getElementById('route-cards-container');
+    const titleEl = document.getElementById('route-results-title');
+    if (!resultsEl || !containerEl) return;
+
+    const totalFlood = rankedRoutes[0].floodOnRoute.length;
+    if (titleEl) titleEl.textContent = `${rankedRoutes.length} tuyến | Tốt nhất: ${rankedRoutes[0].safetyLabel}`;
+
+    containerEl.innerHTML = '';
+    rankedRoutes.forEach((route, idx) => {
+      const badgeClass = route.safetyLabel === 'AN TOÀN' ? 'badge-safe'
+        : route.safetyLabel === 'THẬN TRỌNG' ? 'badge-caution' : 'badge-danger';
+      const COLORS = ['#16a34a', '#2563eb', '#7c3aed'];
+      const dotColor = COLORS[idx] || '#94a3b8';
+
+      const floodListHtml = route.floodOnRoute.slice(0, 3).map(fp => {
+        const dotC = fp.severity === 'LEVEL_3' ? '#ef4444' : fp.severity === 'LEVEL_2' ? '#f97316' : '#eab308';
+        return `<div class="route-flood-item">
+          <div class="route-flood-dot" style="background:${dotC};"></div>
+          <span>${fp.name || 'Điểm ngập'} — ${fp.current_depth_cm}cm</span>
+        </div>`;
+      }).join('');
+      const moreFlood = route.floodOnRoute.length > 3
+        ? `<div style="color:var(--text-dim); font-size:0.72rem;">+${route.floodOnRoute.length - 3} điểm ngập khác...</div>` : '';
+
+      const card = document.createElement('div');
+      card.className = `route-card${route.isBest ? ' best' : ''}${idx === 0 ? ' selected' : ''}`;
+      card.innerHTML = `
+        ${route.isBest ? '<span class="route-card-badge badge-best">⭐ Đề xuất</span>' : `<span class="route-card-badge ${badgeClass}">${route.safetyLabel}</span>`}
+        <div class="route-card-title">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${dotColor};margin-right:5px;"></span>
+          ${route.isBest ? 'Tuyến tốt nhất' : route.label}
+        </div>
+        <div class="route-card-stats">
+          <span class="route-stat">📏 ${route.distance_km} km</span>
+          <span class="route-stat">⏱️ ~${route.duration_min} phút</span>
+          <span class="route-stat" style="color:${route.floodOnRoute.length > 0 ? '#dc2626' : '#16a34a'};">
+            ${route.floodOnRoute.length > 0 ? `⚠️ ${route.floodOnRoute.length} điểm ngập` : '✅ Không có ngập'}
+          </span>
+        </div>
+        ${route.floodOnRoute.length > 0 ? `<div class="route-flood-list">${floodListHtml}${moreFlood}</div>` : ''}
+      `;
+
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.route-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        // Zoom to this route
+        const latLngs = route.coordinates.map(([lng, lat]) => [lat, lng]);
+        this.map.fitBounds(L.latLngBounds(latLngs), { padding: [40, 40] });
+      });
+
+      containerEl.appendChild(card);
+    });
+
+    resultsEl.style.display = 'block';
+  }
+
+  clearRoute() {
+    this.routePolylines.forEach(p => this.map.removeLayer(p));
+    this.routeFloodMarkers.forEach(m => this.map.removeLayer(m));
+    this.routePolylines = [];
+    this.routeFloodMarkers = [];
+    const resultsEl = document.getElementById('route-results');
+    if (resultsEl) resultsEl.style.display = 'none';
+    const containerEl = document.getElementById('route-cards-container');
+    if (containerEl) containerEl.innerHTML = '';
+  }
 }
 
 // Start app on DOMContentLoaded
@@ -946,3 +1322,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.floodApp = new FloodApp();
   window.floodApp.init();
 });
+

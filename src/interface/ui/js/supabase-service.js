@@ -549,6 +549,55 @@ class SupabaseFloodService {
 
     return [];
   }
+
+  /**
+   * Get driving/cycling/walking routes between two coordinates via Mapbox Directions API
+   * Returns up to 3 alternative routes with GeoJSON geometry for flood analysis
+   * @param {{ lat: number, lng: number }} origin
+   * @param {{ lat: number, lng: number }} dest
+   * @param {'driving'|'cycling'|'walking'} profile
+   */
+  async getRoutes(origin, dest, profile = 'driving') {
+    const mapboxToken = (typeof window !== 'undefined' && window.ENV_CONFIG && window.ENV_CONFIG.MAPBOX_TOKEN)
+      ? window.ENV_CONFIG.MAPBOX_TOKEN
+      : '';
+
+    if (!mapboxToken || !mapboxToken.startsWith('pk.')) {
+      console.warn('[SupabaseFloodService] Mapbox token required for routing');
+      return [];
+    }
+
+    try {
+      const coords = `${origin.lng.toFixed(6)},${origin.lat.toFixed(6)};${dest.lng.toFixed(6)},${dest.lat.toFixed(6)}`;
+      const url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${coords}`
+        + `?alternatives=true`
+        + `&geometries=geojson`
+        + `&overview=full`
+        + `&language=vi`
+        + `&steps=false`
+        + `&access_token=${mapboxToken}`;
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Directions API error: ${res.status}`);
+      const data = await res.json();
+
+      if (!data.routes || data.routes.length === 0) return [];
+
+      return data.routes.slice(0, 3).map((r, idx) => ({
+        index: idx,
+        geometry: r.geometry,           // GeoJSON LineString { type, coordinates: [[lng,lat],...] }
+        coordinates: r.geometry.coordinates, // [[lng,lat],...]
+        distance_m: Math.round(r.distance),
+        duration_s: Math.round(r.duration),
+        distance_km: (r.distance / 1000).toFixed(1),
+        duration_min: Math.round(r.duration / 60),
+        label: idx === 0 ? 'Tuyến chính' : `Tuyến thay thế ${idx}`
+      }));
+    } catch (err) {
+      console.warn('[SupabaseFloodService] Directions API error:', err.message);
+      return [];
+    }
+  }
 }
 
 // Export singleton instance
