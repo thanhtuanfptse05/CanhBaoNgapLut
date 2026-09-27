@@ -178,9 +178,13 @@ class FloodApp {
       activePointsEl.textContent = this.floodPoints.length;
     }
 
-    if (deepestPointEl && this.floodPoints.length > 0) {
-      const maxPoint = [...this.floodPoints].sort((a, b) => b.current_depth_cm - a.current_depth_cm)[0];
-      deepestPointEl.textContent = `${maxPoint.current_depth_cm}cm`;
+    if (deepestPointEl) {
+      if (this.floodPoints && this.floodPoints.length > 0) {
+        const maxPoint = [...this.floodPoints].sort((a, b) => b.current_depth_cm - a.current_depth_cm)[0];
+        deepestPointEl.textContent = `${maxPoint.current_depth_cm}cm`;
+      } else {
+        deepestPointEl.textContent = '0cm';
+      }
     }
   }
 

@@ -1,3 +1,10 @@
+## [2.1.0] - 2026-09-27
+- **Triệt tiêu toàn bộ cơ chế suy diễn điểm ngập giả từ lưu lượng sông (Zero Fake Flood Data)**:
+  - Xóa bỏ hoàn toàn hàm `generateFloodPointsFromMeteo` và danh sách `riverMonitoringPoints` suy diễn.
+  - Chấm dứt hiện tượng cắm nhầm mốc "Sông Đáy 120cm" và khuyến cáo cấm xe giả mạo lên các tuyến đường dân cư (đường Giải Phóng, Nam Định).
+  - Tách bạch dứt khoát giữa layer Điểm ngập đô thị (`flood_points` từ DB thực tế) và layer Trạm quan trắc thủy văn (`stations`).
+  - Khi cơ sở dữ liệu chưa có báo cáo ngập, hiển thị trung thực 0 điểm ngập và thông báo khu vực an toàn.
+
 ## [2.0.0] - 2026-09-27
 - Chuyển đổi toàn diện sang giao diện Clean Light Mode (Apple / Google Maps / Linear Standard).
 - Tích hợp Stitch Design System (`DESIGN.md` -> Stitch Project `3691368550768245622`).

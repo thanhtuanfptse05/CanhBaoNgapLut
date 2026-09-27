@@ -52,7 +52,12 @@ Cung cấp một cổng thông tin trực quan hóa ngập lụt toàn quốc nh
 ---
 
 ## 4. Dữ Liệu & Hợp Đồng Giao Tiếp
-- Sử dụng trực tiếp dữ liệu từ bảng `provinces`, `stations`, `station_thresholds`, `flood_points` trên **Supabase Cloud**.
+- Sử dụng trực tiếp dữ liệu từ bảng `provinces`, `stations`, `station_thresholds`, `flood_points`, `community_reports` trên **Supabase Cloud**.
+- **Nguyên tắc Dữ liệu Thực tế (Real Data Only)**:
+  - Điểm ngập lụt đô thị / đường sá (`flood_points`) CHỈ lấy từ bản ghi đã xác minh hoặc báo cáo cộng đồng hợp lệ.
+  - TUYỆT ĐỐI CẤM tự ý suy diễn hoặc chuyển đổi lưu lượng xả sông (river discharge) thành điểm ngập đường phố với độ sâu ngập (cm) và khuyến cáo cấm xe giả lập trên đường dân cư.
+  - Dữ liệu thủy văn lưu lượng sông chỉ hiển thị tại đúng các Trạm quan trắc thủy văn (`stations`) có tọa độ chuẩn tại lòng sông, với nhãn rõ ràng "Trạm quan trắc thủy văn tự động".
+  - Khi cơ sở dữ liệu chưa có điểm ngập nào, hệ thống phải hiển thị trung thực 0 điểm ngập và trạng thái an toàn, tuyệt đối không tạo dữ liệu giả lập để "lấp chỗ trống".
 - Kết nối thông qua Supabase REST API với khóa công khai (`SUPABASE_PUBLISHABLE_KEY`) an toàn cho Client-side.
 - Cơ chế fallback: Nếu mất mạng, hệ thống tự động tải bộ đệm dữ liệu ngoại tuyến (Offline Cache / Local Storage) để không làm trắng màn hình.
 
