@@ -106,5 +106,8 @@
   "104": "NO-BROWSER RULE — CẤM MỞ TRÌNH DUYỆT TEST",
   "105": "ref_node_assert",
   "106": "Feature Spec: Tích Hợp Thời Tiết Thực Tế & Cảnh Báo Mưa Ngập (feat-realtime-weather)",
-  "107": "[1.0.0] - 2026-09-27"
+  "107": "[1.0.0] - 2026-09-27",
+  "108": "Feature Spec: Tìm Kiếm Địa Chỉ Thông Minh Có Đề Xuất (feat-smart-search)",
+  "109": "**LỜI MỞ ĐẦU**",
+  "110": "[1.0.0] - 2026-09-27"
 }

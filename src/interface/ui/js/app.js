@@ -258,6 +258,10 @@ class FloodApp {
       statusText = 'Khô ráo - Thông thoáng';
       statusBg = 'var(--safe-bg)';
       statusColor = 'var(--safe-color)';
+    } else if (point.status === 'STAGNANT_PONDING') {
+      statusText = 'Ứ đọng sau bão (Chờ bơm)';
+      statusBg = '#fee2e2';
+      statusColor = '#991b1b';
     } else if (point.status === 'RECEDING') {
       statusText = 'Đang rút';
       statusBg = 'var(--safe-bg)';
@@ -291,9 +295,9 @@ class FloodApp {
     const recommendation = isSafe
       ? 'Đường thông thoáng, lưu thông an toàn'
       : point.current_depth_cm >= 50
-      ? 'Cấm xe qua lại'
+      ? 'Cấm xe qua lại - Đề xuất quay đầu'
       : point.current_depth_cm >= 30
-      ? 'Xe gầm thấp chú ý'
+      ? 'Xe gầm thấp chú ý, nguy cơ chết máy'
       : 'Lưu thông cẩn thận';
 
     const sourceRow = point.source
@@ -304,11 +308,24 @@ class FloodApp {
       ? `<div class="popup-detail-row"><span>Lượng mưa tức thời:</span><strong>${point.live_rain} mm/h (Open-Meteo)</strong></div>`
       : '';
 
+    const accumRow = point.accum48h
+      ? `<div class="popup-detail-row"><span>Mưa tích lũy 48h:</span><strong>${point.accum48h} mm</strong></div>`
+      : '';
+
+    const recessionRow = (point.recession_hours && !isSafe)
+      ? `<div class="popup-detail-row"><span>Dự kiến nước rút:</span><strong style="color:#d97706;">~${point.recession_hours} giờ</strong></div>`
+      : '';
+
+    const earlyWarningHtml = point.is_early_warning
+      ? `<div style="margin:6px 0;padding:6px 8px;border-radius:6px;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;">⚠️ ${point.forecast_warning_msg || 'Nguy cơ ngập sớm'}</div>`
+      : '';
+
     const popupHtml = `
       <div class="flood-popup-card">
         <div class="popup-title">
           <span>${point.name}</span>
         </div>
+        ${earlyWarningHtml}
         ${communityBadge}
         <div class="popup-depth-meter">
           <span class="depth-value" style="color: ${color}">${point.current_depth_cm || 0}</span>
@@ -322,6 +339,8 @@ class FloodApp {
           <strong>${recommendation}</strong>
         </div>
         ${rainRow}
+        ${accumRow}
+        ${recessionRow}
         ${sourceRow}
         ${point.note ? `<div class="popup-detail-row"><span>Ghi chú:</span><span>${point.note}</span></div>` : ''}
         <div class="popup-detail-row">
@@ -1034,14 +1053,14 @@ class FloodApp {
 
     this.searchMarker = L.marker([item.latitude, item.longitude], { icon: pinIcon }).addTo(this.map);
 
-    // 3. Check nearby flood status (within 500m radius) — real-time
-    const nearbyFlood = this._findNearbyFlood(item.latitude, item.longitude, 500);
+    // 3. Check nearby flood status (within 2500m radius) — real-time
+    const nearbyFlood = this._findNearbyFlood(item.latitude, item.longitude, 2500);
 
     let floodSection = '';
     if (nearbyFlood.length === 0) {
       floodSection = `
         <div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding:7px 10px;border-radius:8px;background:#d1fae5;color:#065f46;font-size:0.8rem;font-weight:600;">
-          <span>✅</span> Khu vực an toàn — không có điểm ngập trong 500m
+          <span>✅</span> Khu vực an toàn — không có điểm ngập trong 2.5km
         </div>`;
     } else {
       const maxDepth = Math.max(...nearbyFlood.map(f => f.current_depth_cm || 0));
@@ -1050,24 +1069,29 @@ class FloodApp {
       const badgeBg   = hasLevel3 ? '#fee2e2' : hasLevel2 ? '#fef3c7' : '#fff7ed';
       const badgeClr  = hasLevel3 ? '#991b1b' : hasLevel2 ? '#92400e' : '#9a3412';
       const icon      = hasLevel3 ? '🔴' : hasLevel2 ? '🟡' : '🟠';
-      const label     = hasLevel3 ? 'NGUY HIỂM — ngập nặng' : hasLevel2 ? 'CẢNH BÁO — ngập trung bình' : 'THEO DÕI — ngập nhẹ';
+      const label     = hasLevel3 ? 'NGUY HIỂM — ngập sâu' : hasLevel2 ? 'CẢNH BÁO — ngập trung bình' : 'THEO DÕI — ngập nhẹ';
 
-      const pointList = nearbyFlood.slice(0, 3).map(f => {
+      const pointList = nearbyFlood.slice(0, 4).map(f => {
         const dist = this._haversineDistance(item.latitude, item.longitude, f.latitude, f.longitude);
         const distStr = dist < 1000 ? `${Math.round(dist)}m` : `${(dist/1000).toFixed(1)}km`;
-        return `<li style="margin:2px 0;font-size:0.75rem;">📍 ${f.name || 'Điểm ngập'} <span style="opacity:0.7">(${distStr} — ${f.current_depth_cm}cm)</span></li>`;
+        const extraNote = f.status === 'STAGNANT_PONDING'
+          ? ` <span style="color:#b91c1c;font-weight:700;">(Ứ đọng sau bão, rút sau ~${f.recession_hours || 48}h)</span>`
+          : f.recession_hours
+          ? ` <span style="color:#d97706;">(Rút sau ~${f.recession_hours}h)</span>`
+          : '';
+        return `<li style="margin:4px 0;font-size:0.75rem;line-height:1.35;">📍 <strong>${f.name || 'Điểm ngập'}</strong> <span style="opacity:0.85;">(${distStr} — ${f.current_depth_cm}cm)</span>${extraNote}</li>`;
       }).join('');
 
       floodSection = `
         <div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:${badgeBg};color:${badgeClr};">
           <div style="font-weight:700;font-size:0.8rem;margin-bottom:4px;">${icon} ${label}</div>
-          <div style="font-size:0.75rem;opacity:0.85;">Độ sâu tối đa: <strong>${maxDepth}cm</strong> — ${nearbyFlood.length} điểm ngập gần đây</div>
+          <div style="font-size:0.75rem;opacity:0.85;">Độ sâu tối đa: <strong>${maxDepth}cm</strong> — ${nearbyFlood.length} điểm ngập lân cận</div>
           <ul style="margin:5px 0 0 0;padding-left:12px;">${pointList}</ul>
         </div>`;
     }
 
     this.searchMarker.bindPopup(`
-      <div class="flood-popup-card" style="min-width:220px;max-width:280px;">
+      <div class="flood-popup-card" style="min-width:240px;max-width:320px;">
         <div class="popup-title" style="font-size:0.95rem;font-weight:700;line-height:1.3;margin-bottom:3px;">
           ${item.name}
         </div>
@@ -1075,11 +1099,11 @@ class FloodApp {
           ${item.fullName || ''}
         </div>
         <div class="popup-badge" style="background:var(--primary-subtle);color:var(--primary);margin-bottom:0;">
-          📍 Vị trí tìm kiếm
+          📍 Vị trí tra cứu
         </div>
         ${floodSection}
       </div>
-    `, { maxWidth: 300 }).openPopup();
+    `, { maxWidth: 320 }).openPopup();
 
     // 4. Update weather at this exact location
     this.updateWeather(item.latitude, item.longitude, item.name);
@@ -1089,7 +1113,7 @@ class FloodApp {
   /**
    * Find flood points within a given radius (meters) of a coordinate.
    */
-  _findNearbyFlood(lat, lng, radiusMeters = 500) {
+  _findNearbyFlood(lat, lng, radiusMeters = 2500) {
     if (!this.floodPoints || this.floodPoints.length === 0) return [];
     return this.floodPoints.filter(fp => {
       // Only warn about active flood hazard (depth > 0 and not SAFE)

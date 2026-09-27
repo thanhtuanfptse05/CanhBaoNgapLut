@@ -1,16 +1,17 @@
 # Graph Report - WEB cảnh báo ngập lụt  (2026-09-27)
 
 ## Corpus Check
-- 111 files · ~171,951 words
+- 128 files · ~196,189 words
 - Verdict: corpus is large enough that graph structure adds value.
+- Unclassified: 19 file(s) not represented in the graph (top: (none) 17, .example 1, .css 1)
 
 ## Summary
-- 1519 nodes · 1488 edges · 111 communities (91 shown, 20 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
+- 1659 nodes · 1676 edges · 121 communities (94 shown, 27 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 11 edges (avg confidence: 0.95)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `99c2baba`
+- Built from commit: `1aaaf68a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -28,7 +29,7 @@
 - **<mark>Phân Tích Phê Bình về SDD</mark>**
 - **<mark>Multi-Agent & Orchestration</mark>**
 - **<mark>Hybrid Framework</mark>**
-- FloodPoint
+- flood_domain.test.js
 - **<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**
 - **<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**
 - **<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**
@@ -46,7 +47,7 @@
 - Core Principles
 - Core Principles
 - SupabaseFloodService
-- migrate.py
+- sync_realtime_open_meteo.py
 - Feature Spec: Báo Ngập Cộng Đồng 1 Chạm (feat-community-report)
 - Feature Spec: Bản Đồ Ngập Lụt & Trạm Đo Toàn Quốc (feat-public-map)
 - Bug Triage Workflow Extension
@@ -88,7 +89,7 @@
 - SHARED CONTEXT — CROSS-AGENT SYNCHRONIZATION
 - Skill: API Security & Input Validation
 - Skill: GIS & Map Performance
-- [1.0.0] - 2026-09-27
+- feat-community-report/CHANGELOG.md
 - [1.0.0] - 2026-09-27
 - [1.0.0] - 2026-09-27
 - SPECIFICATION TEMPLATES (SDD)
@@ -112,14 +113,24 @@
 - package.json
 - server.js
 - 4. Đặc Tả Thành Phần Giao Diện (Component Specifications)
-- **LỜI MỞ ĐẦU**
+- Feature Spec: Hệ Thống Web Cảnh Báo Ngập Lụt Toàn Quốc (feat-national-flood-system)
 - Execution Plan: feat-national-flood-system
 - NO-BROWSER RULE — CẤM MỞ TRÌNH DUYỆT TEST
-- ref_node_assert
+- route.test.js
 - Feature Spec: Tích Hợp Thời Tiết Thực Tế & Cảnh Báo Mưa Ngập (feat-realtime-weather)
 - [1.0.0] - 2026-09-27
 - Feature Spec: Tìm Kiếm Địa Chỉ Thông Minh Có Đề Xuất (feat-smart-search)
 - **LỜI MỞ ĐẦU**
+- [1.0.0] - 2026-09-27
+- test-flood-prediction-engine.test.js
+- Implementation Plan: Tìm Đường Tránh Ngập (feat-flood-route-planner)
+- Feature Specification: National Flood Prediction Engine (feat-flood-prediction-engine)
+- Áp Dụng Cho
+- search_domain.test.js
+- CommunityReport
+- OpenMeteoWeatherService
+- Specification Quality Checklist: feat-flood-prediction-engine
+- FloodPoint
 - [1.0.0] - 2026-09-27
 
 ## God Nodes (most connected - your core abstractions)
@@ -135,12 +146,21 @@
 10. `**<mark>Multi-Agent & Orchestration</mark>**` - 49 edges
 
 ## Surprising Connections (you probably didn't know these)
-- None detected - all connections are within the same source files.
+- `4. Key Entities & Domain Models` --references--> `Province`  [INFERRED]
+  .sdd/specs/feat-flood-prediction-engine/SPEC.md → src/domain/entities/Province.js
+- `4. Key Entities & Boundaries` --references--> `CommunityReport`  [INFERRED]
+  .sdd/specs/feat-national-flood-system/SPEC.md → src/domain/entities/CommunityReport.js
+- `4. Key Entities & Boundaries` --references--> `FloodAlert`  [INFERRED]
+  .sdd/specs/feat-national-flood-system/SPEC.md → src/domain/entities/FloodAlert.js
+- `Phase 2: Core Domain & Repositories (Backend Foundation)` --references--> `FloodPoint`  [INFERRED]
+  .sdd/specs/feat-national-flood-system/PLAN.md → src/domain/entities/FloodPoint.js
+- `4. Key Entities & Boundaries` --references--> `FloodPoint`  [INFERRED]
+  .sdd/specs/feat-national-flood-system/SPEC.md → src/domain/entities/FloodPoint.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (111 total, 20 thin omitted)
+## Communities (121 total, 27 thin omitted)
 
 ### Community 1 - "common.ps1"
 Cohesion: 0.23
@@ -190,9 +210,9 @@ Nodes (49): **11.1.1 Context Window Limits — Giới hạn bộ nhớ làm vi�
 Cohesion: 0.05
 Nodes (42): **13.1.1 CORE — "Những thứ không được phép sai"**, **13.1.2 SHELL — "Những thứ cần xoay chuyển nhanh"**, **13.1 Nguyên tắc Hybrid — Mô hình "Core & Shell"**, **13.2.1 Ba chiều của Decision Matrix**, **13.2.2 The Decision Matrix — 9 ô × Risk overlay**, **13.2.3 Flowchart quyết định nhanh**, **13.2.4 Ví dụ áp dụng ma trận — 5 tình huống thực tế**, **13.2  Decision Matrix — Spec Depth × Agent Autonomy × Risk** (+34 more)
 
-### Community 17 - "FloodPoint"
-Cohesion: 0.08
-Nodes (7): ref_node_test, CommunityReport, FloodAlert, FloodPoint, FloodStation, sanitizeSearchQuery(), shouldTriggerAutocomplete()
+### Community 17 - "flood_domain.test.js"
+Cohesion: 0.24
+Nodes (3): Phase 2: Core Domain & Repositories (Backend Foundation), FloodAlert, FloodStation
 
 ### Community 18 - "**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**"
 Cohesion: 0.05
@@ -255,12 +275,12 @@ Cohesion: 0.18
 Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME], [PRINCIPLE_3_NAME], [PRINCIPLE_4_NAME], [PRINCIPLE_5_NAME], [PROJECT_NAME] Constitution (+2 more)
 
 ### Community 34 - "SupabaseFloodService"
-Cohesion: 0.17
+Cohesion: 0.29
 Nodes (3): BASELINE_DATA, SUPABASE_CONFIG, SupabaseFloodService
 
-### Community 35 - "migrate.py"
-Cohesion: 0.19
-Nodes (10): os, pathlib, psycopg, Database Migration & Seed Script for Supabase PostgreSQL Usage:   uv run --with, Seed Realtime Flood Points & Alerts into Supabase PostgreSQL, fetch_open_meteo_hydrology(), fetch_open_meteo_weather(), Live Data Sync & Database Cleaning Engine for FloodGuard Vietnam - Cleans fake h (+2 more)
+### Community 35 - "sync_realtime_open_meteo.py"
+Cohesion: 0.16
+Nodes (12): json, os, pathlib, psycopg, Database Migration & Seed Script for Supabase PostgreSQL Usage: uv run --with…, Seed Realtime Flood Points & Alerts into Supabase PostgreSQL, fetch_open_meteo_hydrology(), fetch_open_meteo_weather() (+4 more)
 
 ### Community 36 - "Feature Spec: Báo Ngập Cộng Đồng 1 Chạm (feat-community-report)"
 Cohesion: 0.18
@@ -426,7 +446,7 @@ Nodes (3): Objective, Rules, Skill: API Security & Input Validation
 Cohesion: 0.50
 Nodes (3): Best Practices, Objective, Skill: GIS & Map Performance
 
-### Community 77 - "[1.0.0] - 2026-09-27"
+### Community 77 - "feat-community-report/CHANGELOG.md"
 Cohesion: 0.50
 Nodes (3): [1.0.0] - 2026-09-27, [1.1.0] - 2026-09-27, Added
 
@@ -443,12 +463,12 @@ Cohesion: 0.50
 Nodes (3): 1. Light Spec (CRUD đơn giản, UI component, bug fix), 2. Standard Spec (Feature có business logic), SPECIFICATION TEMPLATES (SDD)
 
 ### Community 84 - "feat-public-map/CHANGELOG.md"
-Cohesion: 0.50
-Nodes (3): [1.0.0] - 2026-09-27, [1.1.0] - 2026-09-27, [2.0.0] - 2026-09-27
+Cohesion: 0.33
+Nodes (5): [1.0.0] - 2026-09-27, [1.1.0] - 2026-09-27, [2.0.0] - 2026-09-27, [2.1.0] - 2026-09-27, [2.2.0] - 2026-09-27
 
 ### Community 98 - "package.json"
-Cohesion: 0.11
-Nodes (18): author, description, keywords, license, main, name, scripts, dev (+10 more)
+Cohesion: 0.15
+Nodes (12): author, description, keywords, license, main, name, scripts, dev (+4 more)
 
 ### Community 99 - "server.js"
 Cohesion: 0.20
@@ -458,13 +478,17 @@ Nodes (9): ref_node_child_process, ref_node_fs, ref_node_http, ref_node_path, re
 Cohesion: 0.12
 Nodes (16): 1. Triết Lý Thiết Kế (Design Principles), 2.1 Màu Nền & Bề Mặt (Surfaces), 2.2 Màu Chữ (Typography Colors), 2.3 Màu Thương Hiệu & Điểm Nhấn (Brand Accents), 2.4 Thang Đo Mức Ngập Lụt (Flood Severity Scale), 2. Bảng Màu Chuẩn (Color System Tokens), 3. Hệ Thống Kiểu Chữ (Typography System), 4.1 Thanh Điều Hướng Trên (Header Navigation) (+8 more)
 
-### Community 102 - "**LỜI MỞ ĐẦU**"
+### Community 102 - "Feature Spec: Hệ Thống Web Cảnh Báo Ngập Lụt Toàn Quốc (feat-national-flood-system)"
 Cohesion: 0.20
 Nodes (9): 1. Business Context & Problem Statement, 2. User Personas & Scenarios, 3.1 Bản Đồ & Trực Quan Hóa GIS, 3.2 Dữ Liệu Quan Trắc & Ngưỡng Cảnh Báo, 3.3 Thông Báo & Cảnh Báo Sớm, 3. Acceptance Criteria (EARS Notation), 4. Key Entities & Boundaries, 5. Non-Functional Requirements & Constraints (+1 more)
 
 ### Community 103 - "Execution Plan: feat-national-flood-system"
-Cohesion: 0.25
-Nodes (7): Execution Plan: feat-national-flood-system, Phase 0: Kiến Trúc & Nghiên Cứu (Research & Foundation), Phase 1: Thiết Kế Mô Hình Dữ Liệu & Database First (CURRENT FOCUS), Phase 2: Core Domain & Repositories (Backend Foundation), Phase 3: Business Logic Usecases (Application Layer), Phase 4: API & Presentation Interface (GIS Web UI), Phase 5: Verification & Deployment
+Cohesion: 0.29
+Nodes (6): Execution Plan: feat-national-flood-system, Phase 0: Kiến Trúc & Nghiên Cứu (Research & Foundation), Phase 1: Thiết Kế Mô Hình Dữ Liệu & Database First (CURRENT FOCUS), Phase 3: Business Logic Usecases (Application Layer), Phase 4: API & Presentation Interface (GIS Web UI), Phase 5: Verification & Deployment
+
+### Community 105 - "route.test.js"
+Cohesion: 0.24
+Nodes (5): ref_node_assert, ref_node_test, analyzeFloodOnRoute(), haversineDistance(), pointToSegmentDistance()
 
 ### Community 106 - "Feature Spec: Tích Hợp Thời Tiết Thực Tế & Cảnh Báo Mưa Ngập (feat-realtime-weather)"
 Cohesion: 0.22
@@ -486,22 +510,50 @@ Nodes (7): **Chương 1**, **Cuốn sách này dành cho ai?**, **Cách đọc h
 Cohesion: 0.50
 Nodes (3): [1.0.0] - 2026-09-27, Added, Changelog: feat-smart-search
 
+### Community 111 - "test-flood-prediction-engine.test.js"
+Cohesion: 0.05
+Nodes (28): 1. Kiến Trúc Hệ Thống (Clean Architecture Mapping), 2.1 Các biến đầu vào (Inputs), 2.2 Công thức toán học (Formulas), 2. Thiết Kế Thuật Toán Dự Đoán HTPM (Hydro-Topographic Prediction Model), 3. Các Giai Đoạn Triển Khai (Phased Rollout), Bước 1: Tính Hệ số dòng chảy bề mặt động (Dynamic Runoff Coefficient - $C_{\text{runoff}}$), Bước 2: Lượng nước đọng tích tụ hữu hiệu (Effective Ponding Volume - $V_{\text{eff}}$), Bước 3: Độ sâu ngập dự đoán ($D_{\text{cm}}$) (+20 more)
+
+### Community 112 - "Implementation Plan: Tìm Đường Tránh Ngập (feat-flood-route-planner)"
+Cohesion: 0.08
+Nodes (24): A. `FloodRouteService` (trong `supabase-service.js`), Architecture Decision, B. `FloodRouteAnalyzer` (logic thuần trong `app.js`), C. UI Components (trong `index.html` + `style.css`), Component Design, Data Flow, Files to Modify / Create, Implementation Plan: Tìm Đường Tránh Ngập (feat-flood-route-planner) (+16 more)
+
+### Community 113 - "Feature Specification: National Flood Prediction Engine (feat-flood-prediction-engine)"
+Cohesion: 0.12
+Nodes (15): 1.1 Nỗi đau thực tế (Real-world Pain Points), 1.2 Giải pháp cung cấp, 1. Mục Tiêu Nghiệp Vụ & Bối Cảnh (Business Context), 2. User Scenarios & Testing *(Prioritized User Journeys)*, 3.1 Dữ liệu Địa giới Toàn Quốc (National Administrative Geography), 3.2 Khai thác Khí tượng & Phân tích Chuyên sâu (Hyper-Local Weather Analysis), 3.3 Cơ sở Dữ liệu Điểm Đen Ngập Toàn Quốc (National Flood Vulnerability Knowledge Base), 3.4 Thuật toán Dự đoán Ngập Đa Yếu Tố HTPM (Hydro-Topographic Prediction Model) (+7 more)
+
+### Community 114 - "Áp Dụng Cho"
+Cohesion: 0.18
+Nodes (10): 1. Dữ Liệu Ngập Lụt (Flood Points), 2. Dữ Liệu Thời Tiết, 3. Dữ Liệu Radar Mưa, 4. Dữ Liệu Trạm Quan Trắc, 5. Vị Trí GPS, Enforcement, Nguyên Tắc Cốt Lõi, Rule: Real Data Only — Dữ Liệu Phải Là Thực Tế (+2 more)
+
+### Community 115 - "search_domain.test.js"
+Cohesion: 0.31
+Nodes (5): _fuzzyScore(), _normalizeVi(), sanitizeSearchQuery(), scorePOIMandatory(), shouldTriggerAutocomplete()
+
+### Community 118 - "Specification Quality Checklist: feat-flood-prediction-engine"
+Cohesion: 0.33
+Nodes (5): Content Quality, Feature Readiness, Notes, Requirement Completeness, Specification Quality Checklist: feat-flood-prediction-engine
+
+### Community 120 - "[1.0.0] - 2026-09-27"
+Cohesion: 0.50
+Nodes (3): [1.0.0] - 2026-09-27, Added, Changelog: feat-flood-prediction-engine
+
 ## Knowledge Gaps
-- **1200 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1195 more)
-  These have ≤1 connection - possible missing edges or undocumented components.
-- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1252 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1247 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1381 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **27 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `**LỜI MỞ ĐẦU**` connect `**LỜI MỞ ĐẦU**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`, `**<mark>Templates, Checklists & Quick References</mark>**`?**
-  _High betweenness centrality (0.259) - this node is a cross-community bridge._
-- **Why does `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**` connect `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**` to `**LỜI MỞ ĐẦU**`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
-- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**LỜI MỞ ĐẦU**`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
+  _High betweenness centrality (0.200) - this node is a cross-community bridge._
+- **Why does `**<mark>Phân Tích Phê Bình về SDD</mark>**` connect `**<mark>Phân Tích Phê Bình về SDD</mark>**` to `**LỜI MỞ ĐẦU**`?**
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+- **Why does `**<mark>Agent-Driven Workflow</mark>**` connect `**<mark>Agent-Driven Workflow</mark>**` to `**LỜI MỞ ĐẦU**`?**
+  _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `description` to the rest of the system?**
-  _1200 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1252 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `**<mark>Các Tiêu Chuẩn Mở</mark>**` be split into smaller, more focused modules?**
   _Cohesion score 0.020202020202020204 - nodes in this community are weakly interconnected._
 - **Should `**<mark>Executable Specification</mark>**` be split into smaller, more focused modules?**

@@ -1,16 +1,16 @@
 # Graph Report - WEB cảnh báo ngập lụt  (2026-09-27)
 
 ## Corpus Check
-- 108 files · ~170,406 words
+- 111 files · ~171,951 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1499 nodes · 1466 edges · 108 communities (88 shown, 20 thin omitted)
+- 1519 nodes · 1488 edges · 111 communities (91 shown, 20 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `41dca23b`
+- Built from commit: `99c2baba`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -118,6 +118,9 @@
 - ref_node_assert
 - Feature Spec: Tích Hợp Thời Tiết Thực Tế & Cảnh Báo Mưa Ngập (feat-realtime-weather)
 - [1.0.0] - 2026-09-27
+- Feature Spec: Tìm Kiếm Địa Chỉ Thông Minh Có Đề Xuất (feat-smart-search)
+- **LỜI MỞ ĐẦU**
+- [1.0.0] - 2026-09-27
 
 ## God Nodes (most connected - your core abstractions)
 1. `**<mark>Các Tiêu Chuẩn Mở</mark>**` - 99 edges
@@ -137,7 +140,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (108 total, 20 thin omitted)
+## Communities (111 total, 20 thin omitted)
 
 ### Community 1 - "common.ps1"
 Cohesion: 0.23
@@ -188,8 +191,8 @@ Cohesion: 0.05
 Nodes (42): **13.1.1 CORE — "Những thứ không được phép sai"**, **13.1.2 SHELL — "Những thứ cần xoay chuyển nhanh"**, **13.1 Nguyên tắc Hybrid — Mô hình "Core & Shell"**, **13.2.1 Ba chiều của Decision Matrix**, **13.2.2 The Decision Matrix — 9 ô × Risk overlay**, **13.2.3 Flowchart quyết định nhanh**, **13.2.4 Ví dụ áp dụng ma trận — 5 tình huống thực tế**, **13.2  Decision Matrix — Spec Depth × Agent Autonomy × Risk** (+34 more)
 
 ### Community 17 - "FloodPoint"
-Cohesion: 0.09
-Nodes (5): ref_node_test, CommunityReport, FloodAlert, FloodPoint, FloodStation
+Cohesion: 0.08
+Nodes (7): ref_node_test, CommunityReport, FloodAlert, FloodPoint, FloodStation, sanitizeSearchQuery(), shouldTriggerAutocomplete()
 
 ### Community 18 - "**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**"
 Cohesion: 0.05
@@ -212,8 +215,8 @@ Cohesion: 0.08
 Nodes (25): 1. Initialize Analysis Context, 2. Load Artifacts (Progressive Disclosure), 3. Build Semantic Models, 4. Detection Passes (Token-Efficient Analysis), 5. Severity Assignment, 6. Produce Compact Analysis Report, 7. Provide Next Actions, 8. Offer Remediation (+17 more)
 
 ### Community 23 - "**<mark>Templates, Checklists & Quick References</mark>**"
-Cohesion: 0.08
-Nodes (23): **16.1  Template: AGENTS.md cho Đồ Án Sinh Viên TEMPLATE** 📄, **16.2  Template: CLAUDE.md với Auto-Memory** 📄 **TEMPLATE**, **16.3  Template: Feature Spec (SDD) — 3 Mức Độ** 📐 **SDD**, **16.4  Template: Constitution cho Team** 📜 **CONSTITUTION**, **16.5  Template: Sprint Planning với Hybrid Workflow SDD+ADD** 🔄, **16.6  Checklist: Trước Khi Commit Code do Agent Tạo** ✅ **CHECKLIST**, **16.7  Checklist: Spec Quality Review** 📐 **SDD**, **16.8  Quick Reference: 10 Prompt Patterns cho REFERENCE Agentic Coding** 🔖 (+15 more)
+Cohesion: 0.12
+Nodes (16): **16.1  Template: AGENTS.md cho Đồ Án Sinh Viên TEMPLATE** 📄, **16.2  Template: CLAUDE.md với Auto-Memory** 📄 **TEMPLATE**, **16.3  Template: Feature Spec (SDD) — 3 Mức Độ** 📐 **SDD**, **16.4  Template: Constitution cho Team** 📜 **CONSTITUTION**, **16.5  Template: Sprint Planning với Hybrid Workflow SDD+ADD** 🔄, **16.6  Checklist: Trước Khi Commit Code do Agent Tạo** ✅ **CHECKLIST**, **16.7  Checklist: Spec Quality Review** 📐 **SDD**, **16.8  Quick Reference: 10 Prompt Patterns cho REFERENCE Agentic Coding** 🔖 (+8 more)
 
 ### Community 25 - ".agents/CLAUDE.md"
 Cohesion: 0.12
@@ -252,7 +255,7 @@ Cohesion: 0.18
 Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME], [PRINCIPLE_3_NAME], [PRINCIPLE_4_NAME], [PRINCIPLE_5_NAME], [PROJECT_NAME] Constitution (+2 more)
 
 ### Community 34 - "SupabaseFloodService"
-Cohesion: 0.19
+Cohesion: 0.17
 Nodes (3): BASELINE_DATA, SUPABASE_CONFIG, SupabaseFloodService
 
 ### Community 35 - "migrate.py"
@@ -471,22 +474,34 @@ Nodes (8): 1. Mục Tiêu Nghiệp Vụ (User Value & Business Needs), 2. Tiêu 
 Cohesion: 0.50
 Nodes (3): [1.0.0] - 2026-09-27, Added, Changelog: feat-realtime-weather
 
+### Community 108 - "Feature Spec: Tìm Kiếm Địa Chỉ Thông Minh Có Đề Xuất (feat-smart-search)"
+Cohesion: 0.22
+Nodes (8): 1. Mục Tiêu Nghiệp Vụ (User Value & Business Needs), 2. Tiêu Chí Thiết Kế Giao Diện (UI/UX), 3.1 Nhập Từ Khóa & Tải Đề Xuất, 3.2 Chọn Địa Chỉ Đề Xuất, 3.3 Hủy / Xóa Tìm Kiếm, 3. Đặc Tả Yêu Cầu Chức Năng (EARS Notation), 4. Kiểm Thử & Chấp Nhận (Acceptance Criteria), Feature Spec: Tìm Kiếm Địa Chỉ Thông Minh Có Đề Xuất (feat-smart-search)
+
+### Community 109 - "**LỜI MỞ ĐẦU**"
+Cohesion: 0.25
+Nodes (7): **Chương 1**, **Cuốn sách này dành cho ai?**, **Cách đọc hiệu quả**, **LỜI MỞ ĐẦU**, **MỤC LỤC**, Si EC DRIVEN, **Tinh thần của cuốn sách**
+
+### Community 110 - "[1.0.0] - 2026-09-27"
+Cohesion: 0.50
+Nodes (3): [1.0.0] - 2026-09-27, Added, Changelog: feat-smart-search
+
 ## Knowledge Gaps
-- **1193 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1188 more)
+- **1200 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1195 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `**LỜI MỞ ĐẦU**` connect `**<mark>Templates, Checklists & Quick References</mark>**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`?**
-  _High betweenness centrality (0.263) - this node is a cross-community bridge._
-- **Why does `**<mark>Agent-Driven Workflow</mark>**` connect `**<mark>Agent-Driven Workflow</mark>**` to `**<mark>Templates, Checklists & Quick References</mark>**`?**
-  _High betweenness centrality (0.054) - this node is a cross-community bridge._
-- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**<mark>Templates, Checklists & Quick References</mark>**`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
+- **Why does `**LỜI MỞ ĐẦU**` connect `**LỜI MỞ ĐẦU**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`, `**<mark>Templates, Checklists & Quick References</mark>**`?**
+  _High betweenness centrality (0.259) - this node is a cross-community bridge._
+- **Why does `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**` connect `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**` to `**LỜI MỞ ĐẦU**`?**
+  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**LỜI MỞ ĐẦU**`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `description` to the rest of the system?**
-  _1193 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1200 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `**<mark>Các Tiêu Chuẩn Mở</mark>**` be split into smaller, more focused modules?**
   _Cohesion score 0.020202020202020204 - nodes in this community are weakly interconnected._
 - **Should `**<mark>Executable Specification</mark>**` be split into smaller, more focused modules?**

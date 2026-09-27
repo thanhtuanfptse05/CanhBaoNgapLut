@@ -90,13 +90,13 @@
     "semantic_hash": ""
   },
   "src/interface/ui/js/app.js": {
-    "mtime": 1790495919.3974516,
-    "ast_hash": "9f12e710dc24433e32bde2c21ea6c71b",
+    "mtime": 1790496284.2965453,
+    "ast_hash": "909db2d68f4a35b2a405ea6930ff59af",
     "semantic_hash": ""
   },
   "src/interface/ui/js/supabase-service.js": {
-    "mtime": 1790495778.1022887,
-    "ast_hash": "ba8c715bf5b1a2d5c7fa3d30c65fe208",
+    "mtime": 1790496188.9720373,
+    "ast_hash": "66315efa0fc1d870b40de1c3090dc677",
     "semantic_hash": ""
   },
   "tests/unit/flood_domain.test.js": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1790495808.8202062,
-    "ast_hash": "668c2a2c2426b2633f55f5a2b70062a6",
+    "mtime": 1790496204.4261675,
+    "ast_hash": "05416f8e0a9497b0cfeea1c5fe1c7f66",
     "semantic_hash": ""
   },
   "plan.md": {
@@ -567,6 +567,21 @@
   ".sdd/specs/feat-realtime-weather/SPEC.md": {
     "mtime": 1790495721.937029,
     "ast_hash": "dc8edbbb32de33c96e8bcfcdf791757d",
+    "semantic_hash": ""
+  },
+  "tests/unit/search_domain.test.js": {
+    "mtime": 1790496296.7522385,
+    "ast_hash": "0d433b7bd561d971376aa9a21554bff4",
+    "semantic_hash": ""
+  },
+  ".sdd/specs/feat-smart-search/CHANGELOG.md": {
+    "mtime": 1790496164.5226285,
+    "ast_hash": "6f8b5c8465691f8fac21ebc3179d4c78",
+    "semantic_hash": ""
+  },
+  ".sdd/specs/feat-smart-search/SPEC.md": {
+    "mtime": 1790496157.8492053,
+    "ast_hash": "ec97c2488013d85943b671fa937d4f49",
     "semantic_hash": ""
   }
 }
