@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "test": "node --test tests/unit/flood_domain.test.js"
+    "test": "node --test tests/unit/*.test.js"
   },
   "keywords": [
     "flood-warning",

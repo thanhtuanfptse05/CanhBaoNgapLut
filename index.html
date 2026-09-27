@@ -55,7 +55,38 @@
               <line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
             <span>Sâu nhất:</span>
-            <strong id="stat-deepest-point">--</strong>
+            <strong id="stat-deepest-point">0cm</strong>
+          </div>
+        </div>
+
+        <!-- Real-time Weather Widget (Open-Meteo Telemetry) -->
+        <div class="weather-pill" id="weather-pill" title="Thời tiết thực tế từ Open-Meteo (Tự động cập nhật theo khu vực)">
+          <div class="weather-icon-badge" id="weather-icon-badge">
+            <svg class="icon-svg sm" viewBox="0 0 24 24" id="weather-svg-icon" style="color: var(--primary);">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </div>
+          <div class="weather-details">
+            <div class="weather-main-row">
+              <strong id="weather-city">Hà Nội</strong>
+              <span class="weather-temp-badge" id="weather-temp">--°C</span>
+              <span class="weather-condition" id="weather-desc">Đang tải...</span>
+            </div>
+            <div class="weather-sub-row">
+              <span id="weather-rain-rate">🌧️ 0 mm/h</span>
+              <span class="weather-sep">•</span>
+              <span id="weather-humidity">💧 --%</span>
+              <span class="weather-sep">•</span>
+              <span id="weather-wind">💨 -- km/h</span>
+            </div>
           </div>
         </div>
 
@@ -137,7 +168,7 @@
       </div>
     </aside>
 
-    <!-- Map Tool Floating Buttons (GPS, Layers) -->
+    <!-- Map Tool Floating Buttons (GPS, Layers, Radar) -->
     <div class="map-tool-buttons">
       <button id="btn-gps" class="tool-btn" title="Vị trí của tôi (Định vị GPS)">
         <svg class="icon-svg" viewBox="0 0 24 24">
@@ -147,6 +178,14 @@
           <line x1="12" y1="19" x2="12" y2="22"/>
           <line x1="2" y1="12" x2="5" y2="12"/>
           <line x1="19" y1="12" x2="22" y2="12"/>
+        </svg>
+      </button>
+      <button id="btn-toggle-radar" class="tool-btn" title="Bật/Tắt lớp Radar Mây Mưa thời gian thực">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+          <path d="M12 19v3"/>
+          <path d="M8 20l-1 2"/>
+          <path d="M16 20l-1 2"/>
         </svg>
       </button>
       <button id="btn-toggle-layer" class="tool-btn" title="Chuyển chế độ bản đồ: Đường phố / Vệ tinh / Tối">

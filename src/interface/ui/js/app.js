@@ -23,12 +23,17 @@ class FloodApp {
     this.selectedDepth = 35; // Default for community report
     this.tileLayers = {};
     this.currentTile = 'streets';
+    this.radarLayer = null;
+    this.radarActive = false;
+    this.currentUserCoords = null;
   }
 
   async init() {
     this.initMap();
     this.setupEventListeners();
     await this.loadInitialData();
+    this.initRainRadar();
+    this.updateWeather(21.0285, 105.8048, 'Hà Nội');
   }
 
   initMap() {
@@ -349,10 +354,12 @@ class FloodApp {
         this.selectedProvince = code;
         if (code === 'all') {
           this.map.flyTo([16.0471, 107.8385], 6);
+          this.updateWeather(21.0285, 105.8048, 'Hà Nội');
         } else {
           const prov = this.provinces.find(p => p.code === code);
           if (prov) {
             this.map.flyTo([prov.center_lat, prov.center_lng], prov.zoom_level || 12, { duration: 1.5 });
+            this.updateWeather(prov.center_lat, prov.center_lng, prov.name);
           }
         }
       });
@@ -391,6 +398,12 @@ class FloodApp {
     const gpsBtn = document.getElementById('btn-gps');
     if (gpsBtn) {
       gpsBtn.addEventListener('click', () => this.handleGPSLocation());
+    }
+
+    // 4.1 Weather Rain Radar Toggle Button
+    const radarBtn = document.getElementById('btn-toggle-radar');
+    if (radarBtn) {
+      radarBtn.addEventListener('click', () => this.toggleRainRadar());
     }
 
     // 5. Layer Tile Switcher (Streets -> Satellite -> Dark)
@@ -507,12 +520,140 @@ class FloodApp {
 
         this.map.flyTo([lat, lng], 14, { duration: 1.5 });
         this.showToast('Đã định vị vị trí hiện tại');
+        this.updateWeather(lat, lng, 'Vị trí của bạn');
       },
       (err) => {
         this.showToast('Không thể lấy vị trí: ' + err.message);
       },
       { timeout: 8000, enableHighAccuracy: true }
     );
+  }
+
+  async updateWeather(lat, lng, locationName = 'Hà Nội') {
+    const cityEl = document.getElementById('weather-city');
+    const tempEl = document.getElementById('weather-temp');
+    const descEl = document.getElementById('weather-desc');
+    const rainEl = document.getElementById('weather-rain-rate');
+    const humEl = document.getElementById('weather-humidity');
+    const windEl = document.getElementById('weather-wind');
+    const pillEl = document.getElementById('weather-pill');
+    const iconBadge = document.getElementById('weather-icon-badge');
+
+    if (cityEl) cityEl.textContent = locationName;
+    if (descEl) descEl.textContent = 'Đang tải...';
+
+    const weather = await window.FloodService.getRealtimeWeather(lat, lng);
+
+    if (tempEl) tempEl.textContent = `${weather.temperature}°C`;
+    if (descEl) descEl.textContent = weather.description;
+    if (rainEl) rainEl.textContent = `🌧️ ${weather.rainRate} mm/h`;
+    if (humEl) humEl.textContent = `💧 ${weather.humidity}%`;
+    if (windEl) windEl.textContent = `💨 ${weather.windSpeed} km/h`;
+
+    // Render weather SVG icon based on condition
+    if (iconBadge) {
+      iconBadge.innerHTML = this.getWeatherSvgIcon(weather.iconType);
+    }
+
+    // Rainfall to Flood Risk Warning
+    if (pillEl) {
+      if (weather.rainRate >= 20 || weather.floodRisk.includes('NGUY CƠ NGẬP')) {
+        pillEl.classList.add('weather-alert');
+        this.showToast(`⚠️ [Thời tiết] ${locationName}: Lượng mưa ${weather.rainRate}mm/h - ${weather.floodRisk}`);
+      } else {
+        pillEl.classList.remove('weather-alert');
+      }
+    }
+  }
+
+  getWeatherSvgIcon(iconType) {
+    if (iconType === 'sun') {
+      return `
+        <svg class="icon-svg sm" viewBox="0 0 24 24" style="color: #f59e0b;">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      `;
+    }
+    if (iconType === 'sun-cloud') {
+      return `
+        <svg class="icon-svg sm" viewBox="0 0 24 24" style="color: #3b82f6;">
+          <path d="M12 2v2"/>
+          <path d="M4.93 4.93l1.41 1.41"/>
+          <path d="M20 12h2"/>
+          <path d="M17.5 18H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+        </svg>
+      `;
+    }
+    if (iconType === 'rain' || iconType === 'rain-heavy' || iconType === 'rain-light') {
+      return `
+        <svg class="icon-svg sm" viewBox="0 0 24 24" style="color: #2563eb;">
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+          <path d="M8 19v3"/>
+          <path d="M12 19v3"/>
+          <path d="M16 19v3"/>
+        </svg>
+      `;
+    }
+    if (iconType === 'thunder') {
+      return `
+        <svg class="icon-svg sm" viewBox="0 0 24 24" style="color: #dc2626;">
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+          <polygon points="13 11 9 17 14 17 11 23 18 15 13 15 13 11" fill="currentColor"/>
+        </svg>
+      `;
+    }
+    // Default cloud
+    return `
+      <svg class="icon-svg sm" viewBox="0 0 24 24" style="color: #64748b;">
+        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+      </svg>
+    `;
+  }
+
+  async initRainRadar() {
+    try {
+      const res = await fetch('https://api.rainviewer.com/public/weather-maps.json');
+      const data = await res.json();
+      if (data && data.radar && data.radar.past && data.radar.past.length > 0) {
+        const latest = data.radar.past[data.radar.past.length - 1];
+        const radarTileUrl = `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
+        this.radarLayer = L.tileLayer(radarTileUrl, {
+          opacity: 0.65,
+          zIndex: 500,
+          attribution: 'Radar dữ liệu thời tiết: RainViewer'
+        });
+      }
+    } catch (err) {
+      console.warn('[RainRadar] Cannot init radar layer:', err.message);
+    }
+  }
+
+  toggleRainRadar() {
+    const btn = document.getElementById('btn-toggle-radar');
+    if (!this.radarLayer) {
+      this.showToast('Đang tải dữ liệu Radar Mây Mưa...');
+      return;
+    }
+
+    if (this.radarActive) {
+      this.map.removeLayer(this.radarLayer);
+      this.radarActive = false;
+      if (btn) btn.classList.remove('active');
+      this.showToast('Đã tắt lớp Radar Mây Mưa');
+    } else {
+      this.map.addLayer(this.radarLayer);
+      this.radarActive = true;
+      if (btn) btn.classList.add('active');
+      this.showToast('Đã bật lớp Radar Mây Mưa thời gian thực (RainViewer)');
+    }
   }
 
   fillReportCoordsWithCenter() {

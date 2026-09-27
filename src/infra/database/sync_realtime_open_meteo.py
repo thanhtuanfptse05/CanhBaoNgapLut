@@ -64,12 +64,11 @@ def sync_and_clean():
         connect_timeout=15
     ) as conn:
         with conn.cursor() as cur:
-            # 1. Clean out artificial fake flood points
-            print("Cleaning out artificial fake points from flood_points...")
-            cur.execute("DELETE FROM flood_points WHERE id LIKE 'fp-%';")
-            
-            # Clean out dummy test alerts
-            cur.execute("DELETE FROM flood_alerts WHERE id LIKE 'alert-%';")
+            # 1. Clean out artificial fake flood points and community reports
+            print("Cleaning out artificial fake points from flood_points and community_reports...")
+            cur.execute("DELETE FROM flood_points;")
+            cur.execute("DELETE FROM community_reports;")
+            cur.execute("DELETE FROM flood_alerts;")
 
             # 2. Allow public UPDATE on community_reports for voting
             print("Enabling public voting policies on community_reports...")

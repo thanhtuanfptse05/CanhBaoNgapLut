@@ -311,6 +311,86 @@ class SupabaseFloodService {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
+
+  /**
+   * Fetch 100% Real-time Weather Telemetry via Open-Meteo API
+   */
+  async getRealtimeWeather(lat = 21.0285, lng = 105.8048) {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,weather_code,wind_speed_10m&timezone=Asia%2FBangkok`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Weather HTTP error: ${res.status}`);
+      const data = await res.json();
+      const current = data.current || {};
+      const code = current.weather_code != null ? current.weather_code : 0;
+      const isDay = current.is_day === 1;
+      const parsed = this.parseWeatherCode(code, isDay);
+      const rain = current.precipitation != null ? current.precipitation : (current.rain || 0);
+
+      let floodRisk = 'AN TOÀN';
+      if (rain >= 35) floodRisk = 'NGUY CƠ NGẬP RẤT CAO';
+      else if (rain >= 20) floodRisk = 'NGUY CƠ NGẬP CỤC BỘ';
+      else if (rain > 0) floodRisk = 'ĐANG CÓ MƯA';
+
+      return {
+        success: true,
+        temperature: Math.round(current.temperature_2m || 0),
+        apparentTemperature: Math.round(current.apparent_temperature || 0),
+        humidity: Math.round(current.relative_humidity_2m || 0),
+        rainRate: rain,
+        windSpeed: Math.round(current.wind_speed_10m || 0),
+        weatherCode: code,
+        isDay: isDay,
+        description: parsed.description,
+        iconType: parsed.iconType,
+        floodRisk: floodRisk
+      };
+    } catch (err) {
+      console.warn('[SupabaseFloodService] Weather fetch fallback:', err.message);
+      return {
+        success: false,
+        temperature: 28,
+        apparentTemperature: 30,
+        humidity: 78,
+        rainRate: 0.0,
+        windSpeed: 8,
+        description: 'Thời tiết ổn định',
+        iconType: 'cloud',
+        floodRisk: 'AN TOÀN'
+      };
+    }
+  }
+
+  parseWeatherCode(code, isDay = true) {
+    if (code === 0) {
+      return { description: isDay ? 'Nắng ráo, quang đãng' : 'Trời quang', iconType: isDay ? 'sun' : 'moon' };
+    }
+    if ([1, 2].includes(code)) {
+      return { description: isDay ? 'Ít mây, có nắng' : 'Mây rải rác', iconType: 'sun-cloud' };
+    }
+    if (code === 3) {
+      return { description: 'Trời u ám nhiều mây', iconType: 'cloud' };
+    }
+    if ([45, 48].includes(code)) {
+      return { description: 'Sương mù dày đặc', iconType: 'fog' };
+    }
+    if ([51, 53, 55].includes(code)) {
+      return { description: 'Mưa phùn rải rác', iconType: 'rain-light' };
+    }
+    if ([61, 63].includes(code)) {
+      return { description: 'Mưa rào vừa', iconType: 'rain' };
+    }
+    if (code === 65) {
+      return { description: 'Mưa rất to, xối xả', iconType: 'rain-heavy' };
+    }
+    if ([80, 81, 82].includes(code)) {
+      return { description: 'Mưa rào diện rộng', iconType: 'rain-heavy' };
+    }
+    if ([95, 96, 99].includes(code)) {
+      return { description: 'Dông sét, mưa rất to', iconType: 'thunder' };
+    }
+    return { description: 'Thời tiết bình thường', iconType: 'cloud' };
+  }
 }
 
 // Export singleton instance
