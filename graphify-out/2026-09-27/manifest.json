@@ -90,13 +90,13 @@
     "semantic_hash": ""
   },
   "src/interface/ui/js/app.js": {
-    "mtime": 1790495128.468513,
-    "ast_hash": "4576c23953cc0426ab8de52c89708f33",
+    "mtime": 1790495919.3974516,
+    "ast_hash": "9f12e710dc24433e32bde2c21ea6c71b",
     "semantic_hash": ""
   },
   "src/interface/ui/js/supabase-service.js": {
-    "mtime": 1790495015.2585597,
-    "ast_hash": "272da9f4aa2082b35bf78946a2301d64",
+    "mtime": 1790495778.1022887,
+    "ast_hash": "ba8c715bf5b1a2d5c7fa3d30c65fe208",
     "semantic_hash": ""
   },
   "tests/unit/flood_domain.test.js": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1790494376.4974694,
-    "ast_hash": "83c4b260a438dabb1b272cfb6e21f461",
+    "mtime": 1790495808.8202062,
+    "ast_hash": "668c2a2c2426b2633f55f5a2b70062a6",
     "semantic_hash": ""
   },
   "plan.md": {
@@ -515,8 +515,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790493461.757802,
-    "ast_hash": "14fc4a27702f8873f828aeb1b2c7af40",
+    "mtime": 1790495953.0781474,
+    "ast_hash": "deca6cb9c5ea28146a63f61f42ae8793",
     "semantic_hash": ""
   },
   "server.js": {
@@ -545,13 +545,28 @@
     "semantic_hash": ""
   },
   "src/infra/database/sync_realtime_open_meteo.py": {
-    "mtime": 1790494968.675078,
-    "ast_hash": "b6fb88f8b230afe05718b727da64a557",
+    "mtime": 1790495672.4037478,
+    "ast_hash": "a725ba9443a7fb99d5e0cb8ba5ac150d",
     "semantic_hash": ""
   },
   ".agents/rules/no-browser.md": {
     "mtime": 1790495303.2076201,
     "ast_hash": "4d86b53233e73acf900fdd8619b5ea95",
+    "semantic_hash": ""
+  },
+  "tests/unit/weather_domain.test.js": {
+    "mtime": 1790495938.6877937,
+    "ast_hash": "d4e8a31a890dd7a1e11679333afb57a5",
+    "semantic_hash": ""
+  },
+  ".sdd/specs/feat-realtime-weather/CHANGELOG.md": {
+    "mtime": 1790495728.1982818,
+    "ast_hash": "81e687db8e0a96eaea15dc56982c47b1",
+    "semantic_hash": ""
+  },
+  ".sdd/specs/feat-realtime-weather/SPEC.md": {
+    "mtime": 1790495721.937029,
+    "ast_hash": "dc8edbbb32de33c96e8bcfcdf791757d",
     "semantic_hash": ""
   }
 }

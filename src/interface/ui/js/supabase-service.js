@@ -391,6 +391,72 @@ class SupabaseFloodService {
     }
     return { description: 'Thời tiết bình thường', iconType: 'cloud' };
   }
+
+  /**
+   * Smart Address Search with Mapbox Places Geocoding & OpenStreetMap fallback
+   */
+  async searchAddress(query) {
+    if (!query || query.trim().length < 2) return [];
+
+    const cleanQuery = query.trim();
+    const mapboxToken = (typeof window !== 'undefined' && window.ENV_CONFIG && window.ENV_CONFIG.MAPBOX_TOKEN)
+      ? window.ENV_CONFIG.MAPBOX_TOKEN
+      : '';
+
+    // 1. Try Mapbox Places Geocoding first (high accuracy for Vietnam)
+    if (mapboxToken) {
+      try {
+        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(cleanQuery)}.json?country=vn&language=vi&limit=6&access_token=${mapboxToken}`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.features && data.features.length > 0) {
+            return data.features.map(f => {
+              const name = f.text_vi || f.text || f.place_name;
+              const fullName = f.place_name_vi || f.place_name;
+              return {
+                id: f.id,
+                name: name,
+                fullName: fullName,
+                latitude: f.center[1],
+                longitude: f.center[0],
+                placeType: f.place_type ? f.place_type[0] : 'address'
+              };
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('[SupabaseFloodService] Mapbox geocoding error:', err.message);
+      }
+    }
+
+    // 2. Fallback to OpenStreetMap Nominatim
+    try {
+      const osmUrl = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=vn&limit=6&q=${encodeURIComponent(cleanQuery)}`;
+      const res = await fetch(osmUrl, {
+        headers: { 'Accept-Language': 'vi' }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return (data || []).map(item => {
+          const parts = (item.display_name || '').split(',');
+          const name = parts[0] || item.name || cleanQuery;
+          return {
+            id: 'osm-' + item.place_id,
+            name: name.trim(),
+            fullName: item.display_name,
+            latitude: parseFloat(item.lat),
+            longitude: parseFloat(item.lon),
+            placeType: item.type || 'address'
+          };
+        });
+      }
+    } catch (err) {
+      console.warn('[SupabaseFloodService] Nominatim fallback error:', err.message);
+    }
+
+    return [];
+  }
 }
 
 // Export singleton instance

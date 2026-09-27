@@ -135,13 +135,22 @@
     <!-- Floating Filter & Search Panel -->
     <aside class="floating-controls">
       <div class="control-panel">
-        <!-- Search Street / Place -->
-        <div class="search-box">
-          <svg class="icon-svg sm" viewBox="0 0 24 24" style="color: var(--text-muted);">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <input type="text" id="search-input" placeholder="Tìm tên đường, ngã tư, khu vực..." autocomplete="off">
+        <!-- Search Street / Place with Autocomplete Dropdown -->
+        <div class="search-container">
+          <div class="search-box">
+            <svg class="icon-svg sm search-icon" viewBox="0 0 24 24" style="color: var(--text-muted);">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="search-input" placeholder="Tìm địa chỉ, tên đường, địa danh..." autocomplete="off">
+            <button id="btn-clear-search" class="btn-clear-search" title="Xóa tìm kiếm" style="display:none;">
+              <svg class="icon-svg sm" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <div id="search-suggestions" class="search-suggestions-dropdown" style="display:none;"></div>
         </div>
 
         <!-- Province Selector -->

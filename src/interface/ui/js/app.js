@@ -26,6 +26,8 @@ class FloodApp {
     this.radarLayer = null;
     this.radarActive = false;
     this.currentUserCoords = null;
+    this.searchDebounceTimer = null;
+    this.searchMarker = null;
   }
 
   async init() {
@@ -376,20 +378,65 @@ class FloodApp {
       });
     });
 
-    // 3. Search Bar
+    // 3. Smart Address Search with Autocomplete Suggestions
     const searchInput = document.getElementById('search-input');
-    if (searchInput) {
+    const suggestionsDropdown = document.getElementById('search-suggestions');
+    const clearSearchBtn = document.getElementById('btn-clear-search');
+
+    if (searchInput && suggestionsDropdown) {
       searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        if (!query) {
-          this.renderMarkers();
+        const query = e.target.value.trim();
+        if (clearSearchBtn) {
+          clearSearchBtn.style.display = query.length > 0 ? 'flex' : 'none';
+        }
+
+        if (this.searchDebounceTimer) {
+          clearTimeout(this.searchDebounceTimer);
+        }
+
+        if (query.length < 2) {
+          suggestionsDropdown.style.display = 'none';
+          suggestionsDropdown.innerHTML = '';
           return;
         }
-        const matched = this.floodPoints.filter(p => p.name.toLowerCase().includes(query));
-        this.markersLayer.clearLayers();
-        matched.forEach(pt => this.createFloodMarker(pt).addTo(this.markersLayer));
-        if (matched.length > 0) {
-          this.map.flyTo([matched[0].latitude, matched[0].longitude], 14);
+
+        this.searchDebounceTimer = setTimeout(async () => {
+          suggestionsDropdown.style.display = 'flex';
+          suggestionsDropdown.innerHTML = `
+            <div class="suggestion-empty">
+              <span>Đang tìm kiếm địa chỉ đề xuất...</span>
+            </div>
+          `;
+
+          const results = await window.FloodService.searchAddress(query);
+          this.renderSearchSuggestions(results, query);
+        }, 260);
+      });
+
+      // Clear search button
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          clearSearchBtn.style.display = 'none';
+          suggestionsDropdown.style.display = 'none';
+          suggestionsDropdown.innerHTML = '';
+          if (this.searchMarker) {
+            this.map.removeLayer(this.searchMarker);
+            this.searchMarker = null;
+          }
+        });
+      }
+
+      // Close dropdown when clicking outside or pressing Escape
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+          suggestionsDropdown.style.display = 'none';
+        }
+      });
+
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          suggestionsDropdown.style.display = 'none';
         }
       });
     }
@@ -766,6 +813,98 @@ class FloodApp {
 
     this.showToast('Báo ngập thành công. Cảm ơn đóng góp của bạn!');
     this.map.flyTo([lat, lng], 15);
+  }
+
+  renderSearchSuggestions(results, query) {
+    const dropdown = document.getElementById('search-suggestions');
+    if (!dropdown) return;
+
+    if (!results || results.length === 0) {
+      dropdown.innerHTML = `
+        <div class="suggestion-empty">
+          <span>Không tìm thấy địa chỉ phù hợp với "${query}".</span>
+        </div>
+      `;
+      dropdown.style.display = 'flex';
+      return;
+    }
+
+    dropdown.innerHTML = '';
+    results.forEach(item => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'suggestion-item';
+      itemEl.innerHTML = `
+        <div class="suggestion-icon">
+          <svg class="icon-svg sm" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="suggestion-content">
+          <span class="suggestion-name">${item.name}</span>
+          <span class="suggestion-address">${item.fullName}</span>
+        </div>
+      `;
+
+      itemEl.addEventListener('click', () => {
+        this.selectSearchResult(item);
+      });
+
+      dropdown.appendChild(itemEl);
+    });
+
+    dropdown.style.display = 'flex';
+  }
+
+  selectSearchResult(item) {
+    const searchInput = document.getElementById('search-input');
+    const dropdown = document.getElementById('search-suggestions');
+    const clearSearchBtn = document.getElementById('btn-clear-search');
+
+    if (searchInput) searchInput.value = item.name;
+    if (clearSearchBtn) clearSearchBtn.style.display = 'flex';
+    if (dropdown) dropdown.style.display = 'none';
+
+    // 1. Smooth Fly to location
+    this.map.flyTo([item.latitude, item.longitude], 16, { duration: 1.5 });
+
+    // 2. Put a pin
+    if (this.searchMarker) {
+      this.map.removeLayer(this.searchMarker);
+    }
+
+    const pinIcon = L.divIcon({
+      html: `
+        <div style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:#2563eb;color:#fff;border-radius:50%;box-shadow:0 4px 14px rgba(37,99,235,0.45);border:2px solid #fff;">
+          <svg class="icon-svg sm" viewBox="0 0 24 24" style="stroke-width:2.5;">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+      `,
+      className: 'custom-search-pin',
+      iconSize: [34, 34],
+      iconAnchor: [17, 17]
+    });
+
+    this.searchMarker = L.marker([item.latitude, item.longitude], { icon: pinIcon }).addTo(this.map);
+    this.searchMarker.bindPopup(`
+      <div class="flood-popup-card" style="min-width:200px;">
+        <div class="popup-title">
+          <span>${item.name}</span>
+        </div>
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin:4px 0 8px 0;line-height:1.4;">
+          ${item.fullName}
+        </div>
+        <div class="popup-badge" style="background:var(--primary-subtle);color:var(--primary)">
+          ● Vị trí tìm kiếm
+        </div>
+      </div>
+    `).openPopup();
+
+    // 3. Update weather at this exact location
+    this.updateWeather(item.latitude, item.longitude, item.name);
+    this.showToast(`Đã di chuyển tới: ${item.name}`);
   }
 
   showToast(message) {
