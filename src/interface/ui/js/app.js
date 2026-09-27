@@ -687,14 +687,21 @@ class FloodApp {
   async initRainRadar() {
     try {
       const res = await fetch('https://api.rainviewer.com/public/weather-maps.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       if (data && data.radar && data.radar.past && data.radar.past.length > 0) {
         const latest = data.radar.past[data.radar.past.length - 1];
+        // RainViewer tiles only support zoom 1-6 natively for global coverage;
+        // maxNativeZoom=6 tells Leaflet to stretch tiles beyond zoom 6
+        // instead of requesting non-existent high-zoom tiles ("Zoom Level Not Supported")
         const radarTileUrl = `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
         this.radarLayer = L.tileLayer(radarTileUrl, {
           opacity: 0.65,
           zIndex: 500,
-          attribution: 'Radar dữ liệu thời tiết: RainViewer'
+          maxNativeZoom: 6,   // RainViewer tiles are available up to zoom 6
+          maxZoom: 20,        // Leaflet stretches them beyond zoom 6 (no error tiles)
+          tileSize: 256,
+          attribution: 'Radar mưa thực tế: <a href="https://rainviewer.com" target="_blank">RainViewer</a>'
         });
       }
     } catch (err) {
@@ -722,7 +729,93 @@ class FloodApp {
     }
   }
 
+  /**
+   * GPS My Location — uses Leaflet's built-in locate() with high accuracy mode.
+   * Shows accuracy circle so user can see how reliable the fix is.
+   * Desktop browsers often use IP/WiFi geolocation (less accurate than mobile GPS).
+   */
+  handleGPSLocation() {
+    const btn = document.getElementById('btn-gps');
+    if (btn) btn.classList.add('loading');
+    this.showToast('📍 Đang xác định vị trí GPS...');
+
+    // Remove previous accuracy circle if any
+    if (this._gpsAccuracyCircle) {
+      this.map.removeLayer(this._gpsAccuracyCircle);
+      this._gpsAccuracyCircle = null;
+    }
+    if (this._gpsMarker) {
+      this.map.removeLayer(this._gpsMarker);
+      this._gpsMarker = null;
+    }
+
+    this.map.locate({
+      setView: true,
+      maxZoom: 15,
+      enableHighAccuracy: true,
+      timeout: 10000
+    });
+
+    this.map.once('locationfound', (e) => {
+      if (btn) btn.classList.remove('loading');
+      const accuracy = Math.round(e.accuracy);
+
+      // Draw accuracy circle
+      this._gpsAccuracyCircle = L.circle(e.latlng, {
+        radius: e.accuracy,
+        color: '#2563eb',
+        fillColor: '#2563eb',
+        fillOpacity: 0.08,
+        weight: 1.5,
+        dashArray: '4 4'
+      }).addTo(this.map);
+
+      // GPS position marker
+      const gpsIcon = L.divIcon({
+        html: `<div style="width:16px;height:16px;background:#2563eb;border:3px solid white;border-radius:50%;box-shadow:0 2px 8px rgba(37,99,235,0.5);"></div>`,
+        className: '',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8]
+      });
+      this._gpsMarker = L.marker(e.latlng, { icon: gpsIcon });
+      this._gpsMarker.bindPopup(`
+        <div style="font-size:0.83rem; min-width:160px;">
+          <b>📍 Vị trí hiện tại của bạn</b><br>
+          Lat: ${e.latlng.lat.toFixed(5)}<br>
+          Lng: ${e.latlng.lng.toFixed(5)}<br>
+          <span style="color:var(--text-muted); font-size:0.75rem;">
+            ${accuracy < 100 ? '✅ Chính xác cao' : accuracy < 500 ? '⚠️ Độ chính xác trung bình' : '❌ Kém chính xác (WiFi/IP)'}
+            (~${accuracy}m)
+          </span>
+          ${accuracy > 300 ? '<br><em style="color:#dc2626; font-size:0.72rem;">Trên máy tính, GPS có thể kém chính xác. Dùng điện thoại để có kết quả tốt hơn.</em>' : ''}
+        </div>
+      `).openPopup();
+      this._gpsMarker.addTo(this.map);
+
+      const msg = accuracy < 100
+        ? `✅ Vị trí xác định (±${accuracy}m)`
+        : accuracy < 500
+        ? `⚠️ Vị trí ước lượng (±${accuracy}m) — độ chính xác trung bình`
+        : `❌ Vị trí kém chính xác (±${accuracy}m) — dùng điện thoại để chính xác hơn`;
+      this.showToast(msg);
+
+      // Update weather based on current location
+      this.updateWeather(e.latlng.lat, e.latlng.lng, 'Vị trí của tôi');
+    });
+
+    this.map.once('locationerror', (e) => {
+      if (btn) btn.classList.remove('loading');
+      console.warn('[GPS] Location error:', e.message);
+      if (e.message && e.message.includes('denied')) {
+        this.showToast('❌ Bạn đã từ chối quyền vị trí. Hãy cho phép GPS trong trình duyệt.');
+      } else {
+        this.showToast('❌ Không xác định được vị trí. Kiểm tra cài đặt GPS/quyền trình duyệt.');
+      }
+    });
+  }
+
   fillReportCoordsWithCenter() {
+
     const center = this.map.getCenter();
     const latInput = document.getElementById('report-lat');
     const lngInput = document.getElementById('report-lng');
