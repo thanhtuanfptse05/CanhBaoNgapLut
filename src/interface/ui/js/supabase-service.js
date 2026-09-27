@@ -393,8 +393,11 @@ class SupabaseFloodService {
   }
 
   /**
-   * Smart Address Search with Mapbox Places Geocoding & OpenStreetMap fallback
-   * v1.1.0: Added proximity (map center), types filter, bbox=VN, improved Nominatim params
+   * Smart Address Search - 3-tier cascade for maximum POI coverage
+   * Tier 1: Mapbox Search Box API v1 — best for brand/business POI (Teky, Grab, Circle K...)
+   * Tier 2: Mapbox Geocoding v5 — administrative places, streets, districts
+   * Tier 3: Nominatim OSM — universal fallback (no token required)
+   * v1.2.0: Switched primary to Search Box API for business/POI name coverage
    * @param {string} query - Search keyword
    * @param {{ lat: number, lng: number } | null} mapCenter - Current map center for proximity bias
    */
@@ -406,36 +409,89 @@ class SupabaseFloodService {
       ? window.ENV_CONFIG.MAPBOX_TOKEN
       : '';
 
-    // 1. Try Mapbox Places Geocoding first (high accuracy for Vietnam)
-    if (mapboxToken && mapboxToken.startsWith('pk.')) {
-      try {
-        // Bounding box of Vietnam: lon 102-110, lat 8-24
-        const bbox = '102.0,8.0,110.0,24.0';
-        // Types: cover all granularity levels including small POIs
-        const types = 'place,district,locality,neighborhood,address,poi';
-        // Proximity: bias toward current map center (helps localise results)
-        const proximityParam = mapCenter
-          ? `&proximity=${mapCenter.lng.toFixed(5)},${mapCenter.lat.toFixed(5)}`
-          : '&proximity=106.6297,10.8231'; // Default HCM as center Vietnam
+    const proximityLng = mapCenter ? mapCenter.lng.toFixed(5) : '105.8048';
+    const proximityLat = mapCenter ? mapCenter.lat.toFixed(5) : '21.0285';
 
+    if (mapboxToken && mapboxToken.startsWith('pk.')) {
+      // === TIER 1: Mapbox Search Box API v1 (best POI/brand coverage) ===
+      try {
+        const sbRes = await fetch(
+          `https://api.mapbox.com/search/searchbox/v1/suggest`
+          + `?q=${encodeURIComponent(cleanQuery)}`
+          + `&language=vi`
+          + `&country=VN`
+          + `&limit=6`
+          + `&proximity=${proximityLng},${proximityLat}`
+          + `&session_token=flood-guard-vn-search`
+          + `&access_token=${mapboxToken}`
+        );
+        if (sbRes.ok) {
+          const sbData = await sbRes.json();
+          const suggestions = (sbData && sbData.suggestions) ? sbData.suggestions : [];
+          if (suggestions.length > 0) {
+            // Retrieve full coordinates for each suggestion
+            const detailResults = await Promise.all(
+              suggestions.slice(0, 6).map(async (s) => {
+                try {
+                  const retRes = await fetch(
+                    `https://api.mapbox.com/search/searchbox/v1/retrieve/${s.mapbox_id}`
+                    + `?session_token=flood-guard-vn-search`
+                    + `&access_token=${mapboxToken}`
+                  );
+                  if (!retRes.ok) return null;
+                  const retData = await retRes.json();
+                  const feature = retData && retData.features && retData.features[0];
+                  if (!feature || !feature.geometry) return null;
+                  const coords = feature.geometry.coordinates;
+                  const props = feature.properties || {};
+                  const ctx = props.context || {};
+                  const name = props.name || s.name || cleanQuery;
+                  const subtitleParts = [
+                    props.address || props.full_address,
+                    ctx.place && ctx.place.name,
+                    ctx.district && ctx.district.name,
+                    ctx.region && ctx.region.name
+                  ].filter(Boolean);
+                  const subtitle = subtitleParts.length > 0
+                    ? subtitleParts.join(', ')
+                    : (s.place_formatted || s.full_address || name);
+                  return {
+                    id: 'sb-' + (s.mapbox_id || Math.random().toString(36).slice(2)),
+                    name: name,
+                    fullName: subtitle,
+                    latitude: coords[1],
+                    longitude: coords[0],
+                    placeType: s.feature_type || 'poi'
+                  };
+                } catch (_) { return null; }
+              })
+            );
+            const valid = detailResults.filter(Boolean);
+            if (valid.length > 0) return valid;
+          }
+        }
+      } catch (err) {
+        console.warn('[SupabaseFloodService] Mapbox Search Box API error:', err.message);
+      }
+
+      // === TIER 2: Mapbox Geocoding v5 (administrative & address fallback) ===
+      try {
+        const bbox = '102.0,8.0,110.0,24.0';
+        const types = 'place,district,locality,neighborhood,address,poi';
         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(cleanQuery)}.json`
           + `?country=vn&language=vi&limit=6`
           + `&types=${encodeURIComponent(types)}`
           + `&bbox=${bbox}`
-          + proximityParam
+          + `&proximity=${proximityLng},${proximityLat}`
           + `&access_token=${mapboxToken}`;
-
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
           if (data && data.features && data.features.length > 0) {
             return data.features.map(f => {
-              // Prefer Vietnamese text, fallback to default
               const name = f.text_vi || f.text || (f.place_name || '').split(',')[0];
-              const fullName = f.place_name_vi || f.place_name || name;
-              // Extract place context (district, city) for subtitle
               const contextParts = (f.context || []).map(c => c.text_vi || c.text).filter(Boolean);
-              const subtitle = contextParts.length > 0 ? contextParts.join(', ') : fullName;
+              const subtitle = contextParts.length > 0 ? contextParts.join(', ') : (f.place_name_vi || f.place_name || name);
               return {
                 id: f.id,
                 name: name,
@@ -448,11 +504,11 @@ class SupabaseFloodService {
           }
         }
       } catch (err) {
-        console.warn('[SupabaseFloodService] Mapbox geocoding error:', err.message);
+        console.warn('[SupabaseFloodService] Mapbox Geocoding v5 error:', err.message);
       }
     }
 
-    // 2. Fallback to OpenStreetMap Nominatim (improved params)
+    // === TIER 3: Nominatim OSM (universal fallback, no token required) ===
     try {
       const osmUrl = `https://nominatim.openstreetmap.org/search`
         + `?format=json`
@@ -462,17 +518,12 @@ class SupabaseFloodService {
         + `&namedetails=1`
         + `&accept-language=vi`
         + `&q=${encodeURIComponent(cleanQuery)}`;
-
-      const res = await fetch(osmUrl, {
-        headers: { 'Accept-Language': 'vi,en;q=0.9' }
-      });
+      const res = await fetch(osmUrl, { headers: { 'Accept-Language': 'vi,en;q=0.9' } });
       if (res.ok) {
         const data = await res.json();
         return (data || []).map(item => {
-          // Use namedetails for best local name
           const localName = (item.namedetails && (item.namedetails['name:vi'] || item.namedetails.name))
             || (item.display_name || '').split(',')[0];
-          // Build readable subtitle from address parts
           const addr = item.address || {};
           const subtitleParts = [
             addr.road || addr.pedestrian || addr.footway,
