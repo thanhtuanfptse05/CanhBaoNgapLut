@@ -174,13 +174,15 @@ class FloodApp {
     const activePointsEl = document.getElementById('stat-active-points');
     const deepestPointEl = document.getElementById('stat-deepest-point');
 
+    const activeFloods = (this.floodPoints || []).filter(p => (p.current_depth_cm || 0) > 0);
+
     if (activePointsEl) {
-      activePointsEl.textContent = this.floodPoints.length;
+      activePointsEl.textContent = activeFloods.length;
     }
 
     if (deepestPointEl) {
-      if (this.floodPoints && this.floodPoints.length > 0) {
-        const maxPoint = [...this.floodPoints].sort((a, b) => b.current_depth_cm - a.current_depth_cm)[0];
+      if (activeFloods.length > 0) {
+        const maxPoint = [...activeFloods].sort((a, b) => b.current_depth_cm - a.current_depth_cm)[0];
         deepestPointEl.textContent = `${maxPoint.current_depth_cm}cm`;
       } else {
         deepestPointEl.textContent = '0cm';
@@ -197,6 +199,7 @@ class FloodApp {
         if (this.currentFilter === 'level3' && pt.severity !== 'LEVEL_3') return;
         if (this.currentFilter === 'level2' && pt.severity !== 'LEVEL_2') return;
         if (this.currentFilter === 'level1' && pt.severity !== 'LEVEL_1') return;
+        if (this.currentFilter === 'safe' && pt.severity !== 'SAFE' && (pt.current_depth_cm || 0) > 0) return;
       }
       if (this.currentFilter === 'stations') return; // Skip flood points if filter is stations only
 
@@ -214,6 +217,7 @@ class FloodApp {
   }
 
   createFloodMarker(point) {
+    const isSafe = point.severity === 'SAFE' || (point.current_depth_cm || 0) === 0;
     let color = '#d97706';
     let pulseAnim = '';
 
@@ -223,13 +227,15 @@ class FloodApp {
     } else if (point.severity === 'LEVEL_2') {
       color = '#ea580c';
       pulseAnim = 'style="animation: marker-ripple 2.2s infinite;"';
+    } else if (isSafe) {
+      color = '#059669';
     }
 
     const iconHtml = `
       <div class="flood-pin-marker">
         <div class="flood-pin-glow" style="background-color: ${color};" ${pulseAnim}></div>
         <div class="flood-pin-core" style="background-color: ${color};">
-          ${Math.round(point.current_depth_cm)}
+          ${Math.round(point.current_depth_cm || 0)}
         </div>
       </div>
     `;
@@ -247,7 +253,12 @@ class FloodApp {
     let statusText = 'Đang dâng';
     let statusBg = 'var(--level3-bg)';
     let statusColor = 'var(--level3-color)';
-    if (point.status === 'RECEDING') {
+
+    if (isSafe) {
+      statusText = 'Khô ráo - Thông thoáng';
+      statusBg = 'var(--safe-bg)';
+      statusColor = 'var(--safe-color)';
+    } else if (point.status === 'RECEDING') {
       statusText = 'Đang rút';
       statusBg = 'var(--safe-bg)';
       statusColor = 'var(--safe-color)';
@@ -277,6 +288,22 @@ class FloodApp {
       `
       : '';
 
+    const recommendation = isSafe
+      ? 'Đường thông thoáng, lưu thông an toàn'
+      : point.current_depth_cm >= 50
+      ? 'Cấm xe qua lại'
+      : point.current_depth_cm >= 30
+      ? 'Xe gầm thấp chú ý'
+      : 'Lưu thông cẩn thận';
+
+    const sourceRow = point.source
+      ? `<div class="popup-detail-row"><span>Nguồn điểm ngập:</span><span style="font-weight:600;color:var(--text-secondary);">${point.source}</span></div>`
+      : '';
+
+    const rainRow = point.live_rain !== undefined
+      ? `<div class="popup-detail-row"><span>Lượng mưa tức thời:</span><strong>${point.live_rain} mm/h (Open-Meteo)</strong></div>`
+      : '';
+
     const popupHtml = `
       <div class="flood-popup-card">
         <div class="popup-title">
@@ -284,16 +311,18 @@ class FloodApp {
         </div>
         ${communityBadge}
         <div class="popup-depth-meter">
-          <span class="depth-value" style="color: ${color}">${point.current_depth_cm}</span>
-          <span class="depth-unit">cm (Độ sâu ngập)</span>
+          <span class="depth-value" style="color: ${color}">${point.current_depth_cm || 0}</span>
+          <span class="depth-unit">cm ${isSafe ? '(Mặt đường khô ráo)' : '(Độ sâu ngập)'}</span>
         </div>
         <div class="popup-badge" style="background: ${statusBg}; color: ${statusColor}">
           ● ${statusText}
         </div>
         <div class="popup-detail-row">
           <span>Khuyến cáo:</span>
-          <strong>${point.current_depth_cm >= 50 ? 'Cấm xe qua lại' : point.current_depth_cm >= 30 ? 'Xe gầm thấp chú ý' : 'Lưu thông cẩn thận'}</strong>
+          <strong>${recommendation}</strong>
         </div>
+        ${rainRow}
+        ${sourceRow}
         ${point.note ? `<div class="popup-detail-row"><span>Ghi chú:</span><span>${point.note}</span></div>` : ''}
         <div class="popup-detail-row">
           <span>Cập nhật:</span>
@@ -1063,6 +1092,8 @@ class FloodApp {
   _findNearbyFlood(lat, lng, radiusMeters = 500) {
     if (!this.floodPoints || this.floodPoints.length === 0) return [];
     return this.floodPoints.filter(fp => {
+      // Only warn about active flood hazard (depth > 0 and not SAFE)
+      if ((fp.current_depth_cm || 0) <= 0 || fp.severity === 'SAFE') return false;
       const dist = this._haversineDistance(lat, lng, fp.latitude, fp.longitude);
       return dist <= radiusMeters;
     }).sort((a, b) => {
