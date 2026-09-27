@@ -19,6 +19,7 @@ Cung cấp một cổng thông tin trực quan hóa ngập lụt toàn quốc nh
 
 ## 2. Tiêu Chí Thiết Kế Giao Diện (UI/UX Excellence)
 - **Phong cách thiết kế**: Hiện đại, chuẩn quốc tế (Clean GIS Dashboard), kết hợp Glassmorphism (hiệu ứng kính mờ), phông chữ không chân hiện đại (Inter / Plus Jakarta Sans).
+- **Hạ tầng bản đồ**: Tích hợp Mapbox Tiles độ nét cao (Mapbox Dark v11 và Vệ tinh Satellite Streets v12) kèm fallback CartoDB/OpenStreetMap.
 - **Trải nghiệm tức thì (Zero-friction)**: Tải trang < 1.5s, không popup quảng cáo hay yêu cầu tạo tài khoản.
 - **Thang đo màu sắc trực quan theo độ sâu ngập**:
   - 🟢 **Mức 0 (< 10cm - Xanh ngọc)**: Đường thông thoáng, an toàn.

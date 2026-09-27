@@ -66,7 +66,7 @@
       "file_type": "code",
       "norm_label": "floodapp",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L8"
+      "source_location": "L6"
     },
     {
       "id": "src_interface_ui_js_supabase_service_supabasefloodservice",
@@ -211,7 +211,7 @@
       "file_type": "code",
       "norm_label": ".constructor()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L9"
+      "source_location": "L7"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_createfloodmarker",
@@ -223,7 +223,7 @@
       "file_type": "code",
       "norm_label": ".createfloodmarker()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L165"
+      "source_location": "L141"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_createstationmarker",
@@ -235,7 +235,7 @@
       "file_type": "code",
       "norm_label": ".createstationmarker()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L237"
+      "source_location": "L213"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_fillreportcoordswithcenter",
@@ -247,7 +247,7 @@
       "file_type": "code",
       "norm_label": ".fillreportcoordswithcenter()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L454"
+      "source_location": "L425"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_handlegpslocation",
@@ -259,7 +259,7 @@
       "file_type": "code",
       "norm_label": ".handlegpslocation()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L418"
+      "source_location": "L389"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_handlereportsubmit",
@@ -271,7 +271,7 @@
       "file_type": "code",
       "norm_label": ".handlereportsubmit()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L464"
+      "source_location": "L435"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_init",
@@ -283,7 +283,7 @@
       "file_type": "code",
       "norm_label": ".init()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L23"
+      "source_location": "L21"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_initmap",
@@ -295,7 +295,7 @@
       "file_type": "code",
       "norm_label": ".initmap()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L29"
+      "source_location": "L27"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_loadinitialdata",
@@ -307,7 +307,7 @@
       "file_type": "code",
       "norm_label": ".loadinitialdata()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L77"
+      "source_location": "L53"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_populateprovinceselect",
@@ -319,7 +319,7 @@
       "file_type": "code",
       "norm_label": ".populateprovinceselect()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L99"
+      "source_location": "L75"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_renderemergencybanner",
@@ -331,7 +331,7 @@
       "file_type": "code",
       "norm_label": ".renderemergencybanner()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L112"
+      "source_location": "L88"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_rendermarkers",
@@ -343,7 +343,7 @@
       "file_type": "code",
       "norm_label": ".rendermarkers()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L140"
+      "source_location": "L116"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_setupeventlisteners",
@@ -355,7 +355,7 @@
       "file_type": "code",
       "norm_label": ".setupeventlisteners()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L280"
+      "source_location": "L256"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_showtoast",
@@ -367,7 +367,7 @@
       "file_type": "code",
       "norm_label": ".showtoast()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L520"
+      "source_location": "L491"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_updateheaderstats",
@@ -379,7 +379,7 @@
       "file_type": "code",
       "norm_label": ".updateheaderstats()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L126"
+      "source_location": "L102"
     },
     {
       "id": "src_interface_ui_js_supabase_service_supabasefloodservice_constructor",
@@ -8487,11 +8487,23 @@
       "source_location": "L11"
     },
     {
+      "id": "spec_driven_agent_driven_development_2",
+      "label": "spec-driven-&-agent-driven-development (2).md",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "spec-driven-&-agent-driven-development (2).md",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L1"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_16_1_template_agents_md_cho_\u0111\u1ed3_\u00e1n_sinh_vi\u00ean_template",
       "label": "**16.1  Template: AGENTS.md cho \u0110\u1ed3 \u00c1n Sinh Vi\u00ean TEMPLATE** \ud83d\udcc4",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.1  template: agents.md cho \u0111o an sinh vien template** \ud83d\udcc4",
@@ -8503,7 +8515,7 @@
       "label": "**16.2  Template: CLAUDE.md v\u1edbi Auto-Memory** \ud83d\udcc4 **TEMPLATE**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.2  template: claude.md voi auto-memory** \ud83d\udcc4 **template**",
@@ -8515,7 +8527,7 @@
       "label": "**16.3  Template: Feature Spec (SDD) \u2014 3 M\u1ee9c \u0110\u1ed9** \ud83d\udcd0 **SDD**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.3  template: feature spec (sdd) \u2014 3 muc \u0111o** \ud83d\udcd0 **sdd**",
@@ -8527,7 +8539,7 @@
       "label": "**16.4  Template: Constitution cho Team** \ud83d\udcdc **CONSTITUTION**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.4  template: constitution cho team** \ud83d\udcdc **constitution**",
@@ -8539,7 +8551,7 @@
       "label": "**16.5  Template: Sprint Planning v\u1edbi Hybrid Workflow SDD+ADD** \ud83d\udd04",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.5  template: sprint planning voi hybrid workflow sdd+add** \ud83d\udd04",
@@ -8551,7 +8563,7 @@
       "label": "**16.6  Checklist: Tr\u01b0\u1edbc Khi Commit Code do Agent T\u1ea1o** \u2705 **CHECKLIST**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.6  checklist: truoc khi commit code do agent tao** \u2705 **checklist**",
@@ -8563,7 +8575,7 @@
       "label": "**16.7  Checklist: Spec Quality Review** \ud83d\udcd0 **SDD**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.7  checklist: spec quality review** \ud83d\udcd0 **sdd**",
@@ -8575,7 +8587,7 @@
       "label": "**16.8  Quick Reference: 10 Prompt Patterns cho REFERENCE Agentic Coding** \ud83d\udd16",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.8  quick reference: 10 prompt patterns cho reference agentic coding** \ud83d\udd16",
@@ -8587,7 +8599,7 @@
       "label": "**16.9  Quick Reference: Tool Command Cheatsheet REFERENCE** \ud83d\udd16",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**16.9  quick reference: tool command cheatsheet reference** \ud83d\udd16",
@@ -8595,11 +8607,47 @@
       "source_location": "L16335"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_1",
+      "label": "**Ch\u01b0\u01a1ng 1**",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**chuong 1**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L204"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_cu\u1ed1n_s\u00e1ch_n\u00e0y_d\u00e0nh_cho_ai",
+      "label": "**Cu\u1ed1n s\u00e1ch n\u00e0y d\u00e0nh cho ai?**",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**cuon sach nay danh cho ai?**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L49"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_c\u00e1ch_\u0111\u1ecdc_hi\u1ec7u_qu\u1ea3",
+      "label": "**C\u00e1ch \u0111\u1ecdc hi\u1ec7u qu\u1ea3**",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**cach \u0111oc hieu qua**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L57"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_full_spec_cho_core_module_security_critical_high_risk",
       "label": "\ud83d\udcd5 **FULL SPEC \u2014 Cho core module, security-critical, high-risk**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "\ud83d\udcd5 **full spec \u2014 cho core module, security-critical, high-risk**",
@@ -8611,7 +8659,7 @@
       "label": "**Gi\u1edbi thi\u1ec7u ch\u01b0\u01a1ng**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**gioi thieu chuong**",
@@ -8623,7 +8671,7 @@
       "label": "\ud83d\udcd7 **LIGHT SPEC \u2014 Cho CRUD \u0111\u01a1n gi\u1ea3n, UI component, bug fix**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "\ud83d\udcd7 **light spec \u2014 cho crud \u0111on gian, ui component, bug fix**",
@@ -8635,7 +8683,7 @@
       "label": "\u26a0 **L\u01b0u \u00fd quan tr\u1ecdng v\u1ec1 Tool Commands**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "\u26a0 **luu y quan trong ve tool commands**",
@@ -8643,11 +8691,23 @@
       "source_location": "L16381"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_l\u1eddi_m\u1edf_\u0111\u1ea7u",
+      "label": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**loi mo \u0111au**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L43"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_mark_templates_checklists_quick_references_mark",
       "label": "**<mark>Templates, Checklists & Quick References</mark>**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "**<mark>templates, checklists & quick references</mark>**",
@@ -8655,11 +8715,35 @@
       "source_location": "L15716"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_m\u1ee5c_l\u1ee5c",
+      "label": "**M\u1ee4C L\u1ee4C**",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**muc luc**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L75"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_si_ec_driven",
+      "label": "Si EC DRIVEN",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "si ec driven",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L11"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_standard_spec_cho_feature_c\u00f3_business_logic",
       "label": "\ud83d\udcd8 **STANDARD SPEC \u2014 Cho feature c\u00f3 business logic**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "\ud83d\udcd8 **standard spec \u2014 cho feature co business logic**",
@@ -8667,11 +8751,23 @@
       "source_location": "L15945"
     },
     {
+      "id": "spec_driven_agent_driven_development_2_tinh_th\u1ea7n_c\u1ee7a_cu\u1ed1n_s\u00e1ch",
+      "label": "**Tinh th\u1ea7n c\u1ee7a cu\u1ed1n s\u00e1ch**",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**tinh than cua cuon sach**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L67"
+    },
+    {
       "id": "spec_driven_agent_driven_development_2_versioning_cho_templates",
       "label": "\ud83d\udcd6 \ud83d\udcc5 **Versioning cho Templates**",
       "_origin": "ast",
       "community": 23,
-      "community_name": "**<mark>Templates, Checklists & Quick References</mark>**",
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "\ud83d\udcd6 \ud83d\udcc5 **versioning cho templates**",
@@ -11208,7 +11304,7 @@
       "node_kind": "heading",
       "norm_label": "3.1 kham pha ban \u0111o",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L35"
+      "source_location": "L34"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_3_2_t\u01b0\u01a1ng_t\u00e1c_\u0111i\u1ec3m_ng\u1eadp_tr\u1ea1m_\u0111o",
@@ -11220,7 +11316,7 @@
       "node_kind": "heading",
       "norm_label": "3.2 tuong tac \u0111iem ngap & tram \u0111o",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L40"
+      "source_location": "L39"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_3_3_b\u1ea3ng_th\u1ed1ng_k\u00ea_nhanh_quick_stats_drawer",
@@ -11232,7 +11328,7 @@
       "node_kind": "heading",
       "norm_label": "3.3 bang thong ke nhanh (quick stats drawer)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L48"
+      "source_location": "L47"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_3_\u0111\u1eb7c_t\u1ea3_y\u00eau_c\u1ea7u_ch\u1ee9c_n\u0103ng_ears_notation",
@@ -11244,7 +11340,7 @@
       "node_kind": "heading",
       "norm_label": "3. \u0111ac ta yeu cau chuc nang (ears notation)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L33"
+      "source_location": "L32"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_4_d\u1eef_li\u1ec7u_h\u1ee3p_\u0111\u1ed3ng_giao_ti\u1ebfp",
@@ -11256,7 +11352,7 @@
       "node_kind": "heading",
       "norm_label": "4. du lieu & hop \u0111ong giao tiep",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L53"
+      "source_location": "L52"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_5_ti\u00eau_ch\u00ed_th\u00e0nh_c\u00f4ng_success_criteria",
@@ -11268,7 +11364,7 @@
       "node_kind": "heading",
       "norm_label": "5. tieu chi thanh cong (success criteria)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L60"
+      "source_location": "L59"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_feature_spec_b\u1ea3n_\u0111\u1ed3_ng\u1eadp_l\u1ee5t_tr\u1ea1m_\u0111o_to\u00e0n_qu\u1ed1c_feat_public_map",
@@ -15685,18 +15781,6 @@
       "node_kind": "heading",
       "norm_label": "[1.0.0] - 2026-09-27",
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "sdd_specs_feat_public_map_changelog_1_1_0_2026_09_27",
-      "label": "[1.1.0] - 2026-09-27",
-      "_origin": "ast",
-      "community": 84,
-      "community_name": "Changelog: feat-public-map",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[1.1.0] - 2026-09-27",
-      "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
       "source_location": "L3"
     },
     {
@@ -16884,105 +16968,8 @@
       "source_location": "L1"
     },
     {
-      "id": "spec_driven_agent_driven_development_2",
-      "label": "spec-driven-&-agent-driven-development (2).md",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "spec-driven-&-agent-driven-development (2).md",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L1"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_1",
-      "label": "**Ch\u01b0\u01a1ng 1**",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**chuong 1**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L204"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_cu\u1ed1n_s\u00e1ch_n\u00e0y_d\u00e0nh_cho_ai",
-      "label": "**Cu\u1ed1n s\u00e1ch n\u00e0y d\u00e0nh cho ai?**",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**cuon sach nay danh cho ai?**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L49"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_c\u00e1ch_\u0111\u1ecdc_hi\u1ec7u_qu\u1ea3",
-      "label": "**C\u00e1ch \u0111\u1ecdc hi\u1ec7u qu\u1ea3**",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**cach \u0111oc hieu qua**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L57"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_l\u1eddi_m\u1edf_\u0111\u1ea7u",
-      "label": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**loi mo \u0111au**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L43"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_m\u1ee5c_l\u1ee5c",
-      "label": "**M\u1ee4C L\u1ee4C**",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**muc luc**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L75"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_si_ec_driven",
-      "label": "Si EC DRIVEN",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "si ec driven",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L11"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_tinh_th\u1ea7n_c\u1ee7a_cu\u1ed1n_s\u00e1ch",
-      "label": "**Tinh th\u1ea7n c\u1ee7a cu\u1ed1n s\u00e1ch**",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**tinh than cua cuon sach**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L67"
-    },
-    {
       "id": "ref_node_assert",
       "label": "ref_node_assert",
-      "_origin": "semantic",
       "community": 17,
       "community_name": "FloodPoint",
       "external": true,
@@ -16994,7 +16981,6 @@
     {
       "id": "ref_node_test",
       "label": "ref_node_test",
-      "_origin": "semantic",
       "community": 17,
       "community_name": "FloodPoint",
       "external": true,
@@ -17006,7 +16992,6 @@
     {
       "id": "os",
       "label": "os",
-      "_origin": "semantic",
       "community": 35,
       "community_name": "migrate.py",
       "external": true,
@@ -17018,7 +17003,6 @@
     {
       "id": "pathlib",
       "label": "pathlib",
-      "_origin": "semantic",
       "community": 35,
       "community_name": "migrate.py",
       "external": true,
@@ -17030,7 +17014,6 @@
     {
       "id": "psycopg",
       "label": "psycopg",
-      "_origin": "semantic",
       "community": 35,
       "community_name": "migrate.py",
       "external": true,
@@ -17042,7 +17025,6 @@
     {
       "id": "sys",
       "label": "sys",
-      "_origin": "semantic",
       "community": 35,
       "community_name": "migrate.py",
       "external": true,
@@ -17074,7 +17056,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L539",
+      "source_location": "L510",
       "weight": 1.0
     },
     {
@@ -17086,7 +17068,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L420",
+      "source_location": "L391",
       "weight": 1.0
     },
     {
@@ -17098,7 +17080,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L476",
+      "source_location": "L447",
       "weight": 1.0
     },
     {
@@ -17110,7 +17092,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L508",
+      "source_location": "L479",
       "weight": 1.0
     },
     {
@@ -17122,7 +17104,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L509",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
@@ -17134,7 +17116,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L24",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -17146,7 +17128,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L25",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -17158,7 +17140,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L26",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -17170,7 +17152,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L90",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -17182,7 +17164,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L91",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -17194,7 +17176,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L92",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -17206,7 +17188,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L93",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -17218,7 +17200,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L152",
+      "source_location": "L128",
       "weight": 1.0
     },
     {
@@ -17230,7 +17212,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L159",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -17242,7 +17224,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L305",
+      "source_location": "L281",
       "weight": 1.0
     },
     {
@@ -17254,7 +17236,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L320",
+      "source_location": "L296",
       "weight": 1.0
     },
     {
@@ -17266,7 +17248,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L330",
+      "source_location": "L306",
       "weight": 1.0
     },
     {
@@ -17278,7 +17260,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L341",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -17290,7 +17272,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L374",
+      "source_location": "L345",
       "weight": 1.0
     },
     {
@@ -17302,7 +17284,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L394",
+      "source_location": "L365",
       "weight": 1.0
     },
     {
@@ -17362,7 +17344,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L8",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -20726,24 +20708,13 @@
     },
     {
       "source": "sdd_specs_feat_public_map_changelog_changelog_feat_public_map",
-      "target": "sdd_specs_feat_public_map_changelog_1_1_0_2026_09_27",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "sdd_specs_feat_public_map_changelog_changelog_feat_public_map",
       "target": "sdd_specs_feat_public_map_changelog_1_0_0_2026_09_27",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L7",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -20820,7 +20791,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -20831,7 +20802,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -20842,7 +20813,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L48",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -20875,7 +20846,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L33",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -20886,7 +20857,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L53",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -20897,7 +20868,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L60",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -31891,24 +31862,13 @@
     },
     {
       "source": "src_interface_ui_js_app_floodapp",
-      "target": "src_interface_ui_js_app_floodapp_renderemergencybanner",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L112",
-      "weight": 1.0
-    },
-    {
-      "source": "src_interface_ui_js_app_floodapp",
       "target": "src_interface_ui_js_app_floodapp_updateheaderstats",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L126",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -31919,7 +31879,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L140",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -31930,7 +31890,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L165",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -31941,7 +31901,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L23",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -31952,7 +31912,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L237",
+      "source_location": "L213",
       "weight": 1.0
     },
     {
@@ -31963,7 +31923,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L280",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -31974,7 +31934,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L29",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -31985,7 +31945,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L418",
+      "source_location": "L389",
       "weight": 1.0
     },
     {
@@ -31996,7 +31956,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L454",
+      "source_location": "L425",
       "weight": 1.0
     },
     {
@@ -32007,7 +31967,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L464",
+      "source_location": "L435",
       "weight": 1.0
     },
     {
@@ -32018,7 +31978,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L520",
+      "source_location": "L491",
       "weight": 1.0
     },
     {
@@ -32029,7 +31989,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L77",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -32040,7 +32000,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L9",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -32051,7 +32011,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L99",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interface_ui_js_app_floodapp",
+      "target": "src_interface_ui_js_app_floodapp_renderemergencybanner",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interface/ui/js/app.js",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -32215,5 +32186,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1e0edf23596d4ba1e97d88a53814e83d7d07e829"
+  "built_at_commit": "3397c8d67b7431060b1940de43fcfccf5086040b"
 }

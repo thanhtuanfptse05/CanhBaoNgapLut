@@ -3,6 +3,13 @@
  * Handles Leaflet Map rendering, Realtime UI state, Geolocation, and Modals
  */
 
+// Safely retrieve Mapbox token from runtime config (window.ENV_CONFIG)
+const getMapboxToken = () => {
+  return (typeof window !== 'undefined' && window.ENV_CONFIG && window.ENV_CONFIG.MAPBOX_TOKEN)
+    ? window.ENV_CONFIG.MAPBOX_TOKEN
+    : '';
+};
+
 class FloodApp {
   constructor() {
     this.map = null;
@@ -36,17 +43,58 @@ class FloodApp {
     // Custom Zoom control placed bottom right
     L.control.zoom({ position: 'bottomright' }).addTo(this.map);
 
-    // CartoDB Dark Matter base layer
-    this.tileLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      subdomains: 'abcd'
-    }).addTo(this.map);
+    const mapboxToken = getMapboxToken();
+    const hasMapbox = mapboxToken && mapboxToken.startsWith('pk.');
 
-    // OpenStreetMap standard layer (alternative)
-    this.tileLayers.light = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19
-    });
+    if (hasMapbox) {
+      // 1. Mapbox Dark v11 (Primary default GIS layer)
+      this.tileLayers.dark = L.tileLayer(
+        `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`,
+        {
+          maxZoom: 20,
+          tileSize: 512,
+          zoomOffset: -1,
+          attribution: '© Mapbox © OpenStreetMap'
+        }
+      );
 
+      // 2. Mapbox Satellite Streets v12 (HD Satellite + Street names)
+      this.tileLayers.satellite = L.tileLayer(
+        `https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`,
+        {
+          maxZoom: 20,
+          tileSize: 512,
+          zoomOffset: -1,
+          attribution: '© Mapbox'
+        }
+      );
+
+      // 3. Mapbox Streets v12 (Standard Streets)
+      this.tileLayers.streets = L.tileLayer(
+        `https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`,
+        {
+          maxZoom: 20,
+          tileSize: 512,
+          zoomOffset: -1,
+          attribution: '© Mapbox © OpenStreetMap'
+        }
+      );
+    } else {
+      // Fallback CartoDB & OSM when no Mapbox token is configured
+      this.tileLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd'
+      });
+      this.tileLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19
+      });
+      this.tileLayers.streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      });
+    }
+
+    // Set default layer to dark
+    this.tileLayers.dark.addTo(this.map);
     this.markersLayer = L.layerGroup().addTo(this.map);
   }
 
@@ -306,20 +354,25 @@ class FloodApp {
       gpsBtn.addEventListener('click', () => this.handleGPSLocation());
     }
 
-    // 5. Layer Tile Switcher
+    // 5. Layer Tile Switcher (Dark -> Satellite -> Streets)
     const layerBtn = document.getElementById('btn-toggle-layer');
     if (layerBtn) {
       layerBtn.addEventListener('click', () => {
         if (this.currentTile === 'dark') {
           this.map.removeLayer(this.tileLayers.dark);
-          this.map.addLayer(this.tileLayers.light);
-          this.currentTile = 'light';
-          this.showToast('Đã chuyển sang Bản đồ sáng');
+          this.map.addLayer(this.tileLayers.satellite);
+          this.currentTile = 'satellite';
+          this.showToast('🛰️ Đã chuyển sang Bản đồ Vệ tinh HD (Mapbox)');
+        } else if (this.currentTile === 'satellite') {
+          this.map.removeLayer(this.tileLayers.satellite);
+          this.map.addLayer(this.tileLayers.streets);
+          this.currentTile = 'streets';
+          this.showToast('🗺️ Đã chuyển sang Bản đồ Đường phố (Mapbox)');
         } else {
-          this.map.removeLayer(this.tileLayers.light);
+          this.map.removeLayer(this.tileLayers.streets);
           this.map.addLayer(this.tileLayers.dark);
           this.currentTile = 'dark';
-          this.showToast('Đã chuyển sang Bản đồ tối GIS');
+          this.showToast('🌙 Đã chuyển sang Bản đồ Tối GIS (Mapbox)');
         }
       });
     }
