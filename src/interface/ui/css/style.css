@@ -649,6 +649,44 @@ html, body {
   color: var(--text-main);
 }
 
+/* Community Verification & Voting in Popup */
+.popup-vote-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.btn-vote {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: #ffffff;
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+.btn-vote.up:hover {
+  background: var(--safe-bg);
+  border-color: var(--safe-border);
+  color: var(--safe-color);
+}
+
+.btn-vote.down:hover {
+  background: var(--level3-bg);
+  border-color: var(--level3-border);
+  color: var(--level3-color);
+}
+
 /* Modal Dialogs */
 .modal-backdrop {
   position: fixed;

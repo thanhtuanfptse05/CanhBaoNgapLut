@@ -235,7 +235,7 @@
       "file_type": "code",
       "norm_label": ".createstationmarker()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L261"
+      "source_location": "L260"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_fillreportcoordswithcenter",
@@ -247,7 +247,7 @@
       "file_type": "code",
       "norm_label": ".fillreportcoordswithcenter()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L478"
+      "source_location": "L483"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_handlegpslocation",
@@ -259,7 +259,7 @@
       "file_type": "code",
       "norm_label": ".handlegpslocation()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L442"
+      "source_location": "L447"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_handlereportsubmit",
@@ -271,7 +271,7 @@
       "file_type": "code",
       "norm_label": ".handlereportsubmit()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L488"
+      "source_location": "L493"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_init",
@@ -355,7 +355,7 @@
       "file_type": "code",
       "norm_label": ".setupeventlisteners()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L304"
+      "source_location": "L309"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_showtoast",
@@ -367,7 +367,7 @@
       "file_type": "code",
       "norm_label": ".showtoast()",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L544"
+      "source_location": "L549"
     },
     {
       "id": "src_interface_ui_js_app_floodapp_updateheaderstats",
@@ -1545,6 +1545,306 @@
       "norm_label": "config.example.js",
       "source_file": "src/interface/ui/js/config.example.js",
       "source_location": "L1"
+    },
+    {
+      "id": "design",
+      "label": "DESIGN.md",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "design.md",
+      "source_file": "DESIGN.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "design_1_tri\u1ebft_l\u00fd_thi\u1ebft_k\u1ebf_design_principles",
+      "label": "1. Tri\u1ebft L\u00fd Thi\u1ebft K\u1ebf (Design Principles)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. triet ly thiet ke (design principles)",
+      "source_file": "DESIGN.md",
+      "source_location": "L10"
+    },
+    {
+      "id": "design_2_1_m\u00e0u_n\u1ec1n_b\u1ec1_m\u1eb7t_surfaces",
+      "label": "2.1 M\u00e0u N\u1ec1n & B\u1ec1 M\u1eb7t (Surfaces)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.1 mau nen & be mat (surfaces)",
+      "source_file": "DESIGN.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "design_2_2_m\u00e0u_ch\u1eef_typography_colors",
+      "label": "2.2 M\u00e0u Ch\u1eef (Typography Colors)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.2 mau chu (typography colors)",
+      "source_file": "DESIGN.md",
+      "source_location": "L36"
+    },
+    {
+      "id": "design_2_3_m\u00e0u_th\u01b0\u01a1ng_hi\u1ec7u_\u0111i\u1ec3m_nh\u1ea5n_brand_accents",
+      "label": "2.3 M\u00e0u Th\u01b0\u01a1ng Hi\u1ec7u & \u0110i\u1ec3m Nh\u1ea5n (Brand Accents)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.3 mau thuong hieu & \u0111iem nhan (brand accents)",
+      "source_file": "DESIGN.md",
+      "source_location": "L41"
+    },
+    {
+      "id": "design_2_4_thang_\u0111o_m\u1ee9c_ng\u1eadp_l\u1ee5t_flood_severity_scale",
+      "label": "2.4 Thang \u0110o M\u1ee9c Ng\u1eadp L\u1ee5t (Flood Severity Scale)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.4 thang \u0111o muc ngap lut (flood severity scale)",
+      "source_file": "DESIGN.md",
+      "source_location": "L46"
+    },
+    {
+      "id": "design_2_b\u1ea3ng_m\u00e0u_chu\u1ea9n_color_system_tokens",
+      "label": "2. B\u1ea3ng M\u00e0u Chu\u1ea9n (Color System Tokens)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. bang mau chuan (color system tokens)",
+      "source_file": "DESIGN.md",
+      "source_location": "L27"
+    },
+    {
+      "id": "design_3_h\u1ec7_th\u1ed1ng_ki\u1ec3u_ch\u1eef_typography_system",
+      "label": "3. H\u1ec7 Th\u1ed1ng Ki\u1ec3u Ch\u1eef (Typography System)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. he thong kieu chu (typography system)",
+      "source_file": "DESIGN.md",
+      "source_location": "L60"
+    },
+    {
+      "id": "design_4_1_thanh_\u0111i\u1ec1u_h\u01b0\u1edbng_tr\u00ean_header_navigation",
+      "label": "4.1 Thanh \u0110i\u1ec1u H\u01b0\u1edbng Tr\u00ean (Header Navigation)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.1 thanh \u0111ieu huong tren (header navigation)",
+      "source_file": "DESIGN.md",
+      "source_location": "L75"
+    },
+    {
+      "id": "design_4_2_b\u1ea3n_\u0111\u1ed3_n\u1ec1n_gis_\u0111\u1ed9_n\u00e9t_cao_mapbox_high_definition",
+      "label": "4.2 B\u1ea3n \u0110\u1ed3 N\u1ec1n GIS \u0110\u1ed9 N\u00e9t Cao (Mapbox High-Definition)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.2 ban \u0111o nen gis \u0111o net cao (mapbox high-definition)",
+      "source_file": "DESIGN.md",
+      "source_location": "L85"
+    },
+    {
+      "id": "design_4_3_\u0111i\u1ec3m_ghim_c\u1ea3nh_b\u00e1o_ng\u1eadp_custom_flood_pin",
+      "label": "4.3 \u0110i\u1ec3m Ghim C\u1ea3nh B\u00e1o Ng\u1eadp (Custom Flood Pin)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.3 \u0111iem ghim canh bao ngap (custom flood pin)",
+      "source_file": "DESIGN.md",
+      "source_location": "L93"
+    },
+    {
+      "id": "design_4_4_b\u1ea3ng_\u0111i\u1ec1u_khi\u1ec3n_l\u1ecdc_t\u00ecm_ki\u1ebfm_floating_filter_bar",
+      "label": "4.4 B\u1ea3ng \u0110i\u1ec1u Khi\u1ec3n L\u1ecdc & T\u00ecm Ki\u1ebfm (Floating Filter Bar)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.4 bang \u0111ieu khien loc & tim kiem (floating filter bar)",
+      "source_file": "DESIGN.md",
+      "source_location": "L101"
+    },
+    {
+      "id": "design_4_5_modal_c\u1ee9u_h\u1ed9_kh\u1ea9n_c\u1ea5p_sos_modal",
+      "label": "4.5 Modal C\u1ee9u H\u1ed9 Kh\u1ea9n C\u1ea5p (SOS Modal)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.5 modal cuu ho khan cap (sos modal)",
+      "source_file": "DESIGN.md",
+      "source_location": "L106"
+    },
+    {
+      "id": "design_4_6_form_b\u00e1o_ng\u1eadp_c\u1ed9ng_\u0111\u1ed3ng_1_ch\u1ea1m_community_report",
+      "label": "4.6 Form B\u00e1o Ng\u1eadp C\u1ed9ng \u0110\u1ed3ng 1 Ch\u1ea1m (Community Report)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.6 form bao ngap cong \u0111ong 1 cham (community report)",
+      "source_file": "DESIGN.md",
+      "source_location": "L110"
+    },
+    {
+      "id": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "label": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. \u0111ac ta thanh phan giao dien (component specifications)",
+      "source_file": "DESIGN.md",
+      "source_location": "L73"
+    },
+    {
+      "id": "design_floodguard_vi\u1ec7t_nam_light_mode_gis_professional_standard",
+      "label": "FloodGuard Vi\u1ec7t Nam \u2014 Light Mode GIS Professional Standard",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "floodguard viet nam \u2014 light mode gis professional standard",
+      "source_file": "DESIGN.md",
+      "source_location": "L2"
+    },
+    {
+      "id": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "label": "H\u1ec6 TH\u1ed0NG THI\u1ebeT K\u1ebe GIAO DI\u1ec6N (DESIGN SYSTEM SPECIFICATION)",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "4. \u0110\u1eb7c T\u1ea3 Th\u00e0nh Ph\u1ea7n Giao Di\u1ec7n (Component Specifications)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "he thong thiet ke giao dien (design system specification)",
+      "source_file": "DESIGN.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2",
+      "label": "spec-driven-&-agent-driven-development (2).md",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "spec-driven-&-agent-driven-development (2).md",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L1"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_1",
+      "label": "**Ch\u01b0\u01a1ng 1**",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**chuong 1**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L204"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_cu\u1ed1n_s\u00e1ch_n\u00e0y_d\u00e0nh_cho_ai",
+      "label": "**Cu\u1ed1n s\u00e1ch n\u00e0y d\u00e0nh cho ai?**",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**cuon sach nay danh cho ai?**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L49"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_c\u00e1ch_\u0111\u1ecdc_hi\u1ec7u_qu\u1ea3",
+      "label": "**C\u00e1ch \u0111\u1ecdc hi\u1ec7u qu\u1ea3**",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**cach \u0111oc hieu qua**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L57"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_l\u1eddi_m\u1edf_\u0111\u1ea7u",
+      "label": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**loi mo \u0111au**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L43"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_m\u1ee5c_l\u1ee5c",
+      "label": "**M\u1ee4C L\u1ee4C**",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**muc luc**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L75"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_si_ec_driven",
+      "label": "Si EC DRIVEN",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "si ec driven",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L11"
+    },
+    {
+      "id": "spec_driven_agent_driven_development_2_tinh_th\u1ea7n_c\u1ee7a_cu\u1ed1n_s\u00e1ch",
+      "label": "**Tinh th\u1ea7n c\u1ee7a cu\u1ed1n s\u00e1ch**",
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "**tinh than cua cuon sach**",
+      "source_file": "spec-driven-&-agent-driven-development (2).md",
+      "source_location": "L67"
     },
     {
       "id": "spec_driven_agent_driven_development_2_2_1_t\u1eeb_code_writer_\u0111\u1ebfn_outcome_engineer",
@@ -5514,18 +5814,6 @@
       "source_location": "L1"
     },
     {
-      "id": "spec_driven_agent_driven_development_2",
-      "label": "spec-driven-&-agent-driven-development (2).md",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "spec-driven-&-agent-driven-development (2).md",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L1"
-    },
-    {
       "id": "spec_driven_agent_driven_development_2_14_1_giai_\u0111o\u1ea1n_1_foundation",
       "label": "**14.1  Giai \u0110o\u1ea1n 1: Foundation**",
       "_origin": "ast",
@@ -5622,18 +5910,6 @@
       "source_location": "L15434"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_1",
-      "label": "**Ch\u01b0\u01a1ng 1**",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**chuong 1**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L204"
-    },
-    {
       "id": "spec_driven_agent_driven_development_2_ch\u01b0\u01a1ng_16",
       "label": "**Ch\u01b0\u01a1ng 16**",
       "_origin": "ast",
@@ -5644,30 +5920,6 @@
       "norm_label": "**chuong 16**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L15714"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_cu\u1ed1n_s\u00e1ch_n\u00e0y_d\u00e0nh_cho_ai",
-      "label": "**Cu\u1ed1n s\u00e1ch n\u00e0y d\u00e0nh cho ai?**",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**cuon sach nay danh cho ai?**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L49"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_c\u00e1ch_\u0111\u1ecdc_hi\u1ec7u_qu\u1ea3",
-      "label": "**C\u00e1ch \u0111\u1ecdc hi\u1ec7u qu\u1ea3**",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**cach \u0111oc hieu qua**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L57"
     },
     {
       "id": "spec_driven_agent_driven_development_2_giai_\u0111o\u1ea1n_1",
@@ -5766,18 +6018,6 @@
       "source_location": "L15599"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_l\u1eddi_m\u1edf_\u0111\u1ea7u",
-      "label": "**L\u1edcI M\u1ede \u0110\u1ea6U**",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**loi mo \u0111au**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L43"
-    },
-    {
       "id": "spec_driven_agent_driven_development_2_mark_roadmap_15_tu\u1ea7n_\u00e1p_d\u1ee5ng_cho_\u0111\u1ed3_\u00e1n_se_mark",
       "label": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
       "_origin": "ast",
@@ -5802,18 +6042,6 @@
       "source_location": "L15587"
     },
     {
-      "id": "spec_driven_agent_driven_development_2_m\u1ee5c_l\u1ee5c",
-      "label": "**M\u1ee4C L\u1ee4C**",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**muc luc**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L75"
-    },
-    {
       "id": "spec_driven_agent_driven_development_2_security_audit",
       "label": "**Security Audit**",
       "_origin": "ast",
@@ -5824,18 +6052,6 @@
       "norm_label": "**security audit**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L15513"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_si_ec_driven",
-      "label": "Si EC DRIVEN",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "si ec driven",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L11"
     },
     {
       "id": "spec_driven_agent_driven_development_2_sprint_1_tu\u1ea7n_5_u_6_auth_user_management_u",
@@ -5944,18 +6160,6 @@
       "norm_label": "\ud83c\udfac **thu 6 \u2014 demo & retro (60\u201390 phut)**",
       "source_file": "spec-driven-&-agent-driven-development (2).md",
       "source_location": "L15657"
-    },
-    {
-      "id": "spec_driven_agent_driven_development_2_tinh_th\u1ea7n_c\u1ee7a_cu\u1ed1n_s\u00e1ch",
-      "label": "**Tinh th\u1ea7n c\u1ee7a cu\u1ed1n s\u00e1ch**",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "**<mark>Roadmap 15 Tu\u1ea7n \u00c1p D\u1ee5ng Cho \u0110\u1ed3 \u00c1n SE</mark>**",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "**tinh than cua cuon sach**",
-      "source_file": "spec-driven-&-agent-driven-development (2).md",
-      "source_location": "L67"
     },
     {
       "id": "spec_driven_agent_driven_development_2_tu\u1ea7n_13_documentation_deployment",
@@ -11306,14 +11510,14 @@
       "source_location": "L12"
     },
     {
-      "id": "sdd_specs_feat_public_map_spec_2_ti\u00eau_ch\u00ed_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_ui_ux_excellence",
-      "label": "2. Ti\u00eau Ch\u00ed Thi\u1ebft K\u1ebf Giao Di\u1ec7n (UI/UX Excellence)",
+      "id": "sdd_specs_feat_public_map_spec_2_ti\u00eau_ch\u00ed_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_ui_ux_excellence_light_mode_standard",
+      "label": "2. Ti\u00eau Ch\u00ed Thi\u1ebft K\u1ebf Giao Di\u1ec7n (UI/UX Excellence \u2014 Light Mode Standard)",
       "_origin": "ast",
       "community": 37,
       "community_name": "Feature Spec: B\u1ea3n \u0110\u1ed3 Ng\u1eadp L\u1ee5t & Tr\u1ea1m \u0110o To\u00e0n Qu\u1ed1c (feat-public-map)",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. tieu chi thiet ke giao dien (ui/ux excellence)",
+      "norm_label": "2. tieu chi thiet ke giao dien (ui/ux excellence \u2014 light mode standard)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
       "source_location": "L20"
     },
@@ -11327,7 +11531,7 @@
       "node_kind": "heading",
       "norm_label": "3.1 kham pha ban \u0111o",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L35"
+      "source_location": "L36"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_3_2_t\u01b0\u01a1ng_t\u00e1c_\u0111i\u1ec3m_ng\u1eadp_tr\u1ea1m_\u0111o",
@@ -11339,7 +11543,7 @@
       "node_kind": "heading",
       "norm_label": "3.2 tuong tac \u0111iem ngap & tram \u0111o",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L40"
+      "source_location": "L41"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_3_3_b\u1ea3ng_th\u1ed1ng_k\u00ea_nhanh_quick_stats_drawer",
@@ -11351,7 +11555,7 @@
       "node_kind": "heading",
       "norm_label": "3.3 bang thong ke nhanh (quick stats drawer)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L48"
+      "source_location": "L49"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_3_\u0111\u1eb7c_t\u1ea3_y\u00eau_c\u1ea7u_ch\u1ee9c_n\u0103ng_ears_notation",
@@ -11363,7 +11567,7 @@
       "node_kind": "heading",
       "norm_label": "3. \u0111ac ta yeu cau chuc nang (ears notation)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L33"
+      "source_location": "L34"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_4_d\u1eef_li\u1ec7u_h\u1ee3p_\u0111\u1ed3ng_giao_ti\u1ebfp",
@@ -11375,7 +11579,7 @@
       "node_kind": "heading",
       "norm_label": "4. du lieu & hop \u0111ong giao tiep",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L53"
+      "source_location": "L54"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_5_ti\u00eau_ch\u00ed_th\u00e0nh_c\u00f4ng_success_criteria",
@@ -11387,7 +11591,7 @@
       "node_kind": "heading",
       "norm_label": "5. tieu chi thanh cong (success criteria)",
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L60"
+      "source_location": "L61"
     },
     {
       "id": "sdd_specs_feat_public_map_spec_feature_spec_b\u1ea3n_\u0111\u1ed3_ng\u1eadp_l\u1ee5t_tr\u1ea1m_\u0111o_to\u00e0n_qu\u1ed1c_feat_public_map",
@@ -15787,7 +15991,7 @@
       "label": "feat-public-map/CHANGELOG.md",
       "_origin": "ast",
       "community": 84,
-      "community_name": "Changelog: feat-public-map",
+      "community_name": "feat-public-map/CHANGELOG.md",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "feat-public-map/changelog.md",
@@ -15799,34 +16003,34 @@
       "label": "[1.0.0] - 2026-09-27",
       "_origin": "ast",
       "community": 84,
-      "community_name": "Changelog: feat-public-map",
+      "community_name": "feat-public-map/CHANGELOG.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "[1.0.0] - 2026-09-27",
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L8"
+      "source_location": "L12"
     },
     {
       "id": "sdd_specs_feat_public_map_changelog_1_1_0_2026_09_27",
       "label": "[1.1.0] - 2026-09-27",
       "_origin": "ast",
       "community": 84,
-      "community_name": "Changelog: feat-public-map",
+      "community_name": "feat-public-map/CHANGELOG.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "[1.1.0] - 2026-09-27",
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L3"
+      "source_location": "L7"
     },
     {
-      "id": "sdd_specs_feat_public_map_changelog_changelog_feat_public_map",
-      "label": "Changelog: feat-public-map",
+      "id": "sdd_specs_feat_public_map_changelog_2_0_0_2026_09_27",
+      "label": "[2.0.0] - 2026-09-27",
       "_origin": "ast",
       "community": 84,
-      "community_name": "Changelog: feat-public-map",
+      "community_name": "feat-public-map/CHANGELOG.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "changelog: feat-public-map",
+      "norm_label": "[2.0.0] - 2026-09-27",
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
       "source_location": "L1"
     },
@@ -17275,6 +17479,7 @@
     {
       "id": "ref_node_child_process",
       "label": "ref_node_child_process",
+      "_origin": "semantic",
       "community": 99,
       "community_name": "server.js",
       "external": true,
@@ -17286,6 +17491,7 @@
     {
       "id": "ref_node_fs",
       "label": "ref_node_fs",
+      "_origin": "semantic",
       "community": 99,
       "community_name": "server.js",
       "external": true,
@@ -17297,6 +17503,7 @@
     {
       "id": "ref_node_http",
       "label": "ref_node_http",
+      "_origin": "semantic",
       "community": 99,
       "community_name": "server.js",
       "external": true,
@@ -17308,6 +17515,7 @@
     {
       "id": "ref_node_path",
       "label": "ref_node_path",
+      "_origin": "semantic",
       "community": 99,
       "community_name": "server.js",
       "external": true,
@@ -17319,6 +17527,7 @@
     {
       "id": "ref_node_url",
       "label": "ref_node_url",
+      "_origin": "semantic",
       "community": 99,
       "community_name": "server.js",
       "external": true,
@@ -17350,7 +17559,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L563",
+      "source_location": "L568",
       "weight": 1.0
     },
     {
@@ -17362,7 +17571,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L444",
+      "source_location": "L449",
       "weight": 1.0
     },
     {
@@ -17374,7 +17583,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L500",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
@@ -17386,7 +17595,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L532",
+      "source_location": "L537",
       "weight": 1.0
     },
     {
@@ -17398,7 +17607,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L533",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -17530,7 +17739,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L329",
+      "source_location": "L334",
       "weight": 1.0
     },
     {
@@ -17542,7 +17751,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L344",
+      "source_location": "L349",
       "weight": 1.0
     },
     {
@@ -17554,7 +17763,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L354",
+      "source_location": "L359",
       "weight": 1.0
     },
     {
@@ -17566,7 +17775,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L365",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -17578,7 +17787,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L398",
+      "source_location": "L403",
       "weight": 1.0
     },
     {
@@ -17590,7 +17799,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L418",
+      "source_location": "L423",
       "weight": 1.0
     },
     {
@@ -19984,6 +20193,182 @@
       "weight": 1.0
     },
     {
+      "source": "design",
+      "target": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "design_2_b\u1ea3ng_m\u00e0u_chu\u1ea9n_color_system_tokens",
+      "target": "design_2_1_m\u00e0u_n\u1ec1n_b\u1ec1_m\u1eb7t_surfaces",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "design_2_b\u1ea3ng_m\u00e0u_chu\u1ea9n_color_system_tokens",
+      "target": "design_2_2_m\u00e0u_ch\u1eef_typography_colors",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "design_2_b\u1ea3ng_m\u00e0u_chu\u1ea9n_color_system_tokens",
+      "target": "design_2_3_m\u00e0u_th\u01b0\u01a1ng_hi\u1ec7u_\u0111i\u1ec3m_nh\u1ea5n_brand_accents",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "design_2_b\u1ea3ng_m\u00e0u_chu\u1ea9n_color_system_tokens",
+      "target": "design_2_4_thang_\u0111o_m\u1ee9c_ng\u1eadp_l\u1ee5t_flood_severity_scale",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "target": "design_4_4_b\u1ea3ng_\u0111i\u1ec1u_khi\u1ec3n_l\u1ecdc_t\u00ecm_ki\u1ebfm_floating_filter_bar",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "target": "design_4_5_modal_c\u1ee9u_h\u1ed9_kh\u1ea9n_c\u1ea5p_sos_modal",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "target": "design_4_6_form_b\u00e1o_ng\u1eadp_c\u1ed9ng_\u0111\u1ed3ng_1_ch\u1ea1m_community_report",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "target": "design_4_1_thanh_\u0111i\u1ec1u_h\u01b0\u1edbng_tr\u00ean_header_navigation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "target": "design_4_2_b\u1ea3n_\u0111\u1ed3_n\u1ec1n_gis_\u0111\u1ed9_n\u00e9t_cao_mapbox_high_definition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "target": "design_4_3_\u0111i\u1ec3m_ghim_c\u1ea3nh_b\u00e1o_ng\u1eadp_custom_flood_pin",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "target": "design_1_tri\u1ebft_l\u00fd_thi\u1ebft_k\u1ebf_design_principles",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "target": "design_floodguard_vi\u1ec7t_nam_light_mode_gis_professional_standard",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "target": "design_2_b\u1ea3ng_m\u00e0u_chu\u1ea9n_color_system_tokens",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "target": "design_3_h\u1ec7_th\u1ed1ng_ki\u1ec3u_ch\u1eef_typography_system",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "design_h\u1ec7_th\u1ed1ng_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_design_system_specification",
+      "target": "design_4_\u0111\u1eb7c_t\u1ea3_th\u00e0nh_ph\u1ea7n_giao_di\u1ec7n_component_specifications",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
       "source": "docs_readme",
       "target": "docs_readme_project_documentation",
       "relation": "contains",
@@ -21195,7 +21580,7 @@
     },
     {
       "source": "sdd_specs_feat_public_map_changelog",
-      "target": "sdd_specs_feat_public_map_changelog_changelog_feat_public_map",
+      "target": "sdd_specs_feat_public_map_changelog_2_0_0_2026_09_27",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -21205,25 +21590,25 @@
       "weight": 1.0
     },
     {
-      "source": "sdd_specs_feat_public_map_changelog_changelog_feat_public_map",
-      "target": "sdd_specs_feat_public_map_changelog_1_1_0_2026_09_27",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "sdd_specs_feat_public_map_changelog_changelog_feat_public_map",
+      "source": "sdd_specs_feat_public_map_changelog",
       "target": "sdd_specs_feat_public_map_changelog_1_0_0_2026_09_27",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
-      "source_location": "L8",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "sdd_specs_feat_public_map_changelog",
+      "target": "sdd_specs_feat_public_map_changelog_1_1_0_2026_09_27",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".sdd/specs/feat-public-map/CHANGELOG.md",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -21300,7 +21685,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -21311,7 +21696,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -21322,7 +21707,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -21338,7 +21723,7 @@
     },
     {
       "source": "sdd_specs_feat_public_map_spec_feature_spec_b\u1ea3n_\u0111\u1ed3_ng\u1eadp_l\u1ee5t_tr\u1ea1m_\u0111o_to\u00e0n_qu\u1ed1c_feat_public_map",
-      "target": "sdd_specs_feat_public_map_spec_2_ti\u00eau_ch\u00ed_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_ui_ux_excellence",
+      "target": "sdd_specs_feat_public_map_spec_2_ti\u00eau_ch\u00ed_thi\u1ebft_k\u1ebf_giao_di\u1ec7n_ui_ux_excellence_light_mode_standard",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -21355,7 +21740,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -21366,7 +21751,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -21377,7 +21762,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/feat-public-map/SPEC.md",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -32509,7 +32894,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L261",
+      "source_location": "L260",
       "weight": 1.0
     },
     {
@@ -32531,7 +32916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L304",
+      "source_location": "L309",
       "weight": 1.0
     },
     {
@@ -32553,7 +32938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L442",
+      "source_location": "L447",
       "weight": 1.0
     },
     {
@@ -32564,7 +32949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L478",
+      "source_location": "L483",
       "weight": 1.0
     },
     {
@@ -32575,7 +32960,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L488",
+      "source_location": "L493",
       "weight": 1.0
     },
     {
@@ -32586,7 +32971,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/interface/ui/js/app.js",
-      "source_location": "L544",
+      "source_location": "L549",
       "weight": 1.0
     },
     {
@@ -32750,5 +33135,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d1ea20bb25e39277c424b2e0edf96f9a00cfaea6"
+  "built_at_commit": "8c26d8033a69689802ed738cd3e916813057cc3b"
 }

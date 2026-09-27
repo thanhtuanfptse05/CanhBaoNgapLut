@@ -230,11 +230,32 @@ class FloodApp {
       statusColor = 'var(--level1-color)';
     }
 
+    const isCommunity = !!point.is_community;
+    const communityBadge = isCommunity
+      ? `<div class="vote-badge ${point.is_verified ? 'verified' : 'pending'}">
+           ${point.is_verified ? '✓ Cộng đồng đã xác thực' : '⏳ Chờ cộng đồng xác minh'}
+         </div>`
+      : '';
+
+    const voteActionsHtml = isCommunity
+      ? `
+        <div class="popup-vote-actions">
+          <button class="btn-vote btn-upvote" onclick="window.floodApp.handleVote('${point.id}', true)">
+            👍 Đúng ngập (${point.upvotes || 0})
+          </button>
+          <button class="btn-vote btn-downvote" onclick="window.floodApp.handleVote('${point.id}', false)">
+            👎 Báo sai / Đã rút (${point.downvotes || 0})
+          </button>
+        </div>
+      `
+      : '';
+
     const popupHtml = `
       <div class="flood-popup-card">
         <div class="popup-title">
           <span>${point.name}</span>
         </div>
+        ${communityBadge}
         <div class="popup-depth-meter">
           <span class="depth-value" style="color: ${color}">${point.current_depth_cm}</span>
           <span class="depth-unit">cm (Độ sâu ngập)</span>
@@ -246,10 +267,12 @@ class FloodApp {
           <span>Khuyến cáo:</span>
           <strong>${point.current_depth_cm >= 50 ? 'Cấm xe qua lại' : point.current_depth_cm >= 30 ? 'Xe gầm thấp chú ý' : 'Lưu thông cẩn thận'}</strong>
         </div>
+        ${point.note ? `<div class="popup-detail-row"><span>Ghi chú:</span><span>${point.note}</span></div>` : ''}
         <div class="popup-detail-row">
           <span>Cập nhật:</span>
           <span>${new Date(point.last_updated).toLocaleTimeString('vi-VN')}</span>
         </div>
+        ${voteActionsHtml}
       </div>
     `;
 
@@ -279,6 +302,9 @@ class FloodApp {
 
     const marker = L.marker([station.latitude, station.longitude], { icon });
 
+    const dischargeText = station.live_discharge != null ? `${station.live_discharge} m³/s` : 'Đang đo';
+    const rainText = station.live_rain != null ? `${station.live_rain} mm/h` : '0 mm/h';
+
     const popupHtml = `
       <div class="flood-popup-card">
         <div class="popup-title">
@@ -286,18 +312,26 @@ class FloodApp {
         </div>
         <div class="popup-depth-meter">
           <span class="depth-value" style="color: var(--primary)">${station.current_water_level || '--'}</span>
-          <span class="depth-unit">cm (Mực nước quan trắc)</span>
+          <span class="depth-unit">cm (Mực nước ước tính)</span>
         </div>
         <div class="popup-badge" style="background: var(--primary-subtle); color: var(--primary)">
-          ● Trạm quan trắc tự động
+          ● Trạm quan trắc thủy văn tự động
+        </div>
+        <div class="popup-detail-row">
+          <span>Lưu lượng dòng chảy:</span>
+          <strong>${dischargeText}</strong>
+        </div>
+        <div class="popup-detail-row">
+          <span>Lượng mưa tức thời:</span>
+          <strong>${rainText}</strong>
         </div>
         <div class="popup-detail-row">
           <span>Mã trạm:</span>
           <strong>${station.code}</strong>
         </div>
         <div class="popup-detail-row">
-          <span>Trạng thái trạm:</span>
-          <span style="color: var(--safe-color); font-weight:600;">● Đang hoạt động</span>
+          <span>Nguồn số liệu:</span>
+          <span style="color: var(--primary); font-weight:600;">Open-Meteo Live API</span>
         </div>
       </div>
     `;
@@ -455,6 +489,7 @@ class FloodApp {
       (pos) => {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
+        this.currentUserCoords = { lat, lng };
 
         if (this.userLocationMarker) {
           this.map.removeLayer(this.userLocationMarker);
@@ -490,6 +525,42 @@ class FloodApp {
     }
   }
 
+  async handleVote(reportId, isUpvote) {
+    const voteKey = 'voted_' + reportId;
+    if (localStorage.getItem(voteKey)) {
+      this.showToast('Bạn đã đánh giá điểm ngập này rồi!');
+      return;
+    }
+
+    this.showToast('Đang gửi đánh giá...');
+    const res = await window.FloodService.voteCommunityReport(reportId, isUpvote);
+    if (!res || !res.success) {
+      this.showToast('Không thể gửi đánh giá, vui lòng thử lại sau.');
+      return;
+    }
+
+    localStorage.setItem(voteKey, isUpvote ? 'up' : 'down');
+
+    // Update in memory
+    const point = this.floodPoints.find(p => p.id === reportId);
+    if (point) {
+      point.upvotes = res.upvotes;
+      point.downvotes = res.downvotes;
+      if (res.status === 'REJECTED') {
+        this.floodPoints = this.floodPoints.filter(p => p.id !== reportId);
+        this.renderMarkers();
+        this.updateHeaderStats();
+        this.showToast('Điểm ngập đã bị đánh dấu báo sai và được ẩn khỏi bản đồ.');
+        return;
+      }
+      if (res.status === 'VERIFIED') {
+        point.is_verified = true;
+      }
+    }
+    this.renderMarkers();
+    this.showToast(isUpvote ? 'Cảm ơn bạn đã xác thực điểm ngập!' : 'Đã ghi nhận phản hồi báo sai.');
+  }
+
   async handleReportSubmit() {
     const addressInput = document.getElementById('report-address');
     const noteInput = document.getElementById('report-note');
@@ -515,9 +586,14 @@ class FloodApp {
       province_code: this.selectedProvince === 'all' ? '01' : this.selectedProvince
     };
 
-    const result = await window.FloodService.submitCommunityReport(reportData);
+    // Submit with GPS coords for anti-spam distance verification
+    const result = await window.FloodService.submitCommunityReport(reportData, this.currentUserCoords);
+    if (!result || !result.success) {
+      this.showToast(result && result.error ? result.error : 'Không thể gửi báo cáo ngập.');
+      return;
+    }
 
-    // Optimistically add to map as a new flood point
+    // Add to map as a community flood point
     let severity = 'LEVEL_1';
     if (this.selectedDepth >= 50) severity = 'LEVEL_3';
     else if (this.selectedDepth >= 30) severity = 'LEVEL_2';
@@ -530,6 +606,11 @@ class FloodApp {
       status: 'RISING',
       latitude: lat,
       longitude: lng,
+      is_community: true,
+      upvotes: 1,
+      downvotes: 0,
+      is_verified: false,
+      note: note,
       last_updated: new Date().toISOString()
     };
 

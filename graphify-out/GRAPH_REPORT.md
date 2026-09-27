@@ -1,17 +1,16 @@
 # Graph Report - WEB cảnh báo ngập lụt  (2026-09-27)
 
 ## Corpus Check
-- 103 files · ~166,755 words
+- 105 files · ~168,313 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 19 file(s) not represented in the graph (top: (none) 17, .example 1, .css 1)
 
 ## Summary
-- 1455 nodes · 1413 edges · 103 communities (80 shown, 23 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.95)
+- 1477 nodes · 1437 edges · 106 communities (86 shown, 20 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8c26d803`
+- Built from commit: `8e1aae1a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -114,6 +113,9 @@
 - server.js
 - 4. Đặc Tả Thành Phần Giao Diện (Component Specifications)
 - **LỜI MỞ ĐẦU**
+- Execution Plan: feat-national-flood-system
+- NO-BROWSER RULE — CẤM MỞ TRÌNH DUYỆT TEST
+- ref_node_assert
 
 ## God Nodes (most connected - your core abstractions)
 1. `**<mark>Các Tiêu Chuẩn Mở</mark>**` - 99 edges
@@ -128,21 +130,12 @@
 10. `**<mark>Multi-Agent & Orchestration</mark>**` - 49 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `4. Key Entities & Boundaries` --references--> `CommunityReport`  [INFERRED]
-  .sdd/specs/feat-national-flood-system/SPEC.md → src/domain/entities/CommunityReport.js
-- `Phase 2: Core Domain & Repositories (Backend Foundation)` --references--> `FloodAlert`  [INFERRED]
-  .sdd/specs/feat-national-flood-system/PLAN.md → src/domain/entities/FloodAlert.js
-- `4. Key Entities & Boundaries` --references--> `FloodAlert`  [INFERRED]
-  .sdd/specs/feat-national-flood-system/SPEC.md → src/domain/entities/FloodAlert.js
-- `Phase 2: Core Domain & Repositories (Backend Foundation)` --references--> `FloodPoint`  [INFERRED]
-  .sdd/specs/feat-national-flood-system/PLAN.md → src/domain/entities/FloodPoint.js
-- `4. Key Entities & Boundaries` --references--> `FloodPoint`  [INFERRED]
-  .sdd/specs/feat-national-flood-system/SPEC.md → src/domain/entities/FloodPoint.js
+- None detected - all connections are within the same source files.
 
 ## Import Cycles
 - None detected.
 
-## Communities (103 total, 23 thin omitted)
+## Communities (106 total, 20 thin omitted)
 
 ### Community 1 - "common.ps1"
 Cohesion: 0.23
@@ -193,12 +186,12 @@ Cohesion: 0.05
 Nodes (42): **13.1.1 CORE — "Những thứ không được phép sai"**, **13.1.2 SHELL — "Những thứ cần xoay chuyển nhanh"**, **13.1 Nguyên tắc Hybrid — Mô hình "Core & Shell"**, **13.2.1 Ba chiều của Decision Matrix**, **13.2.2 The Decision Matrix — 9 ô × Risk overlay**, **13.2.3 Flowchart quyết định nhanh**, **13.2.4 Ví dụ áp dụng ma trận — 5 tình huống thực tế**, **13.2  Decision Matrix — Spec Depth × Agent Autonomy × Risk** (+34 more)
 
 ### Community 17 - "FloodPoint"
-Cohesion: 0.06
-Nodes (22): ref_node_assert, ref_node_test, Execution Plan: feat-national-flood-system, Phase 0: Kiến Trúc & Nghiên Cứu (Research & Foundation), Phase 1: Thiết Kế Mô Hình Dữ Liệu & Database First (CURRENT FOCUS), Phase 2: Core Domain & Repositories (Backend Foundation), Phase 3: Business Logic Usecases (Application Layer), Phase 4: API & Presentation Interface (GIS Web UI) (+14 more)
+Cohesion: 0.10
+Nodes (5): ref_node_test, CommunityReport, FloodAlert, FloodPoint, FloodStation
 
 ### Community 18 - "**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**"
-Cohesion: 0.05
-Nodes (37): **14.1  Giai Đoạn 1: Foundation**, **14.2  Giai Đoạn 2: Core Development**, **14.3  Giai Đoạn 3: Polish & Delivery**, **14.4  Phân Công Vai Trò — Nhóm 5 Người**, **14.5  Ceremony Calendar**, Bảng dưới cung cấp cái nhìn toàn cảnh trước khi đi vào chi tiết từng giai đoạn:, **Checklist Milestone — Điểm Kiểm Tra Quan Trọng**, 📖 **Chu Kỳ Tuần Chuẩn (áp dụng Tuần 5–10)** (+29 more)
+Cohesion: 0.04
+Nodes (44): **14.1  Giai Đoạn 1: Foundation**, **14.2  Giai Đoạn 2: Core Development**, **14.3  Giai Đoạn 3: Polish & Delivery**, **14.4  Phân Công Vai Trò — Nhóm 5 Người**, **14.5  Ceremony Calendar**, Bảng dưới cung cấp cái nhìn toàn cảnh trước khi đi vào chi tiết từng giai đoạn:, **Checklist Milestone — Điểm Kiểm Tra Quan Trọng**, 📖 **Chu Kỳ Tuần Chuẩn (áp dụng Tuần 5–10)** (+36 more)
 
 ### Community 19 - "**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**"
 Cohesion: 0.06
@@ -257,16 +250,16 @@ Cohesion: 0.18
 Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME], [PRINCIPLE_3_NAME], [PRINCIPLE_4_NAME], [PRINCIPLE_5_NAME], [PROJECT_NAME] Constitution (+2 more)
 
 ### Community 34 - "SupabaseFloodService"
-Cohesion: 0.25
-Nodes (3): FALLBACK_DATA, SUPABASE_CONFIG, SupabaseFloodService
+Cohesion: 0.22
+Nodes (3): BASELINE_DATA, SUPABASE_CONFIG, SupabaseFloodService
 
 ### Community 35 - "migrate.py"
-Cohesion: 0.24
-Nodes (6): os, pathlib, psycopg, Database Migration & Seed Script for Supabase PostgreSQL Usage: uv run --with…, Seed Realtime Flood Points & Alerts into Supabase PostgreSQL, sys
+Cohesion: 0.19
+Nodes (10): os, pathlib, psycopg, Database Migration & Seed Script for Supabase PostgreSQL Usage:   uv run --with, Seed Realtime Flood Points & Alerts into Supabase PostgreSQL, fetch_open_meteo_hydrology(), fetch_open_meteo_weather(), Live Data Sync & Database Cleaning Engine for FloodGuard Vietnam - Cleans fake h (+2 more)
 
 ### Community 36 - "Feature Spec: Báo Ngập Cộng Đồng 1 Chạm (feat-community-report)"
-Cohesion: 0.20
-Nodes (9): 1. Mục Tiêu Nghiệp Vụ (User Value & Business Needs), 2. Tiêu Chí Thiết Kế Giao Diện (UI/UX Excellence), 3.1 Mở Form Báo Cáo, 3.2 Chọn Mức Độ Ngập Trực Quan, 3.3 Gửi Báo Cáo & Hiển Thị Lên Bản Đồ, 3. Đặc Tả Yêu Cầu Chức Năng (EARS Notation), 4. Dữ Liệu & Hợp Đồng Giao Tiếp, 5. Tiêu Chí Thành Công (+1 more)
+Cohesion: 0.18
+Nodes (10): 1. Mục Tiêu Nghiệp Vụ (User Value & Business Needs), 2. Tiêu Chí Thiết Kế Giao Diện (UI/UX Excellence), 3.1 Mở Form Báo Cáo, 3.2 Chọn Mức Độ Ngập Trực Quan, 3.3 Gửi Báo Cáo & Hiển Thị Lên Bản Đồ, 3.4 Cơ Chế Xác Thực Cộng Đồng (Community Consensus Voting), 3. Đặc Tả Yêu Cầu Chức Năng (EARS Notation), 4. Dữ Liệu & Hợp Đồng Giao Tiếp (+2 more)
 
 ### Community 37 - "Feature Spec: Bản Đồ Ngập Lụt & Trạm Đo Toàn Quốc (feat-public-map)"
 Cohesion: 0.20
@@ -430,7 +423,7 @@ Nodes (3): Best Practices, Objective, Skill: GIS & Map Performance
 
 ### Community 77 - "[1.0.0] - 2026-09-27"
 Cohesion: 0.50
-Nodes (3): [1.0.0] - 2026-09-27, Added, Changelog: feat-community-report
+Nodes (3): [1.0.0] - 2026-09-27, [1.1.0] - 2026-09-27, Added
 
 ### Community 78 - "[1.0.0] - 2026-09-27"
 Cohesion: 0.50
@@ -449,8 +442,8 @@ Cohesion: 0.50
 Nodes (3): [1.0.0] - 2026-09-27, [1.1.0] - 2026-09-27, [2.0.0] - 2026-09-27
 
 ### Community 98 - "package.json"
-Cohesion: 0.15
-Nodes (12): author, description, keywords, license, main, name, scripts, dev (+4 more)
+Cohesion: 0.11
+Nodes (18): author, description, keywords, license, main, name, scripts, dev (+10 more)
 
 ### Community 99 - "server.js"
 Cohesion: 0.20
@@ -461,25 +454,29 @@ Cohesion: 0.12
 Nodes (16): 1. Triết Lý Thiết Kế (Design Principles), 2.1 Màu Nền & Bề Mặt (Surfaces), 2.2 Màu Chữ (Typography Colors), 2.3 Màu Thương Hiệu & Điểm Nhấn (Brand Accents), 2.4 Thang Đo Mức Ngập Lụt (Flood Severity Scale), 2. Bảng Màu Chuẩn (Color System Tokens), 3. Hệ Thống Kiểu Chữ (Typography System), 4.1 Thanh Điều Hướng Trên (Header Navigation) (+8 more)
 
 ### Community 102 - "**LỜI MỞ ĐẦU**"
+Cohesion: 0.20
+Nodes (9): 1. Business Context & Problem Statement, 2. User Personas & Scenarios, 3.1 Bản Đồ & Trực Quan Hóa GIS, 3.2 Dữ Liệu Quan Trắc & Ngưỡng Cảnh Báo, 3.3 Thông Báo & Cảnh Báo Sớm, 3. Acceptance Criteria (EARS Notation), 4. Key Entities & Boundaries, 5. Non-Functional Requirements & Constraints (+1 more)
+
+### Community 103 - "Execution Plan: feat-national-flood-system"
 Cohesion: 0.25
-Nodes (7): **Chương 1**, **Cuốn sách này dành cho ai?**, **Cách đọc hiệu quả**, **LỜI MỞ ĐẦU**, **MỤC LỤC**, Si EC DRIVEN, **Tinh thần của cuốn sách**
+Nodes (7): Execution Plan: feat-national-flood-system, Phase 0: Kiến Trúc & Nghiên Cứu (Research & Foundation), Phase 1: Thiết Kế Mô Hình Dữ Liệu & Database First (CURRENT FOCUS), Phase 2: Core Domain & Repositories (Backend Foundation), Phase 3: Business Logic Usecases (Application Layer), Phase 4: API & Presentation Interface (GIS Web UI), Phase 5: Verification & Deployment
 
 ## Knowledge Gaps
-- **1176 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1171 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1275 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1186 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1181 more)
+  These have ≤1 connection - possible missing edges or undocumented components.
+- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `**LỜI MỞ ĐẦU**` connect `**LỜI MỞ ĐẦU**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`, `**<mark>Templates, Checklists & Quick References</mark>**`?**
-  _High betweenness centrality (0.254) - this node is a cross-community bridge._
-- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**LỜI MỞ ĐẦU**`?**
-  _High betweenness centrality (0.067) - this node is a cross-community bridge._
-- **Why does `**<mark>Agent-Driven Workflow</mark>**` connect `**<mark>Agent-Driven Workflow</mark>**` to `**LỜI MỞ ĐẦU**`?**
+- **Why does `**LỜI MỞ ĐẦU**` connect `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`, `**<mark>Templates, Checklists & Quick References</mark>**`?**
+  _High betweenness centrality (0.267) - this node is a cross-community bridge._
+- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`?**
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
+- **Why does `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**` connect `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**` to `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`?**
   _High betweenness centrality (0.049) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `description` to the rest of the system?**
-  _1176 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1186 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `**<mark>Các Tiêu Chuẩn Mở</mark>**` be split into smaller, more focused modules?**
   _Cohesion score 0.020202020202020204 - nodes in this community are weakly interconnected._
 - **Should `**<mark>Executable Specification</mark>**` be split into smaller, more focused modules?**

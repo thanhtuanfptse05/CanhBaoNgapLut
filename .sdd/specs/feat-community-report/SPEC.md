@@ -44,10 +44,18 @@ Trạm cảm biến quan trắc tự động không thể bao phủ toàn bộ c
 
 ### 3.3 Gửi Báo Cáo & Hiển Thị Lên Bản Đồ
 - **WHEN** người dùng bấm "Gửi Báo Cáo" **THE SYSTEM SHALL**:
-  1. Gửi bản ghi vào bảng `community_reports` trên cơ sở dữ liệu Supabase.
-  2. Tạo ngay một Marker màu tím nhạt với biểu tượng megaphone trên bản đồ phiên người dùng.
-  3. Hiển thị thông báo Toast "Cảm ơn bạn! Điểm báo ngập đã được chia sẻ cho cộng đồng".
-- **WHEN** người gửi thao tác gửi quá nhanh (< 30 giây) **THE SYSTEM SHALL** hiển thị nhắc nhở nhẹ nhàng "Vui lòng chờ ít phút trước khi gửi báo cáo tiếp theo".
+  1. Kiểm tra ràng buộc khoảng cách địa lý (Geofencing): Vị trí báo cáo không được cách vị trí GPS thực tế của thiết bị quá 20km.
+  2. Kiểm tra tần suất gửi (Rate-limiting Cooldown): Mỗi thiết bị chỉ được gửi 1 báo cáo trong vòng 3 phút (lưu vết Client Token trong LocalStorage).
+  3. Gửi bản ghi vào bảng `community_reports` trên cơ sở dữ liệu Supabase với trạng thái `PENDING` (Chờ cộng đồng xác minh).
+  4. Hiển thị thông báo "Báo ngập thành công. Cảm ơn đóng góp của bạn!".
+
+### 3.4 Cơ Chế Xác Thực Cộng Đồng (Community Consensus Voting)
+- **WHEN** người dùng xem một điểm báo ngập của cộng đồng **THE SYSTEM SHALL** cung cấp 2 nút bình chọn nhanh 1 chạm:
+  - Nút "👍 Đúng ngập (+1)": Tăng chỉ số xác thực `upvote_count`.
+  - Nút "👎 Đã rút / Báo sai (-1)": Tăng chỉ số bác bỏ `downvote_count`.
+- **WHEN** số lượt `upvote_count` >= 2 **THE SYSTEM SHALL** tự động thăng hạng điểm ngập sang trạng thái `VERIFIED` (Huy hiệu xanh: "Cộng đồng đã xác thực").
+- **WHEN** số lượt `downvote_count` >= 2 **THE SYSTEM SHALL** tự động đánh dấu `REJECTED` và ẩn điểm ngập khỏi bản đồ công cộng.
+- **WHEN** điểm báo ngập đã tồn tại > 2 giờ mà không nhận thêm lượt xác nhận **THE SYSTEM SHALL** tự động đánh dấu hết hạn (Auto-decay) và ẩn khỏi bản đồ để bảo đảm thông tin luôn tươi mới.
 
 ---
 

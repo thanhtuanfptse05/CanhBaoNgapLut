@@ -1,4 +1,7 @@
-# Changelog: feat-community-report
+## [1.1.0] - 2026-09-27
+- Bổ sung cơ chế chống spam (Geofencing bán kính GPS, Rate limiting 3 phút).
+- Bổ sung cơ chế bỏ phiếu xác minh cộng đồng (Upvote/Downvote 1 chạm).
+- Tích hợp luật tự động phân rã (Auto-decay) ẩn điểm ngập sau 2 giờ.
 
 ## [1.0.0] - 2026-09-27
 ### Added

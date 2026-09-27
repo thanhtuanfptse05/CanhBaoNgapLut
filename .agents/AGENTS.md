@@ -23,6 +23,7 @@ Mapping/GIS: Leaflet / OpenStreetMap / GeoJSON
 - KHÔNG hardcode API keys, secrets trong mã nguồn.
 - KHÔNG commit code vi phạm các nguyên tắc trong `.sdd/constitution.md`.
 - KHÔNG bỏ qua khâu kiểm thử (unit tests) cho các thuật toán đánh giá mức ngập.
+- TUYỆT ĐỐI CẤM mở trình duyệt (`browser_subagent`) để test. Để người dùng tự trải nghiệm trên trình duyệt. Mọi kiểm thử phải chạy qua terminal (`npm test`).
 
 ## 5. DEFINITION OF DONE & CI/CD
 - [ ] Spec, Plan, Tasks được tạo/cập nhật đầy đủ trong `.sdd/specs/feat-{name}/`

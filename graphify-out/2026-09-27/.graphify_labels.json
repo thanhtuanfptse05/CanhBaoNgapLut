@@ -83,7 +83,7 @@
   "81": "AGENTS.md — Root Level Context",
   "82": "Implementation Tasks: feat-community-report",
   "83": "Implementation Tasks: feat-emergency-alerts",
-  "84": "Changelog: feat-public-map",
+  "84": "feat-public-map/CHANGELOG.md",
   "85": "rules/graphify.md",
   "86": "workflows/graphify.md",
   "87": "CLAUDE.md",
@@ -99,5 +99,7 @@
   "97": "tests/README.md",
   "98": "package.json",
   "99": "server.js",
-  "100": "config.example.js"
+  "100": "config.example.js",
+  "101": "4. Đặc Tả Thành Phần Giao Diện (Component Specifications)",
+  "102": "**LỜI MỞ ĐẦU**"
 }

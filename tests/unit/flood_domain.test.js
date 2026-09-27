@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { FloodPoint } from '../../src/domain/entities/FloodPoint.js';
 import { FloodAlert } from '../../src/domain/entities/FloodAlert.js';
 import { FloodStation } from '../../src/domain/entities/FloodStation.js';
+import { CommunityReport } from '../../src/domain/entities/CommunityReport.js';
 
 test('FloodPoint entity correctly calculates severity based on water depth', () => {
   const safePoint = new FloodPoint({ id: '1', name: 'Đường A', provinceCode: '01', latitude: 21, longitude: 105, currentDepthCm: 5 });
@@ -57,4 +58,34 @@ test('FloodStation entity reports operational state', () => {
     status: 'ACTIVE'
   });
   assert.equal(station.isOperational(), true);
+});
+
+test('CommunityReport anti-spam consensus and geofence rules', () => {
+  const report = new CommunityReport({
+    id: 'cr-1',
+    provinceCode: '01',
+    latitude: 21.0285,
+    longitude: 105.8048,
+    addressText: 'Nguyễn Trãi, Thanh Xuân',
+    estimatedDepthCm: 40,
+    upvoteCount: 1,
+    downvoteCount: 0,
+    verificationStatus: 'PENDING'
+  });
+
+  // Check geofence (21.03, 105.80 is very close ~1km)
+  assert.equal(report.isWithinGeofence(21.0300, 105.8050, 25), true);
+  // Check geofence far away (Da Nang vs Ha Noi ~600km)
+  assert.equal(report.isWithinGeofence(16.0544, 108.2022, 25), false);
+
+  // Upvote consensus promotion
+  report.upvote();
+  assert.equal(report.upvoteCount, 2);
+  assert.equal(report.verificationStatus, 'VERIFIED');
+
+  // Downvote consensus rejection
+  report.downvote();
+  report.downvote();
+  assert.equal(report.downvoteCount, 2);
+  assert.equal(report.verificationStatus, 'REJECTED');
 });

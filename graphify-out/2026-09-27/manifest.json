@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "src/interface/ui/js/app.js": {
-    "mtime": 1790493303.7067993,
-    "seen": 1790493475.8544712,
-    "ast_hash": "5e906ef29d07c8f2fcebba7ccbb2f74e",
+    "mtime": 1790494435.7521863,
+    "seen": 1790494469.9848523,
+    "ast_hash": "7082205f189a661c9cff28dcb26594fb",
     "semantic_hash": ""
   },
   "src/interface/ui/js/supabase-service.js": {
@@ -396,9 +396,9 @@
     "semantic_hash": ""
   },
   ".sdd/specs/feat-public-map/CHANGELOG.md": {
-    "mtime": 1790493447.3348274,
-    "seen": 1790493475.8586688,
-    "ast_hash": "8c89cdc689d2b0d379243ce22790b714",
+    "mtime": 1790494329.814357,
+    "seen": 1790494469.9893036,
+    "ast_hash": "04f27ff885238ffc77dbabd1aa26eeeb",
     "semantic_hash": ""
   },
   ".sdd/specs/feat-public-map/PLAN.md": {
@@ -408,9 +408,9 @@
     "semantic_hash": ""
   },
   ".sdd/specs/feat-public-map/SPEC.md": {
-    "mtime": 1790493085.8629913,
-    "seen": 1790493219.2229614,
-    "ast_hash": "2a4f819c635a0890ad84a6b161fca071",
+    "mtime": 1790494323.3692927,
+    "seen": 1790494469.9895554,
+    "ast_hash": "657284a74839e6b3d737ef296a697291",
     "semantic_hash": ""
   },
   ".sdd/specs/feat-public-map/TASKS.md": {
@@ -570,9 +570,9 @@
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1790493280.5518565,
-    "seen": 1790493475.860804,
-    "ast_hash": "02f23d5ad8c4cdd902a24ce44fd731a0",
+    "mtime": 1790494376.4974694,
+    "seen": 1790494469.9951868,
+    "ast_hash": "83c4b260a438dabb1b272cfb6e21f461",
     "semantic_hash": ""
   },
   "plan.md": {
@@ -633,6 +633,12 @@
     "mtime": 1790493259.8686185,
     "seen": 1790493475.8544726,
     "ast_hash": "a86e03f142997ff144f01cc5a789d51c",
+    "semantic_hash": ""
+  },
+  "DESIGN.md": {
+    "mtime": 1790494116.5530322,
+    "seen": 1790494469.9949691,
+    "ast_hash": "571f25907bab71a1a4fa806ea68d83dc",
     "semantic_hash": ""
   }
 }
