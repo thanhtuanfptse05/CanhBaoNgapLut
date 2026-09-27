@@ -221,3 +221,61 @@ describe('_deduplicateResults - geo-proximity deduplication', () => {
   });
 });
 
+// ============================================================
+// CRITICAL: POI-mandatory scoring — the "teky hà đông" problem
+// When query decomposes to brand+location, admin districts must
+// NOT outrank actual POI results that contain the brand name.
+// ============================================================
+
+function scorePOIMandatory(poiQuery, locationHint, results) {
+  const ADMIN_TYPES = new Set(['place', 'district', 'region', 'country', 'postcode', 'locality']);
+  const scored = results.map(r => {
+    const poiInName     = _fuzzyScore(poiQuery, r.name);
+    const poiInFullName = _fuzzyScore(poiQuery, r.fullName || '') * 0.7;
+    const poiPresence   = Math.max(poiInName, poiInFullName);
+    const locationBonus = _fuzzyScore(locationHint, r.fullName || '') * 0.3;
+    const isAdminOnly   = ADMIN_TYPES.has(r.placeType) && poiPresence < 0.2;
+    const score = isAdminOnly ? 0.05 : poiPresence + locationBonus;
+    return { ...r, _score: score };
+  });
+  return scored.sort((a, b) => b._score - a._score);
+}
+
+describe('POI-mandatory scoring — admin district penalty', () => {
+  it('"teky hà đông": Teky POI must rank above "Hà Đông" district', () => {
+    const results = [
+      { id: 'ha-dong-place', name: 'Hà Đông', fullName: 'Hà Đông, Hanoi, Vietnam', placeType: 'place' },
+      { id: 'teky-galaxy', name: 'Học Viện Teky', fullName: '51-53 Galaxy Tố Hữu, Hà Đông, Hanoi', placeType: 'poi' },
+    ];
+    const ranked = scorePOIMandatory('teky', 'hà đông', results);
+    assert.equal(ranked[0].id, 'teky-galaxy', 'Teky POI must be ranked #1');
+    assert.ok(ranked[0]._score > ranked[1]._score,
+      `Teky (${ranked[0]._score.toFixed(2)}) should outrank Hà Đông district (${ranked[1]._score.toFixed(2)})`
+    );
+  });
+
+  it('"Hà Đông" admin place gets penalty score ≤ 0.05 when brand is "teky"', () => {
+    const results = [
+      { id: 'ha-dong-district', name: 'Hà Đông', fullName: 'Hà Đông, Hanoi, Vietnam', placeType: 'district' }
+    ];
+    const ranked = scorePOIMandatory('teky', 'hà đông', results);
+    assert.ok(ranked[0]._score <= 0.05,
+      `Admin district should score ≤ 0.05, got ${ranked[0]._score}`
+    );
+  });
+
+  it('TEKY at Galaxy Tố Hữu scores highest among multiple results', () => {
+    const results = [
+      { id: 'ha-dong-place', name: 'Hà Đông', fullName: 'Hà Đông, Hanoi, Vietnam', placeType: 'place' },
+      { id: 'teky-thanh-chan', name: 'Học Viện Công Nghệ Sáng Tạo Teky', fullName: 'Toà nhà Thanh Chân, Hanoi', placeType: 'poi' },
+      { id: 'teky-galaxy', name: 'Hoc Vien Sang Tao Cong Nghe TEKY', fullName: '51-53 Galaxy Tố Hữu, Hà Đông, Hanoi', placeType: 'poi' },
+    ];
+    const ranked = scorePOIMandatory('teky', 'hà đông', results);
+    // Both Teky results should be ahead of Hà Đông district
+    assert.notEqual(ranked[0].id, 'ha-dong-place', 'District should NOT be #1');
+    assert.notEqual(ranked[1].id, 'ha-dong-place', 'District should NOT be #2');
+    // Galaxy Tố Hữu (in Hà Đông) should rank #1 due to location bonus
+    assert.equal(ranked[0].id, 'teky-galaxy', 'Galaxy Tố Hữu TEKY (in Hà Đông) should be #1');
+  });
+});
+

@@ -714,16 +714,53 @@ class SupabaseFloodService {
 
     if (allResults.length === 0) return [];
 
-    // === STEP 3: Fuzzy Relevance Scoring ===
-    // Score each result against both full query and POI part
+    // === STEP 3: Multi-dimensional Relevance Scoring ===
+    //
+    // Problem: "teky hà đông" decomposes to poi="teky", location="hà đông"
+    //   - naive fuzzy("teky hà đông", "Hà Đông") = 2/3 = 0.67 (HIGH! Wrong)
+    //   - naive fuzzy("teky hà đông", "Học Viện Teky") = 1/3 = 0.33 (LOW! Wrong)
+    //
+    // Fix: When query is decomposed (has locationHint), score by POI match ONLY.
+    //   - Results that don't contain the POI brand → penalize heavily
+    //   - Results that contain the POI brand → boost by exact match
+    //
     const SOURCE_PRIORITY = { searchbox: 0.15, geocoding: 0.05, nominatim: 0 };
+    const ADMIN_TYPES = new Set(['place', 'district', 'region', 'country', 'postcode', 'locality']);
+
+    const hasDecomposition = locationHint && poiQuery !== cleanQuery;
+
     for (const r of allResults) {
-      const nameScore = this._fuzzyScore(cleanQuery, r.name);
-      const fullNameScore = this._fuzzyScore(cleanQuery, r.fullName) * 0.6;
-      const poiScore = poiQuery !== cleanQuery
-        ? this._fuzzyScore(poiQuery, r.name) * 0.8 : 0;
       const sourcePriority = SOURCE_PRIORITY[r._source] || 0;
-      r._score = Math.max(nameScore, fullNameScore, poiScore) + sourcePriority;
+
+      if (hasDecomposition) {
+        // === Decomposed query mode (brand + location) ===
+        // Primary signal: does the result's NAME contain the POI brand?
+        const poiInName     = this._fuzzyScore(poiQuery, r.name);
+        const poiInFullName = this._fuzzyScore(poiQuery, r.fullName) * 0.7;
+        const poiPresence   = Math.max(poiInName, poiInFullName);
+
+        // Secondary signal: does fullName/address contain the location hint?
+        const locationInFull = this._fuzzyScore(locationHint, r.fullName) * 0.3;
+        const locationInName = this._fuzzyScore(locationHint, r.name) * 0.1;
+
+        // Admin penalty: if result is a pure admin place (district/city)
+        // without the POI brand → heavily penalized to push it below real POI results
+        const isAdminOnly = ADMIN_TYPES.has(r.placeType) && poiPresence < 0.2;
+
+        if (isAdminOnly) {
+          // Pure location match (e.g. "Hà Đông" district) when user wants "teky hà đông"
+          r._score = 0.05 + sourcePriority;
+        } else {
+          // Real POI: score = brand presence + location hint bonus + source
+          r._score = poiPresence + Math.max(locationInFull, locationInName) + sourcePriority;
+        }
+
+      } else {
+        // === Normal query mode (no decomposition) ===
+        const nameScore     = this._fuzzyScore(cleanQuery, r.name);
+        const fullNameScore = this._fuzzyScore(cleanQuery, r.fullName) * 0.6;
+        r._score = Math.max(nameScore, fullNameScore) + sourcePriority;
+      }
     }
 
     // === STEP 4: Deduplication (merge geo-nearby results) ===
@@ -734,6 +771,7 @@ class SupabaseFloodService {
 
     return deduped.slice(0, 6).map(({ _score, _source, ...r }) => r);
   }
+
 
 
   /**
