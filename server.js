@@ -28,7 +28,12 @@ const MIME_TYPES = {
  * Universal Request Handler for both Local Dev and Vercel Serverless Function
  */
 export default function handler(req, res) {
-  let reqPath = decodeURI(req.url.split('?')[0]);
+  // Respect original requested URI when running behind Vercel rewrites
+  const rawUrl = req.headers['x-forwarded-uri'] || 
+                 req.headers['x-matched-path'] || 
+                 req.url;
+
+  let reqPath = decodeURI(rawUrl.split('?')[0]);
   if (!reqPath || reqPath === '/' || reqPath === '/server.js') {
     reqPath = '/index.html';
   }
