@@ -88,16 +88,31 @@ class FloodApp {
       );
     } else {
       // Fallback CartoDB & OSM when no Mapbox token is configured
-      this.tileLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19,
-        subdomains: 'abcd'
+      // Use 'light_all' for streets so all small labels are visible
+      this.tileLayers.streets = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 20,
+        minZoom: 3,
+        subdomains: 'abcd',
+        attribution: '© CartoDB © OpenStreetMap'
       });
-      this.tileLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19
-      });
-      this.tileLayers.streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
-      });
+      // Dark base + separate labels layer on top for full label coverage
+      this.tileLayers.dark = L.layerGroup([
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+          maxZoom: 20, subdomains: 'abcd'
+        }),
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+          maxZoom: 20, subdomains: 'abcd', zIndex: 450
+        })
+      ]);
+      // Satellite: Esri base + CartoDB labels overlay
+      this.tileLayers.satellite = L.layerGroup([
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 19
+        }),
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19, subdomains: 'abcd', zIndex: 450
+        })
+      ]);
     }
 
     // Set default layer to Mapbox Streets (Clean Light Mode Standard)
@@ -408,7 +423,10 @@ class FloodApp {
             </div>
           `;
 
-          const results = await window.FloodService.searchAddress(query);
+          // Pass current map center for proximity-biased results
+          const center = this.map ? this.map.getCenter() : null;
+          const mapCenter = center ? { lat: center.lat, lng: center.lng } : null;
+          const results = await window.FloodService.searchAddress(query, mapCenter);
           this.renderSearchSuggestions(results, query);
         }, 260);
       });

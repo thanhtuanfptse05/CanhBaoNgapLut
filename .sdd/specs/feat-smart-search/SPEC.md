@@ -3,9 +3,10 @@
 - **Feature Name**: smart-address-search
 - **Target Users**: Người tham gia giao thông, người dân cần tra cứu lộ trình và địa chỉ cụ thể
 - **Status**: Approved
-- **Version**: 1.0.0
+- **Version**: 1.1.0
 - **Author**: Outcome Engineer
 - **Date**: 2026-09-27
+- **Updated**: 2026-09-27 (v1.1.0 - Cải thiện độ chính xác search & nhãn bản đồ)
 
 ---
 
@@ -34,8 +35,9 @@ Tính năng Tìm kiếm Thông minh (Smart Address Search) giải quyết triệ
 ## 3. Đặc Tả Yêu Cầu Chức Năng (EARS Notation)
 
 ### 3.1 Nhập Từ Khóa & Tải Đề Xuất
-- **WHEN** người dùng gõ từ 2 ký tự vào ô tìm kiếm **THE SYSTEM SHALL** kích hoạt cơ chế debounce (300ms) và gửi yêu cầu tới Mapbox Geocoding API (`country=vn`, `language=vi`).
-- **WHEN** API trả về kết quả **THE SYSTEM SHALL** hiển thị danh sách gợi ý (tối đa 5 địa chỉ gần đúng nhất) ngay phía dưới ô tìm kiếm.
+- **WHEN** người dùng gõ từ 2 ký tự vào ô tìm kiếm **THE SYSTEM SHALL** kích hoạt cơ chế debounce (260ms) và gửi yêu cầu tới Mapbox Geocoding API với các tham số: `country=vn`, `language=vi`, `types=place,district,locality,neighborhood,address,poi`, `bbox=102.0,8.0,110.0,24.0` (khung giới hạn lãnh thổ VN), và `proximity` từ tâm bản đồ hiện tại.
+- **WHEN** Mapbox API trả về kết quả **THE SYSTEM SHALL** hiển thị danh sách gợi ý (tối đa 6 địa chỉ gần đúng nhất) ngay phía dưới ô tìm kiếm.
+- **WHEN** Mapbox API thất bại hoặc token không hợp lệ **THE SYSTEM SHALL** fallback sang Nominatim OSM với `addressdetails=1&namedetails=1&accept-language=vi&countrycodes=vn`.
 
 ### 3.2 Chọn Địa Chỉ Đề Xuất
 - **WHEN** người dùng click vào một kết quả gợi ý **THE SYSTEM SHALL**:

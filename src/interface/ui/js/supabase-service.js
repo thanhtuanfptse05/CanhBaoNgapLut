@@ -394,8 +394,11 @@ class SupabaseFloodService {
 
   /**
    * Smart Address Search with Mapbox Places Geocoding & OpenStreetMap fallback
+   * v1.1.0: Added proximity (map center), types filter, bbox=VN, improved Nominatim params
+   * @param {string} query - Search keyword
+   * @param {{ lat: number, lng: number } | null} mapCenter - Current map center for proximity bias
    */
-  async searchAddress(query) {
+  async searchAddress(query, mapCenter = null) {
     if (!query || query.trim().length < 2) return [];
 
     const cleanQuery = query.trim();
@@ -404,20 +407,39 @@ class SupabaseFloodService {
       : '';
 
     // 1. Try Mapbox Places Geocoding first (high accuracy for Vietnam)
-    if (mapboxToken) {
+    if (mapboxToken && mapboxToken.startsWith('pk.')) {
       try {
-        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(cleanQuery)}.json?country=vn&language=vi&limit=6&access_token=${mapboxToken}`;
+        // Bounding box of Vietnam: lon 102-110, lat 8-24
+        const bbox = '102.0,8.0,110.0,24.0';
+        // Types: cover all granularity levels including small POIs
+        const types = 'place,district,locality,neighborhood,address,poi';
+        // Proximity: bias toward current map center (helps localise results)
+        const proximityParam = mapCenter
+          ? `&proximity=${mapCenter.lng.toFixed(5)},${mapCenter.lat.toFixed(5)}`
+          : '&proximity=106.6297,10.8231'; // Default HCM as center Vietnam
+
+        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(cleanQuery)}.json`
+          + `?country=vn&language=vi&limit=6`
+          + `&types=${encodeURIComponent(types)}`
+          + `&bbox=${bbox}`
+          + proximityParam
+          + `&access_token=${mapboxToken}`;
+
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
           if (data && data.features && data.features.length > 0) {
             return data.features.map(f => {
-              const name = f.text_vi || f.text || f.place_name;
-              const fullName = f.place_name_vi || f.place_name;
+              // Prefer Vietnamese text, fallback to default
+              const name = f.text_vi || f.text || (f.place_name || '').split(',')[0];
+              const fullName = f.place_name_vi || f.place_name || name;
+              // Extract place context (district, city) for subtitle
+              const contextParts = (f.context || []).map(c => c.text_vi || c.text).filter(Boolean);
+              const subtitle = contextParts.length > 0 ? contextParts.join(', ') : fullName;
               return {
                 id: f.id,
                 name: name,
-                fullName: fullName,
+                fullName: subtitle,
                 latitude: f.center[1],
                 longitude: f.center[0],
                 placeType: f.place_type ? f.place_type[0] : 'address'
@@ -430,21 +452,40 @@ class SupabaseFloodService {
       }
     }
 
-    // 2. Fallback to OpenStreetMap Nominatim
+    // 2. Fallback to OpenStreetMap Nominatim (improved params)
     try {
-      const osmUrl = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=vn&limit=6&q=${encodeURIComponent(cleanQuery)}`;
+      const osmUrl = `https://nominatim.openstreetmap.org/search`
+        + `?format=json`
+        + `&countrycodes=vn`
+        + `&limit=6`
+        + `&addressdetails=1`
+        + `&namedetails=1`
+        + `&accept-language=vi`
+        + `&q=${encodeURIComponent(cleanQuery)}`;
+
       const res = await fetch(osmUrl, {
-        headers: { 'Accept-Language': 'vi' }
+        headers: { 'Accept-Language': 'vi,en;q=0.9' }
       });
       if (res.ok) {
         const data = await res.json();
         return (data || []).map(item => {
-          const parts = (item.display_name || '').split(',');
-          const name = parts[0] || item.name || cleanQuery;
+          // Use namedetails for best local name
+          const localName = (item.namedetails && (item.namedetails['name:vi'] || item.namedetails.name))
+            || (item.display_name || '').split(',')[0];
+          // Build readable subtitle from address parts
+          const addr = item.address || {};
+          const subtitleParts = [
+            addr.road || addr.pedestrian || addr.footway,
+            addr.suburb || addr.neighbourhood,
+            addr.city_district || addr.district,
+            addr.city || addr.town || addr.village || addr.county,
+            addr.state
+          ].filter(Boolean);
+          const subtitle = subtitleParts.length > 0 ? subtitleParts.join(', ') : item.display_name;
           return {
             id: 'osm-' + item.place_id,
-            name: name.trim(),
-            fullName: item.display_name,
+            name: localName.trim(),
+            fullName: subtitle,
             latitude: parseFloat(item.lat),
             longitude: parseFloat(item.lon),
             placeType: item.type || 'address'
