@@ -56,8 +56,36 @@ class FloodApp {
     const mapboxToken = getMapboxToken();
     const hasMapbox = mapboxToken && mapboxToken.startsWith('pk.');
 
+    // High-performance ArcGIS World Street Map (100% Free, No API Key, Enterprise CDN)
+    const createEsriStreets = () => L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+      {
+        maxZoom: 19,
+        attribution: 'Tiles © Esri'
+      }
+    );
+
+    // High-performance ArcGIS World Imagery (Satellite)
+    const createEsriSatellite = () => L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        maxZoom: 19,
+        attribution: 'Tiles © Esri'
+      }
+    );
+
+    // High-performance OpenStreetMap mirror
+    const createOsmLayer = () => L.tileLayer(
+      'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+      {
+        maxZoom: 19,
+        subdomains: 'abc',
+        attribution: '© OpenStreetMap contributors'
+      }
+    );
+
     if (hasMapbox) {
-      // 1. Mapbox Dark v11 (Primary default GIS layer)
+      // 1. Mapbox Dark v11
       this.tileLayers.dark = L.tileLayer(
         `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`,
         {
@@ -89,24 +117,33 @@ class FloodApp {
           attribution: '© Mapbox © OpenStreetMap'
         }
       );
+
+      // Automatic failover if Mapbox token is rejected (e.g. 401 Unauthorized / Invalid Token)
+      let fallbackTriggered = false;
+      const activateFallback = () => {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+        console.warn('[FloodGuard GIS] Mapbox token authentication failed (401/error). Auto-switching to Esri ArcGIS.');
+        if (this.map.hasLayer(this.tileLayers.streets)) {
+          this.map.removeLayer(this.tileLayers.streets);
+        }
+        this.tileLayers.streets = createEsriStreets();
+        this.tileLayers.satellite = createEsriSatellite();
+        this.tileLayers.dark = createOsmLayer();
+        this.tileLayers.streets.addTo(this.map);
+        this.showToast('Token Mapbox không hợp lệ (401). Đã kích hoạt bản đồ Esri dự phòng.');
+      };
+
+      this.tileLayers.streets.on('tileerror', activateFallback);
+      this.tileLayers.satellite.on('tileerror', activateFallback);
+      this.tileLayers.dark.on('tileerror', activateFallback);
     } else {
-      // Fallback OpenStreetMap Standard when no Mapbox token is configured (Zero API key watermark)
-      this.tileLayers.streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-      });
-      this.tileLayers.dark = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-      });
-      // Satellite: Esri World Imagery (Public & Free)
-      this.tileLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19,
-        attribution: 'Tiles © Esri'
-      });
+      this.tileLayers.streets = createEsriStreets();
+      this.tileLayers.satellite = createEsriSatellite();
+      this.tileLayers.dark = createOsmLayer();
     }
 
-    // Set default layer to Mapbox Streets (Clean Light Mode Standard)
+    // Set default layer to Streets
     this.tileLayers.streets.addTo(this.map);
     this.markersLayer = L.layerGroup().addTo(this.map);
   }
