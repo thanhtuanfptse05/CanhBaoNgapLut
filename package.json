@@ -3,10 +3,9 @@
   "version": "1.1.0",
   "description": "Hệ thống Web Cảnh Báo Ngập Lụt & Trạm Quan Trắc Toàn Quốc (Clean Architecture + SDD)",
   "type": "module",
-  "main": "server.js",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js",
+    "dev": "node scripts/dev-server.js",
+    "start": "node scripts/dev-server.js",
     "test": "node --test tests/unit/*.test.js"
   },
   "keywords": [
