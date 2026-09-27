@@ -22,7 +22,7 @@
   "20": "**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**",
   "21": "Tasks: [FEATURE NAME]",
   "22": "speckit-analyze/SKILL.md",
-  "23": "**LỜI MỞ ĐẦU**",
+  "23": "**<mark>Templates, Checklists & Quick References</mark>**",
   "24": "FloodApp",
   "25": ".agents/CLAUDE.md",
   "26": "Execution Steps",
@@ -96,5 +96,6 @@
   "94": "infra/README.md",
   "95": "interface/README.md",
   "96": "usecase/README.md",
-  "97": "tests/README.md"
+  "97": "tests/README.md",
+  "98": "**LỜI MỞ ĐẦU**"
 }

@@ -1,0 +1,22 @@
+{
+  "name": "web-canh-bao-ngap-lut",
+  "version": "1.1.0",
+  "description": "Hệ thống Web Cảnh Báo Ngập Lụt & Trạm Quan Trắc Toàn Quốc (Clean Architecture + SDD)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node --test tests/unit/flood_domain.test.js"
+  },
+  "keywords": [
+    "flood-warning",
+    "gis",
+    "leaflet",
+    "mapbox",
+    "clean-architecture",
+    "spec-driven-development"
+  ],
+  "author": "Cao Thanh Tuan",
+  "license": "MIT"
+}

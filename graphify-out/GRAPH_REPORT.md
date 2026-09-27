@@ -1,17 +1,17 @@
 # Graph Report - WEB cảnh báo ngập lụt  (2026-09-27)
 
 ## Corpus Check
-- 99 files · ~164,443 words
+- 102 files · ~164,853 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 19 file(s) not represented in the graph (top: (none) 17, .example 1, .css 1)
 
 ## Summary
-- 1413 nodes · 1374 edges · 99 communities (77 shown, 22 thin omitted)
+- 1438 nodes · 1397 edges · 101 communities (78 shown, 23 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.95)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1e0edf23`
+- Built from commit: `d1ea20bb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -110,7 +110,8 @@
 - interface/README.md
 - usecase/README.md
 - tests/README.md
-- **LỜI MỞ ĐẦU**
+- package.json
+- server.js
 
 ## God Nodes (most connected - your core abstractions)
 1. `**<mark>Các Tiêu Chuẩn Mở</mark>**` - 99 edges
@@ -139,7 +140,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (99 total, 22 thin omitted)
+## Communities (101 total, 23 thin omitted)
 
 ### Community 1 - "common.ps1"
 Cohesion: 0.23
@@ -194,8 +195,8 @@ Cohesion: 0.06
 Nodes (22): ref_node_assert, ref_node_test, Execution Plan: feat-national-flood-system, Phase 0: Kiến Trúc & Nghiên Cứu (Research & Foundation), Phase 1: Thiết Kế Mô Hình Dữ Liệu & Database First (CURRENT FOCUS), Phase 2: Core Domain & Repositories (Backend Foundation), Phase 3: Business Logic Usecases (Application Layer), Phase 4: API & Presentation Interface (GIS Web UI) (+14 more)
 
 ### Community 18 - "**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**"
-Cohesion: 0.05
-Nodes (37): **14.1  Giai Đoạn 1: Foundation**, **14.2  Giai Đoạn 2: Core Development**, **14.3  Giai Đoạn 3: Polish & Delivery**, **14.4  Phân Công Vai Trò — Nhóm 5 Người**, **14.5  Ceremony Calendar**, Bảng dưới cung cấp cái nhìn toàn cảnh trước khi đi vào chi tiết từng giai đoạn:, **Checklist Milestone — Điểm Kiểm Tra Quan Trọng**, 📖 **Chu Kỳ Tuần Chuẩn (áp dụng Tuần 5–10)** (+29 more)
+Cohesion: 0.04
+Nodes (44): **14.1  Giai Đoạn 1: Foundation**, **14.2  Giai Đoạn 2: Core Development**, **14.3  Giai Đoạn 3: Polish & Delivery**, **14.4  Phân Công Vai Trò — Nhóm 5 Người**, **14.5  Ceremony Calendar**, Bảng dưới cung cấp cái nhìn toàn cảnh trước khi đi vào chi tiết từng giai đoạn:, **Checklist Milestone — Điểm Kiểm Tra Quan Trọng**, 📖 **Chu Kỳ Tuần Chuẩn (áp dụng Tuần 5–10)** (+36 more)
 
 ### Community 19 - "**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**"
 Cohesion: 0.06
@@ -445,26 +446,30 @@ Nodes (3): 1. Light Spec (CRUD đơn giản, UI component, bug fix), 2. Standard
 Cohesion: 0.50
 Nodes (3): [1.0.0] - 2026-09-27, [1.1.0] - 2026-09-27, Changelog: feat-public-map
 
-### Community 98 - "**LỜI MỞ ĐẦU**"
-Cohesion: 0.25
-Nodes (7): **Chương 1**, **Cuốn sách này dành cho ai?**, **Cách đọc hiệu quả**, **LỜI MỞ ĐẦU**, **MỤC LỤC**, Si EC DRIVEN, **Tinh thần của cuốn sách**
+### Community 98 - "package.json"
+Cohesion: 0.15
+Nodes (12): author, description, keywords, license, main, name, scripts, dev (+4 more)
+
+### Community 99 - "server.js"
+Cohesion: 0.20
+Nodes (9): ref_node_child_process, ref_node_fs, ref_node_http, ref_node_path, ref_node_url, __dirname, __filename, MIME_TYPES (+1 more)
 
 ## Knowledge Gaps
-- **1147 isolated node(s):** `SUPABASE_CONFIG`, `FALLBACK_DATA`, `1. PROJECT OVERVIEW`, `2. TECH STACK (STRICT)`, `3. ARCHITECTURE & WORKFLOW PRINCIPLES (MANDATORY)` (+1142 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1240 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1162 isolated node(s):** `name`, `version`, `description`, `type`, `main` (+1157 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1261 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `**LỜI MỞ ĐẦU**` connect `**LỜI MỞ ĐẦU**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`, `**<mark>Templates, Checklists & Quick References</mark>**`?**
-  _High betweenness centrality (0.267) - this node is a cross-community bridge._
-- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**LỜI MỞ ĐẦU**`?**
-  _High betweenness centrality (0.075) - this node is a cross-community bridge._
-- **Why does `**<mark>AI Agent Thực Sự Là Gì?</mark>**` connect `**<mark>AI Agent Thực Sự Là Gì?</mark>**` to `**LỜI MỞ ĐẦU**`?**
-  _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **What connects `SUPABASE_CONFIG`, `FALLBACK_DATA`, `1. PROJECT OVERVIEW` to the rest of the system?**
-  _1147 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `**LỜI MỞ ĐẦU**` connect `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**` to `**<mark>Các Tiêu Chuẩn Mở</mark>**`, `**<mark>Executable Specification</mark>**`, `**<mark>Specification Patterns Nâng Cao</mark>**`, `**<mark>Agent-Driven Workflow</mark>**`, `**<mark>SDD Workflow</mark>**`, `**Mô Hình Tư Duy Mới** **<mark>Developer Như “Kiến Trúc Sư + Nhạc Trưởng”</mark>**`, `**<mark>AI Agent Thực Sự Là Gì?</mark>**`, `**<mark>Hệ Sinh Thái Công Cụ AI Coding Bản Đồ Toàn Cảnh</mark>**`, `**<mark>Phân Tích Phê Bình về SDD</mark>**`, `**<mark>Multi-Agent & Orchestration</mark>**`, `**<mark>Hybrid Framework</mark>**`, `**<mark>Phân Tích Phê Bình về ADD Ưu, Nhược và Ranh Giới</mark>**`, `**<mark>Lịch Sử Tiến Hóa Của Phương Pháp Phát Triển Phần Mềm</mark>**`, `**<mark>Templates, Checklists & Quick References</mark>**`?**
+  _High betweenness centrality (0.258) - this node is a cross-community bridge._
+- **Why does `**<mark>Các Tiêu Chuẩn Mở</mark>**` connect `**<mark>Các Tiêu Chuẩn Mở</mark>**` to `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`?**
+  _High betweenness centrality (0.058) - this node is a cross-community bridge._
+- **Why does `**<mark>Agent-Driven Workflow</mark>**` connect `**<mark>Agent-Driven Workflow</mark>**` to `**<mark>Roadmap 15 Tuần Áp Dụng Cho Đồ Án SE</mark>**`?**
+  _High betweenness centrality (0.050) - this node is a cross-community bridge._
+- **What connects `name`, `version`, `description` to the rest of the system?**
+  _1162 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `**<mark>Các Tiêu Chuẩn Mở</mark>**` be split into smaller, more focused modules?**
   _Cohesion score 0.020202020202020204 - nodes in this community are weakly interconnected._
 - **Should `**<mark>Executable Specification</mark>**` be split into smaller, more focused modules?**
