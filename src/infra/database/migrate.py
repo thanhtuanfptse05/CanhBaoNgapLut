@@ -8,6 +8,9 @@ import os
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 try:
     import psycopg
 except ImportError:
@@ -38,7 +41,6 @@ def run_migrations():
         print("Cú pháp: uv run --with psycopg[binary] python src/infra/database/migrate.py <MAT_KHAU_DB>")
         sys.exit(1)
 
-    conn_str = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=require"
     print(f"Connecting to Supabase PostgreSQL ({db_host}:{db_port})...")
 
     db_dir = Path(__file__).parent
@@ -46,7 +48,15 @@ def run_migrations():
     seed_file = db_dir / "seed_provinces.sql"
 
     try:
-        with psycopg.connect(conn_str) as conn:
+        with psycopg.connect(
+            host=db_host,
+            port=db_port,
+            user=db_user,
+            password=db_password,
+            dbname=db_name,
+            sslmode="require",
+            connect_timeout=15
+        ) as conn:
             with conn.cursor() as cur:
                 print(f"Applying schema from: {schema_file.name}...")
                 with open(schema_file, "r", encoding="utf-8") as f:
