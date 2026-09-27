@@ -22,3 +22,11 @@ Last updated: 2026-09-27
 - Không sử dụng các biến/hàm không rõ kiểu dữ liệu.
 - Mọi usecase cốt lõi và thuật toán cảnh báo ngập lụt phải có Unit Test.
 - Xử lý lỗi tập trung, không để crash ứng dụng khi mất kết nối trạm đo/sensor.
+
+## ARTICLE 4 — SPEC-FIRST & ZERO-DRIFT POLICY (BẮT BUỘC)
+- BẮT BUỘC phải dùng skill của speckit (`speckit-specify`, `speckit-plan`, `speckit-tasks`) để viết đặc tả (`SPEC.md`) trước khi bắt đầu code bất kỳ tính năng nào.
+- KHI SỬA CODE, BẮT BUỘC PHẢI SỬA SPEC TRƯỚC: Nếu thay đổi logic, API hoặc sửa lỗi, phải cập nhật `SPEC.md` và `CHANGELOG.md` trước, sau đó mới được sửa code.
+- Tuyệt đối nghiêm cấm viết code trực tiếp mà không có spec hoặc spec bị drift so với code.
+
+## ARTICLE 5 — CI/CD & GITHUB PUSH
+- Sau khi hoàn thành code và vượt qua các bài kiểm thử (lint & tests), BẮT BUỘC phải commit và push lên GitHub repository theo đúng quy trình CI/CD.
