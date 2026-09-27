@@ -3,10 +3,10 @@
 - **Feature Name**: smart-address-search
 - **Target Users**: Người tham gia giao thông, người dân cần tra cứu lộ trình và địa chỉ cụ thể
 - **Status**: Approved
-- **Version**: 1.2.0
+- **Version**: 2.0.0
 - **Author**: Outcome Engineer
 - **Date**: 2026-09-27
-- **Updated**: 2026-09-27 (v1.2.0 - Upgrade to Mapbox Search Box API v1 for POI/brand search)
+- **Updated**: 2026-09-27 (v2.0.0 - World-class search: parallel APIs + NLP query decomposition + fuzzy scoring + dedup)
 
 ---
 
