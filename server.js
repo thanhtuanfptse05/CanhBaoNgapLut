@@ -39,6 +39,30 @@ export default function handler(req, res) {
     reqPath = '/index.html';
   }
 
+  // Dynamic config.js serving environment variables to browser client
+  if (reqPath.endsWith('config.js')) {
+    const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN || 
+                        process.env.MAPBOX_TOKEN || '';
+    const supabaseUrl = process.env.SUPABASE_URL || 'https://atjyhnewynqblnmbtdog.supabase.co';
+    const supabaseAnonKey = process.env.SUPABASE_PUBLISHABLE_KEY || 
+                            process.env.SUPABASE_ANON_KEY || 
+                            'sb_publishable_KTh8S-YdzHGBG3Uo_Gi2zA_zXVjYRtl';
+
+    const configContent = `window.ENV_CONFIG = Object.assign(window.ENV_CONFIG || {}, {
+  MAPBOX_TOKEN: ${JSON.stringify(mapboxToken)},
+  MAPBOX_ACCESS_TOKEN: ${JSON.stringify(mapboxToken)},
+  SUPABASE_URL: ${JSON.stringify(supabaseUrl)},
+  SUPABASE_ANON_KEY: ${JSON.stringify(supabaseAnonKey)}
+});`;
+
+    res.writeHead(200, {
+      'Content-Type': 'application/javascript; charset=utf-8',
+      'Cache-Control': 'no-cache'
+    });
+    res.end(configContent);
+    return;
+  }
+
   const relativePath = reqPath.replace(/^\/+/, '');
 
   // Search candidate paths (__dirname and process.cwd())

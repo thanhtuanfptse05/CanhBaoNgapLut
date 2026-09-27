@@ -1277,12 +1277,19 @@ class SupabaseFloodService {
    * @param {string} query - Search keyword (Vietnamese OK, diacritics OK, typos OK)
    * @param {{ lat: number, lng: number } | null} mapCenter - Current map center for proximity bias
    */
+  _getMapboxToken() {
+    if (typeof window !== 'undefined' && window.ENV_CONFIG) {
+      if (window.ENV_CONFIG.MAPBOX_TOKEN) return window.ENV_CONFIG.MAPBOX_TOKEN;
+      if (window.ENV_CONFIG.MAPBOX_ACCESS_TOKEN) return window.ENV_CONFIG.MAPBOX_ACCESS_TOKEN;
+    }
+    return '';
+  }
+
   async searchAddress(query, mapCenter = null) {
     if (!query || query.trim().length < 2) return [];
 
     const cleanQuery = query.trim();
-    const mapboxToken = (typeof window !== 'undefined' && window.ENV_CONFIG && window.ENV_CONFIG.MAPBOX_TOKEN)
-      ? window.ENV_CONFIG.MAPBOX_TOKEN : '';
+    const mapboxToken = this._getMapboxToken();
 
     // === STEP 1: NLP Query Decomposition ===
     const { poi: poiQuery, location: locationHint } = this._decomposeQuery(cleanQuery);
@@ -1517,9 +1524,7 @@ class SupabaseFloodService {
    * @param {'driving'|'cycling'|'walking'} profile
    */
   async getRoutes(origin, dest, profile = 'driving') {
-    const mapboxToken = (typeof window !== 'undefined' && window.ENV_CONFIG && window.ENV_CONFIG.MAPBOX_TOKEN)
-      ? window.ENV_CONFIG.MAPBOX_TOKEN
-      : '';
+    const mapboxToken = this._getMapboxToken();
 
     if (!mapboxToken || !mapboxToken.startsWith('pk.')) {
       console.warn('[SupabaseFloodService] Mapbox token required for routing');

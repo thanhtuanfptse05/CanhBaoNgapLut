@@ -5,9 +5,11 @@
 
 // Safely retrieve Mapbox token from runtime config (window.ENV_CONFIG)
 const getMapboxToken = () => {
-  return (typeof window !== 'undefined' && window.ENV_CONFIG && window.ENV_CONFIG.MAPBOX_TOKEN)
-    ? window.ENV_CONFIG.MAPBOX_TOKEN
-    : '';
+  if (typeof window !== 'undefined' && window.ENV_CONFIG) {
+    if (window.ENV_CONFIG.MAPBOX_TOKEN) return window.ENV_CONFIG.MAPBOX_TOKEN;
+    if (window.ENV_CONFIG.MAPBOX_ACCESS_TOKEN) return window.ENV_CONFIG.MAPBOX_ACCESS_TOKEN;
+  }
+  return '';
 };
 
 class FloodApp {
@@ -88,32 +90,20 @@ class FloodApp {
         }
       );
     } else {
-      // Fallback CartoDB & OSM when no Mapbox token is configured
-      // Use 'light_all' for streets so all small labels are visible
-      this.tileLayers.streets = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 20,
-        minZoom: 3,
-        subdomains: 'abcd',
-        attribution: '© CartoDB © OpenStreetMap'
+      // Fallback OpenStreetMap Standard when no Mapbox token is configured (Zero API key watermark)
+      this.tileLayers.streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
       });
-      // Dark base + separate labels layer on top for full label coverage
-      this.tileLayers.dark = L.layerGroup([
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-          maxZoom: 20, subdomains: 'abcd'
-        }),
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-          maxZoom: 20, subdomains: 'abcd', zIndex: 450
-        })
-      ]);
-      // Satellite: Esri base + CartoDB labels overlay
-      this.tileLayers.satellite = L.layerGroup([
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-          maxZoom: 19
-        }),
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-          maxZoom: 19, subdomains: 'abcd', zIndex: 450
-        })
-      ]);
+      this.tileLayers.dark = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      });
+      // Satellite: Esri World Imagery (Public & Free)
+      this.tileLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19,
+        attribution: 'Tiles © Esri'
+      });
     }
 
     // Set default layer to Mapbox Streets (Clean Light Mode Standard)
