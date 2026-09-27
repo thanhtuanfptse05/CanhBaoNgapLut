@@ -28,27 +28,13 @@ const MIME_TYPES = {
  * Universal Request Handler for both Local Dev and Vercel Serverless Function
  */
 export default function handler(req, res) {
-  if (req.url.includes('debug')) {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-      url: req.url,
-      headers: req.headers,
-      __dirname,
-      cwd: process.cwd(),
-      filesInDir: fs.existsSync(__dirname) ? fs.readdirSync(__dirname) : [],
-      filesInCwd: fs.existsSync(process.cwd()) ? fs.readdirSync(process.cwd()) : [],
-      hasSrcInDir: fs.existsSync(path.join(__dirname, 'src')),
-      hasSrcInCwd: fs.existsSync(path.join(process.cwd(), 'src'))
-    }, null, 2));
-    return;
-  }
+  const urlObj = new URL(req.url, 'http://localhost');
+  const queryPath = urlObj.searchParams.get('path');
 
-  // Respect original requested URI when running behind Vercel rewrites
-  const rawUrl = req.headers['x-forwarded-uri'] || 
-                 req.headers['x-matched-path'] || 
-                 req.url;
+  let reqPath = queryPath !== null
+    ? (!queryPath ? '/index.html' : '/' + decodeURI(queryPath))
+    : decodeURI(urlObj.pathname);
 
-  let reqPath = decodeURI(rawUrl.split('?')[0]);
   if (!reqPath || reqPath === '/' || reqPath === '/server.js') {
     reqPath = '/index.html';
   }
