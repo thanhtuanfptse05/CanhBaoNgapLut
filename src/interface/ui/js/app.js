@@ -968,7 +968,7 @@ class FloodApp {
     dropdown.style.display = 'flex';
   }
 
-  selectSearchResult(item) {
+  async selectSearchResult(item) {
     const searchInput = document.getElementById('search-input');
     const dropdown = document.getElementById('search-suggestions');
     const clearSearchBtn = document.getElementById('btn-clear-search');
@@ -980,7 +980,7 @@ class FloodApp {
     // 1. Smooth Fly to location
     this.map.flyTo([item.latitude, item.longitude], 16, { duration: 1.5 });
 
-    // 2. Put a pin
+    // 2. Put a pin with loading popup
     if (this.searchMarker) {
       this.map.removeLayer(this.searchMarker);
     }
@@ -1000,24 +1000,86 @@ class FloodApp {
     });
 
     this.searchMarker = L.marker([item.latitude, item.longitude], { icon: pinIcon }).addTo(this.map);
-    this.searchMarker.bindPopup(`
-      <div class="flood-popup-card" style="min-width:200px;">
-        <div class="popup-title">
-          <span>${item.name}</span>
-        </div>
-        <div style="font-size:0.8rem;color:var(--text-secondary);margin:4px 0 8px 0;line-height:1.4;">
-          ${item.fullName}
-        </div>
-        <div class="popup-badge" style="background:var(--primary-subtle);color:var(--primary)">
-          ● Vị trí tìm kiếm
-        </div>
-      </div>
-    `).openPopup();
 
-    // 3. Update weather at this exact location
+    // 3. Check nearby flood status (within 500m radius) — real-time
+    const nearbyFlood = this._findNearbyFlood(item.latitude, item.longitude, 500);
+
+    let floodSection = '';
+    if (nearbyFlood.length === 0) {
+      floodSection = `
+        <div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding:7px 10px;border-radius:8px;background:#d1fae5;color:#065f46;font-size:0.8rem;font-weight:600;">
+          <span>✅</span> Khu vực an toàn — không có điểm ngập trong 500m
+        </div>`;
+    } else {
+      const maxDepth = Math.max(...nearbyFlood.map(f => f.current_depth_cm || 0));
+      const hasLevel3 = nearbyFlood.some(f => f.severity === 'LEVEL_3');
+      const hasLevel2 = nearbyFlood.some(f => f.severity === 'LEVEL_2');
+      const badgeBg   = hasLevel3 ? '#fee2e2' : hasLevel2 ? '#fef3c7' : '#fff7ed';
+      const badgeClr  = hasLevel3 ? '#991b1b' : hasLevel2 ? '#92400e' : '#9a3412';
+      const icon      = hasLevel3 ? '🔴' : hasLevel2 ? '🟡' : '🟠';
+      const label     = hasLevel3 ? 'NGUY HIỂM — ngập nặng' : hasLevel2 ? 'CẢNH BÁO — ngập trung bình' : 'THEO DÕI — ngập nhẹ';
+
+      const pointList = nearbyFlood.slice(0, 3).map(f => {
+        const dist = this._haversineDistance(item.latitude, item.longitude, f.latitude, f.longitude);
+        const distStr = dist < 1000 ? `${Math.round(dist)}m` : `${(dist/1000).toFixed(1)}km`;
+        return `<li style="margin:2px 0;font-size:0.75rem;">📍 ${f.name || 'Điểm ngập'} <span style="opacity:0.7">(${distStr} — ${f.current_depth_cm}cm)</span></li>`;
+      }).join('');
+
+      floodSection = `
+        <div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:${badgeBg};color:${badgeClr};">
+          <div style="font-weight:700;font-size:0.8rem;margin-bottom:4px;">${icon} ${label}</div>
+          <div style="font-size:0.75rem;opacity:0.85;">Độ sâu tối đa: <strong>${maxDepth}cm</strong> — ${nearbyFlood.length} điểm ngập gần đây</div>
+          <ul style="margin:5px 0 0 0;padding-left:12px;">${pointList}</ul>
+        </div>`;
+    }
+
+    this.searchMarker.bindPopup(`
+      <div class="flood-popup-card" style="min-width:220px;max-width:280px;">
+        <div class="popup-title" style="font-size:0.95rem;font-weight:700;line-height:1.3;margin-bottom:3px;">
+          ${item.name}
+        </div>
+        <div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:6px;line-height:1.4;">
+          ${item.fullName || ''}
+        </div>
+        <div class="popup-badge" style="background:var(--primary-subtle);color:var(--primary);margin-bottom:0;">
+          📍 Vị trí tìm kiếm
+        </div>
+        ${floodSection}
+      </div>
+    `, { maxWidth: 300 }).openPopup();
+
+    // 4. Update weather at this exact location
     this.updateWeather(item.latitude, item.longitude, item.name);
     this.showToast(`Đã di chuyển tới: ${item.name}`);
   }
+
+  /**
+   * Find flood points within a given radius (meters) of a coordinate.
+   */
+  _findNearbyFlood(lat, lng, radiusMeters = 500) {
+    if (!this.floodPoints || this.floodPoints.length === 0) return [];
+    return this.floodPoints.filter(fp => {
+      const dist = this._haversineDistance(lat, lng, fp.latitude, fp.longitude);
+      return dist <= radiusMeters;
+    }).sort((a, b) => {
+      const da = this._haversineDistance(lat, lng, a.latitude, a.longitude);
+      const db = this._haversineDistance(lat, lng, b.latitude, b.longitude);
+      return da - db;
+    });
+  }
+
+  /**
+   * Haversine distance in meters between two lat/lng pairs.
+   */
+  _haversineDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
 
   showToast(message) {
     let toast = document.getElementById('toast-notice');
